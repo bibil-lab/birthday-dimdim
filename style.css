@@ -1,0 +1,1655 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+font-family: Georgia, "Times New Roman", serif;
+color: #68444d;
+background: #f8eef0;
+}
+
+/* ==================================================
+GENERAL BUTTON
+================================================== */
+
+button,
+.main-button,
+.open-story-button {
+border: none;
+
+display: inline-block;
+
+padding: 13px 30px;
+
+border-radius: 30px;
+
+background: #95606d;
+
+color: white;
+
+font-family: Arial, sans-serif;
+
+font-size: 14px;
+
+letter-spacing: 1px;
+
+text-decoration: none;
+
+cursor: pointer;
+
+transition: 0.3s;
+
+}
+
+button:hover,
+.main-button:hover,
+.open-story-button:hover {
+transform: translateY(-3px);
+
+background: #7d4e5b;
+
+box-shadow:
+    0 8px 20px rgba(100, 50, 60, 0.15);
+
+}
+
+/* ==================================================
+OPENING
+================================================== */
+
+.opening {
+height: 100vh;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+text-align: center;
+
+position: relative;
+
+overflow: hidden;
+
+background:
+    radial-gradient(
+        circle at top,
+        #fff7f8,
+        transparent 45%
+    ),
+    linear-gradient(
+        135deg,
+        #f5d5dc,
+        #fff1f3
+    );
+
+}
+
+.opening-content {
+position: relative;
+
+z-index: 2;
+
+padding: 30px;
+
+}
+
+.small-text {
+font-family: Arial, sans-serif;
+
+font-size: 13px;
+
+letter-spacing: 3px;
+
+color: #96727a;
+
+margin-bottom: 20px;
+
+}
+
+.opening h1 {
+font-size: 45px;
+
+font-weight: normal;
+
+color: #704650;
+
+margin-bottom: 12px;
+
+}
+
+.subtitle {
+font-family: Arial, sans-serif;
+
+color: #98747c;
+
+margin-bottom: 35px;
+
+}
+
+/* FLOATING HEARTS */
+
+.hearts span {
+position: absolute;
+
+color: rgba(150, 85, 100, 0.3);
+
+font-size: 26px;
+
+animation: floating 5s infinite ease-in-out;
+
+}
+
+.hearts span:nth-child(1) {
+left: 12%;
+top: 20%;
+}
+
+.hearts span:nth-child(2) {
+left: 82%;
+top: 22%;
+
+animation-delay: 1s;
+
+}
+
+.hearts span:nth-child(3) {
+left: 20%;
+top: 75%;
+
+animation-delay: 2s;
+
+}
+
+.hearts span:nth-child(4) {
+left: 75%;
+top: 70%;
+
+animation-delay: 3s;
+
+}
+
+.hearts span:nth-child(5) {
+left: 50%;
+top: 10%;
+
+animation-delay: 1.5s;
+
+}
+
+@keyframes floating {
+
+0%, 100% {
+    transform: translateY(0);
+}
+
+50% {
+    transform: translateY(-20px);
+}
+
+}
+
+/* ==================================================
+BIRTHDAY
+================================================== */
+
+.birthday {
+min-height: 100vh;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+text-align: center;
+
+padding: 40px;
+
+background:
+    linear-gradient(
+        135deg,
+        #fff7f8,
+        #f4dce2
+    );
+
+}
+
+.birthday-content {
+max-width: 650px;
+}
+
+.date {
+font-family: Arial, sans-serif;
+
+letter-spacing: 5px;
+
+font-size: 13px;
+
+color: #a27780;
+
+margin-bottom: 25px;
+
+}
+
+.birthday h2 {
+font-size: 40px;
+
+font-weight: normal;
+
+margin-bottom: 8px;
+
+}
+
+.birthday h3 {
+font-size: 32px;
+
+font-weight: normal;
+
+margin-bottom: 30px;
+
+}
+
+.birthday-text {
+font-family: Arial, sans-serif;
+
+line-height: 1.8;
+
+color: #8c6870;
+
+margin-bottom: 35px;
+
+}
+
+/* ==================================================
+BOOK INTRO
+================================================== */
+
+.book-intro {
+min-height: 100vh;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+padding: 60px 20px;
+
+background:
+    radial-gradient(
+        circle,
+        #fffafa,
+        #ead8dc
+    );
+
+}
+
+.book-cover {
+width: min(500px, 90vw);
+
+min-height: 650px;
+
+padding: 70px 50px;
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: center;
+
+align-items: center;
+
+text-align: center;
+
+position: relative;
+
+color: #f9eeee;
+
+background:
+    linear-gradient(
+        135deg,
+        #704650,
+        #966370
+    );
+
+box-shadow:
+    15px 20px 40px rgba(80, 45, 55, 0.25);
+
+border-radius: 4px;
+
+}
+
+.book-cover::before {
+content: "";
+
+position: absolute;
+
+top: 25px;
+bottom: 25px;
+
+left: 25px;
+right: 25px;
+
+border: 1px solid rgba(255,255,255,0.4);
+
+pointer-events: none;
+
+}
+
+.book-small {
+font-family: Arial, sans-serif;
+
+font-size: 11px;
+
+letter-spacing: 4px;
+
+margin-bottom: 35px;
+
+}
+
+.book-cover h2 {
+font-size: 44px;
+
+font-weight: normal;
+
+margin-bottom: 15px;
+
+}
+
+.book-names {
+font-size: 22px;
+
+font-style: italic;
+
+margin-bottom: 30px;
+
+}
+
+.book-heart {
+font-size: 45px;
+
+margin-bottom: 25px;
+
+}
+
+.book-description {
+max-width: 300px;
+
+font-family: Arial, sans-serif;
+
+font-size: 13px;
+
+line-height: 1.8;
+
+opacity: 0.85;
+
+margin-bottom: 35px;
+
+}
+
+/* ==================================================
+BOOK SECTION
+================================================== */
+
+.book-section {
+min-height: 100vh;
+
+padding: 80px 20px;
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: center;
+
+align-items: center;
+
+background:
+    repeating-linear-gradient(
+        0deg,
+        #eee0df 0px,
+        #eee0df 1px,
+        #f7eeee 1px,
+        #f7eeee 5px
+    );
+
+}
+
+/* BOOK */
+
+.book {
+width: min(1000px, 95vw);
+
+min-height: 650px;
+
+background: #fdf8f1;
+
+box-shadow:
+    0 20px 50px rgba(70, 45, 45, 0.2);
+
+position: relative;
+
+border-radius: 5px;
+
+overflow: hidden;
+
+}
+
+/* CENTER LINE */
+
+.book::before {
+content: "";
+
+position: absolute;
+
+top: 0;
+bottom: 0;
+
+left: 50%;
+
+width: 2px;
+
+background: rgba(120, 90, 80, 0.12);
+
+transform: translateX(-50%);
+
+z-index: 5;
+
+}
+
+/* PAGE */
+
+.book-page {
+min-height: 650px;
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+position: relative;
+
+animation: pageAppear 0.5s ease;
+
+}
+
+@keyframes pageAppear {
+
+from {
+    opacity: 0;
+
+    transform: scale(0.98);
+}
+
+to {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+}
+
+/* LEFT */
+
+.page-left {
+padding: 55px;
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: center;
+
+align-items: center;
+
+text-align: center;
+
+border-right:
+    1px solid rgba(120, 90, 80, 0.1);
+
+}
+
+/* RIGHT */
+
+.page-right {
+padding: 55px;
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: center;
+
+align-items: center;
+
+text-align: center;
+
+}
+
+/* PAGE NUMBER */
+
+.page-count {
+font-family: Arial, sans-serif;
+
+font-size: 11px;
+
+letter-spacing: 3px;
+
+color: #b29698;
+
+margin-bottom: 18px;
+
+}
+
+/* PHOTO */
+
+.book-photo {
+width: 85%;
+
+max-width: 350px;
+
+padding: 10px 10px 35px;
+
+background: white;
+
+box-shadow:
+    0 10px 25px rgba(80, 50, 50, 0.15);
+
+transform: rotate(-2deg);
+
+margin-bottom: 20px;
+
+position: relative;
+
+}
+
+.book-photo img {
+width: 100%;
+
+display: block;
+
+aspect-ratio: 4 / 5;
+
+object-fit: cover;
+
+}
+
+/* VIDEO */
+
+.book-video {
+width: 90%;
+
+max-width: 370px;
+
+padding: 10px;
+
+background: white;
+
+box-shadow:
+    0 10px 25px rgba(80, 50, 50, 0.15);
+
+transform: rotate(1deg);
+
+margin-bottom: 20px;
+
+position: relative;
+
+}
+
+.book-video video {
+width: 100%;
+
+display: block;
+
+max-height: 450px;
+
+object-fit: contain;
+
+background: #111;
+
+}
+
+/* TAPE */
+
+.tape {
+width: 80px;
+
+height: 22px;
+
+background:
+    rgba(218, 190, 166, 0.55);
+
+position: absolute;
+
+top: -10px;
+
+left: 50%;
+
+transform:
+    translateX(-50%)
+    rotate(-4deg);
+
+z-index: 3;
+
+}
+
+/* CAPTION */
+
+.memory-caption {
+font-size: 18px;
+
+line-height: 1.8;
+
+color: #704850;
+
+max-width: 360px;
+
+}
+
+/* BOOK CONTROLS */
+
+.book-controls {
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 30px;
+
+margin-top: 35px;
+
+}
+
+.book-controls span {
+font-family: Arial, sans-serif;
+
+font-size: 13px;
+
+color: #8d6d73;
+
+min-width: 55px;
+
+text-align: center;
+
+}
+
+/* ==================================================
+CLOSING
+================================================== */
+
+.closing-section {
+min-height: 100vh;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+text-align: center;
+
+padding: 100px 25px;
+
+position: relative;
+
+overflow: hidden;
+
+background:
+    radial-gradient(
+        circle at center,
+        #fff9fa 0%,
+        #f7e5e8 45%,
+        #ead1d6 100%
+    );
+
+}
+
+/* DECORATIVE HEARTS */
+
+.closing-section::before,
+.closing-section::after {
+content: "♡";
+
+position: absolute;
+
+font-size: 100px;
+
+color:
+    rgba(150, 85, 100, 0.08);
+
+pointer-events: none;
+
+}
+
+.closing-section::before {
+left: 8%;
+
+top: 15%;
+
+transform: rotate(-20deg);
+
+}
+
+.closing-section::after {
+right: 8%;
+
+bottom: 15%;
+
+transform: rotate(20deg);
+
+}
+
+/* CONTENT */
+
+.closing-content {
+max-width: 750px;
+
+animation:
+    closingFade 2s ease;
+
+}
+
+@keyframes closingFade {
+
+from {
+    opacity: 0;
+
+    transform:
+        translateY(30px);
+}
+
+to {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+}
+
+/* LABEL */
+
+.closing-label {
+font-family: Arial, sans-serif;
+
+font-size: 10px;
+
+letter-spacing: 5px;
+
+color: #a27680;
+
+margin-bottom: 20px;
+
+}
+
+/* LINE */
+
+.closing-line {
+width: 60px;
+
+height: 1px;
+
+background: #b78b94;
+
+margin:
+    0 auto 30px;
+
+}
+
+/* TITLE */
+
+.closing-content h2 {
+font-size: 45px;
+
+font-weight: normal;
+
+letter-spacing: 2px;
+
+color: #704650;
+
+margin-bottom: 45px;
+
+}
+
+/* TEXT */
+
+.closing-text {
+font-size: 16px;
+
+line-height: 2;
+
+color: #806068;
+
+margin-bottom: 25px;
+
+}
+
+/* LIST */
+
+.closing-list {
+margin: 40px auto;
+
+display: flex;
+
+flex-direction: column;
+
+gap: 10px;
+
+}
+
+.closing-list span {
+font-family: Arial, sans-serif;
+
+font-size: 12px;
+
+letter-spacing: 0.5px;
+
+color: #96747b;
+
+}
+
+/* FINAL */
+
+.closing-final {
+margin-top: 45px;
+
+margin-bottom: 10px;
+
+font-size: 17px;
+
+color: #806068;
+
+}
+
+.closing-message {
+font-size: 21px;
+
+font-style: italic;
+
+color: #704650;
+
+line-height: 1.7;
+
+margin-bottom: 25px;
+
+}
+
+/* HEART */
+
+.closing-heart {
+font-size: 45px;
+
+color: #9b5d6b;
+
+animation:
+    heartBeat 2s infinite ease-in-out;
+
+margin-bottom: 8px;
+
+}
+
+@keyframes heartBeat {
+
+0%, 100% {
+    transform: scale(1);
+}
+
+50% {
+    transform: scale(1.12);
+}
+
+}
+
+/* FROM */
+
+.closing-from {
+font-size: 17px;
+
+font-style: italic;
+
+color: #806068;
+
+margin-bottom: 50px;
+
+}
+
+/* DATE */
+
+.closing-date {
+display: flex;
+
+justify-content: center;
+
+gap: 12px;
+
+font-family: Arial, sans-serif;
+
+font-size: 11px;
+
+letter-spacing: 3px;
+
+color: #a27680;
+
+margin-bottom: 15px;
+
+}
+
+/* BIRTHDAY */
+
+.closing-birthday {
+font-size: 15px;
+
+color: #704650;
+
+letter-spacing: 1px;
+
+}
+
+/* ==================================================
+LETTER
+================================================== */
+
+.letter {
+min-height: 100vh;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+padding: 40px;
+
+background: #f2e4df;
+
+}
+
+.letter-paper {
+width: min(700px, 90vw);
+
+min-height: 600px;
+
+padding: 70px;
+
+background:
+    repeating-linear-gradient(
+        #fffdf8 0px,
+        #fffdf8 30px,
+        #eee6dc 31px
+    );
+
+box-shadow:
+    0 20px 50px rgba(70, 50, 40, 0.15);
+
+text-align: center;
+
+}
+
+.letter-small {
+font-family: Arial, sans-serif;
+
+font-size: 11px;
+
+letter-spacing: 4px;
+
+color: #a27680;
+
+margin-bottom: 35px;
+
+}
+
+.letter-paper h2 {
+font-size: 38px;
+
+font-weight: normal;
+
+margin-bottom: 35px;
+
+}
+
+.letter-paper p:last-child {
+font-family: Arial, sans-serif;
+
+color: #8b6b70;
+
+line-height: 2;
+
+}
+
+/* ==================================================
+MOBILE
+================================================== */
+
+@media (max-width: 768px) {
+
+.opening h1 {
+    font-size: 34px;
+}
+
+.birthday h2 {
+    font-size: 31px;
+}
+
+.birthday h3 {
+    font-size: 27px;
+}
+
+.book-cover {
+    min-height: 570px;
+
+    padding: 50px 30px;
+}
+
+.book-cover h2 {
+    font-size: 35px;
+}
+
+.book {
+    width: 94vw;
+}
+
+.book::before {
+    display: none;
+}
+
+.book-page {
+    display: block;
+
+    min-height: auto;
+}
+
+.page-left,
+.page-right {
+    min-height: 500px;
+
+    padding: 45px 25px;
+
+    border: none;
+}
+
+.page-left {
+    border-bottom:
+        1px dashed rgba(120, 90, 80, 0.2);
+}
+
+.book-photo {
+    width: 90%;
+}
+
+.book-video {
+    width: 95%;
+}
+
+.memory-caption {
+    font-size: 16px;
+}
+
+.book-controls {
+    gap: 12px;
+}
+
+.book-controls button {
+    padding: 11px 17px;
+
+    font-size: 12px;
+}
+
+.closing-section {
+    padding: 80px 25px;
+}
+
+.closing-content h2 {
+    font-size: 34px;
+
+    margin-bottom: 35px;
+}
+
+.closing-text {
+    font-size: 14px;
+
+    line-height: 1.9;
+}
+
+.closing-list {
+    gap: 12px;
+
+    margin: 35px auto;
+}
+
+.closing-list span {
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.closing-message {
+    font-size: 18px;
+}
+
+.closing-heart {
+    font-size: 40px;
+}
+
+.closing-section::before {
+    left: -20px;
+}
+
+.closing-section::after {
+    right: -20px;
+}
+
+.letter-paper {
+    padding: 50px 25px;
+}
+
+}
+
+/* ==================================================
+LETTER CONTENT
+================================================== */
+
+.letter {
+min-height: 100vh;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+padding: 80px 20px;
+
+background:
+    linear-gradient(
+        135deg,
+        #f2e0e2,
+        #f8eeee
+    );
+
+}
+
+.letter-paper {
+width: min(750px, 92vw);
+
+padding: 70px 75px;
+
+background:
+    repeating-linear-gradient(
+        to bottom,
+        #fffdf8 0px,
+        #fffdf8 31px,
+        #eee5da 32px
+    );
+
+box-shadow:
+    0 20px 50px rgba(70, 50, 40, 0.15);
+
+position: relative;
+
+}
+
+.letter-paper::before {
+content: "";
+
+position: absolute;
+
+top: 25px;
+bottom: 25px;
+
+left: 25px;
+right: 25px;
+
+border:
+    1px solid rgba(150, 110, 110, 0.15);
+
+pointer-events: none;
+
+}
+
+.letter-small {
+font-family: Arial, sans-serif;
+
+font-size: 10px;
+
+letter-spacing: 4px;
+
+text-align: center;
+
+color: #a27680;
+
+margin-bottom: 25px;
+
+}
+
+.letter-paper h2 {
+font-size: 38px;
+
+font-weight: normal;
+
+text-align: center;
+
+color: #704650;
+
+margin-bottom: 45px;
+
+}
+
+.letter-content {
+position: relative;
+
+z-index: 2;
+
+}
+
+.letter-content p {
+font-family: Georgia, "Times New Roman", serif;
+
+font-size: 16px;
+
+line-height: 2;
+
+color: #76565d;
+
+margin-bottom: 25px;
+
+text-align: left;
+
+}
+
+.letter-content .letter-final {
+text-align: center;
+
+font-size: 17px;
+
+color: #704650;
+
+margin-top: 30px;
+
+}
+
+.letter-signature {
+text-align: right;
+
+font-size: 16px;
+
+line-height: 1.8;
+
+font-style: italic;
+
+color: #806068;
+
+margin-top: 45px;
+
+padding-right: 20px;
+
+}
+
+.letter-signature strong {
+font-size: 21px;
+
+font-weight: normal;
+
+color: #704650;
+
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+.letter {
+    padding: 50px 15px;
+}
+
+.letter-paper {
+    padding: 55px 35px;
+}
+
+.letter-paper::before {
+    top: 15px;
+    bottom: 15px;
+
+    left: 15px;
+    right: 15px;
+}
+
+.letter-paper h2 {
+    font-size: 30px;
+
+    margin-bottom: 35px;
+}
+
+.letter-content p {
+    font-size: 14px;
+
+    line-height: 1.9;
+
+    margin-bottom: 22px;
+}
+
+.letter-content .letter-final {
+    font-size: 15px;
+}
+
+.letter-signature {
+    font-size: 14px;
+
+    padding-right: 5px;
+}
+
+}
+
+/* ==================================================
+   RESTART BUTTON
+================================================== */
+
+.restart-area {
+    text-align: center;
+
+    margin-top: 50px;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+.restart-button {
+    display: inline-block;
+
+    padding: 12px 25px;
+
+    border: 1px solid #a27680;
+
+    border-radius: 30px;
+
+    color: #806068;
+
+    text-decoration: none;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    transition: 0.3s;
+}
+
+.restart-button:hover {
+    background: #806068;
+
+    color: white;
+
+    transform: translateY(-3px);
+}
+
+/* ==================================================
+   PAGE TURN ANIMATION
+================================================== */
+
+.book-page {
+    transform-origin: center center;
+
+    backface-visibility: hidden;
+
+    perspective: 1200px;
+}
+
+
+/* NEXT */
+
+.book-page.page-next {
+    animation:
+        pageTurnNext 0.65s ease;
+}
+
+@keyframes pageTurnNext {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            perspective(1200px)
+            rotateY(-12deg)
+            translateX(25px);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            perspective(1200px)
+            rotateY(0)
+            translateX(0);
+    }
+
+}
+
+
+/* PREVIOUS */
+
+.book-page.page-prev {
+    animation:
+        pageTurnPrev 0.65s ease;
+}
+
+@keyframes pageTurnPrev {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            perspective(1200px)
+            rotateY(12deg)
+            translateX(-25px);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            perspective(1200px)
+            rotateY(0)
+            translateX(0);
+    }
+
+}
+
+/* ==================================================
+   MUSIC BUTTON
+================================================== */
+
+.music-button {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: rgba(112, 70, 80, 0.9);
+
+    color: white;
+
+    border: 1px solid rgba(255,255,255,0.5);
+
+    font-size: 21px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+
+    box-shadow:
+        0 8px 25px rgba(70, 40, 50, 0.2);
+
+    transition: 0.3s;
+}
+
+.music-button:hover {
+    transform: scale(1.08);
+
+    background: #7d4e5b;
+}
+
+.music-button.playing {
+    animation:
+        musicPulse 1.5s infinite ease-in-out;
+}
+
+@keyframes musicPulse {
+
+    0%, 100% {
+        box-shadow:
+            0 0 0 0 rgba(149, 96, 109, 0.3);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 10px rgba(149, 96, 109, 0);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .music-button {
+        width: 43px;
+        height: 43px;
+
+        right: 15px;
+        bottom: 15px;
+
+        font-size: 18px;
+    }
+
+}
+
+/* ==================================================
+   CLICK HEART EFFECT
+================================================== */
+
+.click-heart {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 10000;
+
+    font-size: 22px;
+
+    color: #a65d6d;
+
+    animation: heartFloat 1s ease-out forwards;
+}
+
+@keyframes heartFloat {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -80px)
+            scale(1.1);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -130px)
+            scale(0.7);
+    }
+
+}
+
+/* ==================================================
+   BOOK OPENING ANIMATION
+================================================== */
+
+.book-intro.opening-book {
+    animation: bookIntroFade 1.2s ease forwards;
+}
+
+.book-intro.opening-book .book-cover {
+    animation: openBookCover 1.1s ease forwards;
+    transform-origin: left center;
+}
+
+@keyframes openBookCover {
+
+    0% {
+        transform:
+            perspective(1400px)
+            rotateY(0deg);
+        opacity: 1;
+    }
+
+    70% {
+        transform:
+            perspective(1400px)
+            rotateY(-105deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform:
+            perspective(1400px)
+            rotateY(-140deg);
+        opacity: 0;
+    }
+
+}
+
+@keyframes bookIntroFade {
+
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* Pastikan cover berada di depan */
+
+.book-cover {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+
+/* Saat animasi selesai */
+
+.book-intro.book-hidden {
+    display: none;
+}
