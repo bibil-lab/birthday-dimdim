@@ -604,90 +604,188 @@ di layar paling awal, sebelum situs dibuka
 
 function initIntroScreen() {
 
-    const introEl =
-        document.getElementById("introScreen");
+    const introScreen = document.getElementById("introScreen");
+    const introText = document.getElementById("introText");
+    const introPhotos = document.getElementById("introPhotos");
+    const introTap = document.getElementById("introTap");
 
-    const textEl =
-        document.getElementById("introText");
-
-    if (!introEl || !textEl) {
+    if (!introScreen || !introText) {
         return;
     }
 
-    const message = "pibesdeee dimdimmm";
+
+    /* =========================================
+       PESAN INTRO
+       ========================================= */
+
+    const message = "Happy Birthday Dimdim ♡";
+
+
+    /* Warna huruf */
 
     const colors = [
-        "#95606d",
-        "#7d4e5b",
-        "#a97885",
-        "#704650"
+        "#e76f9c",
+        "#d95f91",
+        "#c95d8f",
+        "#b85c8d",
+        "#a95686",
+        "#9c547f"
     ];
 
-    message.split("").forEach(function(char, index) {
 
-        const letter =
-            document.createElement("span");
+    /* Kosongkan text */
 
-        letter.className =
-            "letter" + (char === " " ? " space" : "");
+    introText.innerHTML = "";
 
-        letter.textContent =
-            char === " " ? "\u00A0" : char;
 
-        letter.style.setProperty(
-            "--d",
-            (index * 0.07) + "s"
-        );
+    /* =========================================
+       MEMBUAT HURUF SATU PER SATU
+       ========================================= */
 
-        letter.style.setProperty(
-            "--c",
-            colors[index % colors.length]
-        );
+    [...message].forEach((char, index) => {
 
-        textEl.appendChild(letter);
+        const span = document.createElement("span");
+
+        span.className = "letter";
+
+        span.textContent = char;
+
+        span.style.color =
+            colors[index % colors.length];
+
+        span.style.animationDelay =
+            `${index * 70}ms`;
+
+        introText.appendChild(span);
 
     });
 
 
-    /* Kunci scroll selama intro tampil */
+    /* =========================================
+       ANIMASI FOTO SETELAH TEKS
+       ========================================= */
 
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    const textDuration =
+        (message.length * 70) + 700;
 
 
-    function dismissIntro() {
+    setTimeout(() => {
 
-        burstHearts(introEl, 18);
+        if (introPhotos) {
 
-        introEl.classList.add("intro-hidden");
-
-        document.documentElement.style.overflow = "";
-        document.body.style.overflow = "";
-
-        setTimeout(function() {
-
-            introEl.remove();
-
-        }, 650);
-
-    }
-
-    introEl.addEventListener("click", dismissIntro);
-
-    introEl.addEventListener("keydown", function(event) {
-
-        if (event.key === "Enter" || event.key === " ") {
-
-            event.preventDefault();
-
-            dismissIntro();
+            introPhotos.classList.add("show");
 
         }
 
-    });
+
+        /* Munculkan tulisan tap */
+
+        setTimeout(() => {
+
+            if (introTap) {
+                introTap.classList.add("show");
+            }
+
+        }, 900);
+
+
+        /* Efek hati */
+
+        if (typeof burstHearts === "function") {
+
+            burstHearts();
+
+        }
+
+    }, textDuration);
+
+
+    /* =========================================
+       FUNGSI MEMBUKA WEBSITE
+       ========================================= */
+
+    let isOpening = false;
+
+
+    function openIntro() {
+
+        if (isOpening) {
+            return;
+        }
+
+        isOpening = true;
+
+
+        /* Efek hati */
+
+        if (typeof burstHearts === "function") {
+
+            burstHearts();
+
+        }
+
+
+        /* Hilangkan intro */
+
+        introScreen.classList.add("hide");
+
+
+        /* Buka scroll */
+
+        document.body.style.overflow = "";
+
+
+        /* Hapus dari halaman setelah animasi */
+
+        setTimeout(() => {
+
+            introScreen.style.display = "none";
+
+        }, 900);
+
+    }
+
+
+    /* =========================================
+       CLICK / TAP
+       ========================================= */
+
+    introScreen.addEventListener(
+        "click",
+        openIntro
+    );
+
+
+    /* =========================================
+       KEYBOARD
+       ========================================= */
+
+    introScreen.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+
+                openIntro();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       LOCK SCROLL SAAT INTRO
+       ========================================= */
+
+    document.body.style.overflow = "hidden";
 
 }
-
 
 /* ==================================================
 SCROLL REVEAL
