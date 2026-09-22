@@ -1653,3 +1653,128 @@ color: #704650;
 .book-intro.book-hidden {
     display: none;
 }
+
+/* ==================================================
+   MOBILE FIX - MEMORY BOOK
+================================================== */
+
+@media (max-width: 768px) {
+
+    /* Area buku */
+    #bookPages {
+        width: 100%;
+        min-height: auto;
+        padding: 20px 12px 80px;
+        box-sizing: border-box;
+    }
+
+    /* Halaman kiri + kanan */
+    #bookPage {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        box-sizing: border-box;
+    }
+
+    .page-left,
+    .page-right {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    /* ==============================
+       FOTO
+    ============================== */
+
+    .book-photo {
+        width: 100%;
+        max-width: 310px;
+        margin: 0 auto;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    .book-photo img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 330px;
+        object-fit: contain;
+        border-radius: 3px;
+    }
+
+
+    /* ==============================
+       TULISAN MOMEN
+    ============================== */
+
+    .page-right {
+        padding: 0 12px;
+        text-align: center;
+    }
+
+    .page-count {
+        font-size: 11px;
+        margin: 5px 0 10px;
+        letter-spacing: 2px;
+    }
+
+    .memory-caption {
+        display: block;
+        width: 100%;
+        max-width: 330px;
+        margin: 0 auto;
+
+        font-size: 14px;
+        line-height: 1.7;
+
+        text-align: center;
+
+        padding: 12px 8px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ==============================
+       VIDEO
+    ============================== */
+
+    .book-video {
+        width: 100%;
+        max-width: 330px;
+        margin: 0 auto;
+    }
+
+    .book-video video {
+        display: block;
+        width: 100%;
+        max-height: 420px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+
+
+    /* ==============================
+       TOMBOL NEXT / PREVIOUS
+    ============================== */
+
+    #bookPages button {
+        margin-top: 8px;
+    }
+
+
+    /* Kalau tombol berada dalam container navigasi */
+    .book-navigation {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-top: 10px;
+        padding: 0;
+    }
+
+}
