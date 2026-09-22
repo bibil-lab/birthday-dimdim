@@ -14,70 +14,70 @@ const pages = [
         type: "photo",
         number: 1,
         image: "foto1.jpg",
-        text: "foto1 pertama kali bibil ngajak ngajak dimdim ngerjain tugas di Socrates Vegan"
+        text: "pertama kali bibil ngajak ngajak dimdim ngerjain tugas di Socrates Vegan"
     },
 
     {
         type: "photo",
         number: 2,
         image: "foto2.jpg",
-        text: "foto2 pertama kali kita nontonnn pulang kuliahh terus pulang nonton kitaa mamm"
+        text: "pertama kali kita nontonnn pulang kuliahh terus pulang nonton kitaa mamm"
     },
 
     {
         type: "photo",
         number: 3,
         image: "foto3.jpg",
-        text: "foto3 bibil ke rumahh dimdim krna mau ke pantee terus dari situu kita makinn dekett"
+        text: "bibil ke rumahh dimdim krna mau ke pantee terus dari situu kita makinn dekett"
     },
 
     {
         type: "photo",
         number: 4,
         image: "foto4.jpg",
-        text: "foto4 kitaa ke pet cafee dan disituu bibil ceritainn kehidupann bibil ke dimdim krna bibil uda percyaa sma dimdim padahl kita belumm pcrann"
+        text: "kitaa ke pet cafee dan disituu bibil ceritainn kehidupann bibil ke dimdim krna bibil uda percyaa sma dimdim padahl kita belumm pcrann"
     },
 
     {
         type: "photo",
         number: 5,
         image: "foto5.jpg",
-        text: "foto5 kitaa uda pcarann dann ituu pertama kali kita pigii jauhhh"
+        text: "kitaa uda pcarann dann ituu pertama kali kita pigii jauhhh"
     },
 
     {
         type: "photo",
         number: 6,
         image: "foto6.jpg",
-        text: "foto6 pertama kalinyaa bibil taunn baruan sma cowoo"
+        text: "pertama kalinyaa bibil taunn baruan sma cowoo"
     },
 
     {
         type: "video",
         number: 7,
         video: "video1.mp4",
-        text: "video1 kitaa mainn PlayStation, nntonn netflixx dann ituu masi maluu\" krna masi baruu\" pcalann, kalo sekarang sudahh tidaa ada maloe nyaaa"
+        text: "kitaa mainn PlayStation, nntonn netflixx dann ituu masi maluu\" krna masi baruu\" pcalann, kalo sekarang sudahh tidaa ada maloe nyaaa"
     },
 
     {
         type: "video",
         number: 8,
         video: "video2.mp4",
-        text: "video2 bibil screen recording dimdim lagi main gitar pass kitaa pecee, sekarang kita uda jarang pece hampir ga pernh punn :((("
+        text: "bibil screen recording dimdim lagi main gitar pass kitaa pecee, sekarang kita uda jarang pece hampir ga pernh punn :((("
     },
 
     {
         type: "video",
         number: 9,
         video: "video3.mp4",
-        text: "video3 kitaa ke tamannn dann pulangnyaa kita nontonnn, ituu pass ulang tahun bibill, makacii yahh bibil sngtt senangg cekalii pada saat ituu"
+        text: "kitaa ke tamannn dann pulangnyaa kita nontonnn, ituu pass ulang tahun bibill, makacii yahh bibil sngtt senangg cekalii pada saat ituu"
     },
 
     {
         type: "video",
         number: 10,
         video: "video4.mp4",
-        text: "video4 bibil ajak dimdim mainn tiktokk dann dimdimm mauuu, tapi sekarang dimdim gamauu lagi bibil ajak tiktokann :(((("
+        text: "bibil ajak dimdim mainn tiktokk dann dimdimm mauuu, tapi sekarang dimdim gamauu lagi bibil ajak tiktokann :(((("
     }
 
 ];
