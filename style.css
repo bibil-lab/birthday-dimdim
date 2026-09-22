@@ -1,1639 +1,1194 @@
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 html {
-scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-font-family: Georgia, "Times New Roman", serif;
-color: #68444d;
-background: #f8eef0;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #68444d;
+    background: #f8eef0;
 }
 
-/* ==================================================
-GENERAL BUTTON
-================================================== */
+
+/* =========================================================
+   GENERAL BUTTON
+========================================================= */
 
 button,
 .main-button,
 .open-story-button {
-border: none;
+    border: none;
+    display: inline-block;
 
-display: inline-block;
+    padding: 13px 30px;
 
-padding: 13px 30px;
+    border-radius: 30px;
 
-border-radius: 30px;
+    background: #95606d;
+    color: white;
 
-background: #95606d;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
 
-color: white;
+    text-decoration: none;
 
-font-family: Arial, sans-serif;
+    cursor: pointer;
 
-font-size: 14px;
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
 
-letter-spacing: 1px;
-
-text-decoration: none;
-
-cursor: pointer;
-
-transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-
-position: relative;
-
-overflow: hidden;
-
+    position: relative;
+    overflow: hidden;
 }
 
 button:hover,
 .main-button:hover,
 .open-story-button:hover {
-transform: translateY(-3px);
+    transform: translateY(-3px);
 
-background: #7d4e5b;
+    background: #7d4e5b;
 
-box-shadow:
-    0 8px 20px rgba(100, 50, 60, 0.15);
-
+    box-shadow:
+        0 8px 20px rgba(100, 50, 60, 0.15);
 }
 
 button:active,
 .main-button:active,
 .open-story-button:active {
-
-transform: translateY(-1px) scale(0.97);
-
+    transform: translateY(-1px) scale(0.97);
 }
 
-/* RIPPLE EFFECT ON CLICK */
+
+/* =========================================================
+   RIPPLE
+========================================================= */
 
 .ripple {
-position: absolute;
+    position: absolute;
 
-border-radius: 50%;
+    border-radius: 50%;
 
-background: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.55);
 
-transform: scale(0);
+    transform: scale(0);
 
-pointer-events: none;
+    pointer-events: none;
 
-animation: rippleAnim 0.6s ease-out;
-
+    animation: rippleAnim 0.6s ease-out;
 }
 
 @keyframes rippleAnim {
-
-to {
-    transform: scale(2.6);
-    opacity: 0;
+    to {
+        transform: scale(2.6);
+        opacity: 0;
+    }
 }
 
-}
 
-/* ==================================================
-   INTRO TEXT ANIMATION
-================================================== */
+/* =========================================================
+   INTRO SCREEN
+========================================================= */
 
 .intro-screen {
-position: fixed;
+    position: fixed;
 
-inset: 0;
+    inset: 0;
 
-z-index: 10001;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
 
-display: flex;
+    z-index: 10001;
 
-flex-direction: column;
+    display: flex;
 
-align-items: center;
+    align-items: center;
+    justify-content: center;
 
-justify-content: center;
+    text-align: center;
 
-text-align: center;
+    padding: 20px;
 
-gap: 22px;
+    overflow: hidden;
 
-padding: 20px;
+    cursor: pointer;
 
-overflow: hidden;
+    background:
+        radial-gradient(
+            circle at center,
+            #fff3f5 0%,
+            #f3d3da 65%,
+            #e6bfc8 100%
+        );
 
-cursor: pointer;
-
-background:
-    radial-gradient(
-        circle at center,
-        #fff3f5,
-        #f3d3da 65%,
-        #e6bfc8
-    );
-
-transition: opacity 0.6s ease, visibility 0.6s ease;
-
+    transition:
+        opacity 0.6s ease,
+        visibility 0.6s ease;
 }
 
 .intro-screen.intro-hidden {
-
-opacity: 0;
-
-visibility: hidden;
-
-pointer-events: none;
-
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
+
+
+/* =========================================================
+   KERTAS BESAR INTRO
+========================================================= */
+
+.intro-screen::before {
+    content: "";
+
+    position: absolute;
+
+    width: 92%;
+    height: 94%;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.25),
+            rgba(255, 248, 249, 0.75),
+            rgba(255, 255, 255, 0.25)
+        );
+
+    box-shadow:
+        0 20px 60px rgba(95, 45, 60, 0.10);
+
+    transform: rotate(-1deg);
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   FOTO INTRO
+   KHUSUS .intro-photos
+   Supaya tidak bentrok dengan bagian lain
+========================================================= */
+
+.intro-photos {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   KARTU FOTO INTRO
+========================================================= */
+
+.intro-photos .intro-photo {
+    position: absolute;
+
+    width: clamp(100px, 12vw, 170px);
+
+    padding:
+        8px
+        8px
+        28px;
+
+    background: #fffafa;
+
+    box-shadow:
+        0 10px 25px rgba(90, 45, 55, 0.18),
+        0 2px 5px rgba(90, 45, 55, 0.08);
+
+    border-radius: 2px;
+
+    opacity: 0;
+
+    animation:
+        introPhotoAppear 0.8s ease forwards,
+        introPhotoFloat 5s ease-in-out infinite;
+
+    will-change: transform;
+}
+
+
+/* =========================================================
+   GAMBAR INTRO
+========================================================= */
+
+.intro-photos .intro-photo img {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    border-radius: 1px;
+}
+
+
+/* =========================================================
+   POSISI FOTO INTRO
+   FOTO 7
+========================================================= */
+
+.intro-photos .photo-1 {
+    top: 7%;
+    left: 7%;
+
+    transform: rotate(-8deg);
+
+    animation-delay:
+        0.2s,
+        1.8s;
+}
+
+
+/* FOTO 8 */
+
+.intro-photos .photo-2 {
+    top: 6%;
+    right: 7%;
+
+    transform: rotate(7deg);
+
+    animation-delay:
+        0.35s,
+        2s;
+}
+
+
+/* FOTO 9 */
+
+.intro-photos .photo-3 {
+    top: 37%;
+    left: 4%;
+
+    transform: rotate(6deg);
+
+    animation-delay:
+        0.5s,
+        2.2s;
+}
+
+
+/* FOTO 10 */
+
+.intro-photos .photo-4 {
+    top: 37%;
+    right: 4%;
+
+    transform: rotate(-7deg);
+
+    animation-delay:
+        0.65s,
+        2.4s;
+}
+
+
+/* FOTO 11 */
+
+.intro-photos .photo-5 {
+    bottom: 6%;
+    left: 7%;
+
+    transform: rotate(7deg);
+
+    animation-delay:
+        0.8s,
+        2.1s;
+}
+
+
+/* FOTO 12 */
+
+.intro-photos .photo-6 {
+    bottom: 6%;
+    right: 7%;
+
+    transform: rotate(-7deg);
+
+    animation-delay:
+        0.95s,
+        2.5s;
+}
+
+
+/* FOTO 13 */
+
+.intro-photos .photo-7 {
+    top: 20%;
+    left: 19%;
+
+    transform: rotate(-5deg);
+
+    animation-delay:
+        1.1s,
+        2.3s;
+}
+
+
+/* FOTO 14 */
+
+.intro-photos .photo-8 {
+    top: 20%;
+    right: 19%;
+
+    transform: rotate(5deg);
+
+    animation-delay:
+        1.25s,
+        2.6s;
+}
+
+
+/* FOTO 15 */
+
+.intro-photos .photo-9 {
+    bottom: 21%;
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        rotate(-3deg);
+
+    animation-delay:
+        1.4s,
+        2.8s;
+}
+
+
+/* =========================================================
+   INTRO CENTER
+========================================================= */
+
+.intro-center {
+    position: relative;
+
+    z-index: 10;
+
+    width: 80%;
+    max-width: 1000px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   INTRO TEXT
+========================================================= */
 
 .intro-text {
-display: flex;
+    width: 100%;
 
-flex-wrap: wrap;
+    display: flex;
 
-justify-content: center;
+    flex-wrap: wrap;
 
-max-width: 92vw;
+    align-items: center;
+    justify-content: center;
 
+    gap: 3px;
+
+    max-width: 1000px;
 }
 
+
+/* =========================================================
+   HURUF INTRO
+========================================================= */
+
 .intro-text .letter {
-display: inline-block;
+    display: inline-block;
 
-font-family: Georgia, "Times New Roman", serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-font-weight: bold;
+    font-size:
+        clamp(
+            40px,
+            6vw,
+            75px
+        );
 
-font-size: clamp(30px, 9vw, 70px);
+    line-height: 1;
 
-color: var(--c, #95606d);
+    font-weight: 700;
 
-opacity: 0;
+    color: var(--c, #95606d);
 
-transform: translateY(45px) scale(0.4) rotate(-8deg);
+    text-shadow:
+        0 5px 12px rgba(90, 40, 55, 0.15);
 
-animation:
-    introLetterPop 0.7s cubic-bezier(.34, 1.56, .64, 1) forwards,
-    introLetterWiggle 2.6s ease-in-out infinite;
+    opacity: 0;
 
-animation-delay: var(--d, 0s), calc(var(--d, 0s) + 0.9s);
+    transform:
+        translateY(25px)
+        scale(0.75);
 
-text-shadow: 0 6px 18px rgba(112, 70, 80, 0.18);
+    animation:
+        introLetterAppear
+        0.6s
+        ease
+        forwards;
 
+    animation-delay: var(--d, 0s);
 }
 
 .intro-text .letter.space {
-
-width: 0.38em;
-
+    width: 0.4em;
 }
 
-@keyframes introLetterPop {
 
-to {
-    opacity: 1;
-
-    transform: translateY(0) scale(1) rotate(0deg);
-}
-
-}
-
-@keyframes introLetterWiggle {
-
-0%, 100% {
-    transform: rotate(0deg) translateY(0);
-}
-
-25% {
-    transform: rotate(-4deg) translateY(-4px);
-}
-
-75% {
-    transform: rotate(4deg) translateY(4px);
-}
-
-}
+/* =========================================================
+   INTRO TAP
+========================================================= */
 
 .intro-tap {
-font-family: Arial, sans-serif;
+    margin-top: 35px;
 
-font-size: 12px;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-letter-spacing: 4px;
+    font-size:
+        clamp(
+            12px,
+            1.5vw,
+            18px
+        );
 
-text-transform: uppercase;
+    letter-spacing: 3px;
 
-color: #96727a;
+    color: #8d5b68;
 
-opacity: 0;
+    opacity: 0;
 
-animation:
-    introTapFade 0.8s ease forwards,
-    introTapPulse 1.6s ease-in-out 2.4s infinite;
-
-animation-delay: 2s, 2.6s;
-
+    animation:
+        introTapAppear
+        1s
+        ease
+        1.7s
+        forwards;
 }
 
-@keyframes introTapFade {
 
-to {
-    opacity: 0.8;
+/* =========================================================
+   INTRO PHOTO ANIMATION
+========================================================= */
+
+@keyframes introPhotoAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(0.78);
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
+
+@keyframes introPhotoFloat {
+
+    0%,
+    100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -7px;
+    }
 }
 
-@keyframes introTapPulse {
 
-0%, 100% {
-    opacity: 0.5;
+/* =========================================================
+   INTRO LETTER ANIMATION
+========================================================= */
+
+@keyframes introLetterAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.75);
+
+        filter: blur(5px);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter: blur(0);
+    }
 }
 
-50% {
-    opacity: 1;
+
+/* =========================================================
+   INTRO TAP ANIMATION
+========================================================= */
+
+@keyframes introTapAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
 }
 
+
+/* =========================================================
+   INTRO EXIT
+========================================================= */
+
+.intro-screen.intro-hidden {
+    animation:
+        introDisappear
+        0.65s
+        ease
+        forwards;
 }
 
-/* ==================================================
-OPENING
-================================================== */
+@keyframes introDisappear {
+
+    from {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+
+    to {
+        opacity: 0;
+
+        transform:
+            scale(1.03);
+    }
+}
+
+
+/* =========================================================
+   OPENING
+========================================================= */
 
 .opening {
-height: 100vh;
+    height: 100vh;
 
-display: flex;
+    display: flex;
 
-justify-content: center;
+    justify-content: center;
+    align-items: center;
 
-align-items: center;
-
-text-align: center;
-
-position: relative;
-
-overflow: hidden;
-
-background:
-    radial-gradient(
-        circle at top,
-        #fff7f8,
-        transparent 45%
-    ),
-    linear-gradient(
-        135deg,
-        #f5d5dc,
-        #fff1f3
-    );
-
-background-size: 100% 100%, 220% 220%;
-
-animation: openingGradient 14s ease-in-out infinite;
-
-}
-
-@keyframes openingGradient {
-
-0%, 100% {
-    background-position: center top, 0% 50%;
-}
-
-50% {
-    background-position: center top, 100% 50%;
-}
-
-}
-
-.opening-content {
-position: relative;
-
-z-index: 2;
-
-padding: 30px;
-
-}
-
-.small-text {
-font-family: Arial, sans-serif;
-
-font-size: 13px;
-
-letter-spacing: 3px;
-
-color: #96727a;
-
-margin-bottom: 20px;
-
-}
-
-.opening h1 {
-font-size: 45px;
-
-font-weight: normal;
-
-color: #704650;
-
-margin-bottom: 12px;
-
-}
-
-.subtitle {
-font-family: Arial, sans-serif;
-
-color: #98747c;
-
-margin-bottom: 35px;
-
-}
-
-/* FLOATING HEARTS (parallax wrapper moves the whole group,
-   individual keyframe keeps them bobbing) */
-
-.hearts {
-position: absolute;
-
-inset: 0;
-
-transition: transform 0.35s ease-out;
-
-will-change: transform;
-
-}
-
-.hearts span {
-position: absolute;
-
-color: rgba(150, 85, 100, 0.3);
-
-font-size: 26px;
-
-animation: floating 5s infinite ease-in-out;
-
-}
-
-.hearts span:nth-child(1) {
-left: 12%;
-top: 20%;
-}
-
-.hearts span:nth-child(2) {
-left: 82%;
-top: 22%;
-
-animation-delay: 1s;
-
-}
-
-.hearts span:nth-child(3) {
-left: 20%;
-top: 75%;
-
-animation-delay: 2s;
-
-}
-
-.hearts span:nth-child(4) {
-left: 75%;
-top: 70%;
-
-animation-delay: 3s;
-
-}
-
-.hearts span:nth-child(5) {
-left: 50%;
-top: 10%;
-
-animation-delay: 1.5s;
-
-}
-
-@keyframes floating {
-
-0%, 100% {
-    transform: translateY(0);
-}
-
-50% {
-    transform: translateY(-20px);
-}
-
-}
-
-/* ==================================================
-BIRTHDAY
-================================================== */
-
-.birthday {
-min-height: 100vh;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-text-align: center;
-
-padding: 40px;
-
-position: relative;
-
-overflow: hidden;
-
-background:
-    linear-gradient(
-        135deg,
-        #fff7f8,
-        #f4dce2
-    );
-
-background-size: 220% 220%;
-
-animation: openingGradient 16s ease-in-out infinite;
-
-}
-
-.birthday-content {
-max-width: 650px;
-
-position: relative;
-
-}
-
-.date {
-font-family: Arial, sans-serif;
-
-letter-spacing: 5px;
-
-font-size: 13px;
-
-color: #a27780;
-
-margin-bottom: 25px;
-
-}
-
-.birthday h2 {
-font-size: 40px;
-
-font-weight: normal;
-
-margin-bottom: 8px;
-
-}
-
-.birthday h3 {
-font-size: 32px;
-
-font-weight: normal;
-
-margin-bottom: 30px;
-
-}
-
-.birthday-text {
-font-family: Arial, sans-serif;
-
-line-height: 1.8;
-
-color: #8c6870;
-
-margin-bottom: 35px;
-
-}
-
-/* BURST HEART PARTICLES (birthday reveal) */
-
-.burst-heart {
-position: absolute;
-
-left: 50%;
-top: 50%;
-
-color: #a65d6d;
-
-pointer-events: none;
-
-transform: translate(-50%, -50%);
-
-animation: burstOut 1.2s ease-out forwards;
-
-z-index: 3;
-
-}
-
-@keyframes burstOut {
-
-0% {
-    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
-    opacity: 1;
-}
-
-100% {
-    transform:
-        translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)))
-        scale(1)
-        rotate(25deg);
-    opacity: 0;
-}
-
-}
-
-/* ==================================================
-BOOK INTRO
-================================================== */
-
-.book-intro {
-min-height: 100vh;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-padding: 60px 20px;
-
-background:
-    radial-gradient(
-        circle,
-        #fffafa,
-        #ead8dc
-    );
-
-}
-
-.book-cover {
-width: min(500px, 90vw);
-
-min-height: 650px;
-
-padding: 70px 50px;
-
-display: flex;
-
-flex-direction: column;
-
-justify-content: center;
-
-align-items: center;
-
-text-align: center;
-
-position: relative;
-
-color: #f9eeee;
-
-background:
-    linear-gradient(
-        135deg,
-        #704650,
-        #966370
-    );
-
-box-shadow:
-    15px 20px 40px rgba(80, 45, 55, 0.25);
-
-border-radius: 4px;
-
-transition: transform 0.4s ease, box-shadow 0.4s ease;
-
-}
-
-.book-cover:hover {
-
-transform: translateY(-6px);
-
-box-shadow:
-    18px 28px 50px rgba(80, 45, 55, 0.3);
-
-}
-
-.book-cover::before {
-content: "";
-
-position: absolute;
-
-top: 25px;
-bottom: 25px;
-
-left: 25px;
-right: 25px;
-
-border: 1px solid rgba(255,255,255,0.4);
-
-pointer-events: none;
-
-}
-
-.book-small {
-font-family: Arial, sans-serif;
-
-font-size: 11px;
-
-letter-spacing: 4px;
-
-margin-bottom: 35px;
-
-}
-
-.book-cover h2 {
-font-size: 44px;
-
-font-weight: normal;
-
-margin-bottom: 15px;
-
-}
-
-.book-names {
-font-size: 22px;
-
-font-style: italic;
-
-margin-bottom: 30px;
-
-}
-
-.book-heart {
-font-size: 45px;
-
-margin-bottom: 25px;
-
-animation: heartBeat 2.4s infinite ease-in-out;
-
-}
-
-.book-description {
-max-width: 300px;
-
-font-family: Arial, sans-serif;
-
-font-size: 13px;
-
-line-height: 1.8;
-
-opacity: 0.85;
-
-margin-bottom: 35px;
-
-}
-
-/* ==================================================
-BOOK SECTION
-================================================== */
-
-.book-section {
-min-height: 100vh;
-
-padding: 80px 20px;
-
-display: flex;
-
-flex-direction: column;
-
-justify-content: center;
-
-align-items: center;
-
-background:
-    repeating-linear-gradient(
-        0deg,
-        #eee0df 0px,
-        #eee0df 1px,
-        #f7eeee 1px,
-        #f7eeee 5px
-    );
-
-}
-
-/* BOOK */
-
-.book {
-width: min(1000px, 95vw);
-
-min-height: 650px;
-
-background: #fdf8f1;
-
-box-shadow:
-    0 20px 50px rgba(70, 45, 45, 0.2);
-
-position: relative;
-
-border-radius: 5px;
-
-overflow: hidden;
-
-perspective: 1800px;
-
--webkit-perspective: 1800px;
-
-}
-
-/* ==================================================
-PAGE-TURN LEAF (halaman yang benar-benar membalik
-dari sisi spine, seperti buku asli)
-================================================== */
-
-.book-leaf {
-position: absolute;
-
-inset: 0;
-
-visibility: hidden;
-
-transform-style: preserve-3d;
-
--webkit-transform-style: preserve-3d;
-
-pointer-events: none;
-
-z-index: 6;
-
-transform: translateZ(0);
-
-}
-
-.leaf-face {
-position: absolute;
-
-inset: 0;
-
-display: grid;
-
-grid-template-columns: 1fr 1fr;
-
-background: #fdf8f1;
-
-border-radius: 5px;
-
-overflow: hidden;
-
-backface-visibility: hidden;
-
--webkit-backface-visibility: hidden;
-
-}
-
-.leaf-front {
-transform: rotateY(0deg);
-}
-
-.leaf-back {
-transform: rotateY(180deg);
-}
-
-/* SHADING — halaman gelap saat menekuk, terang lagi saat rata */
-
-.book-leaf::after {
-content: "";
-
-position: absolute;
-
-inset: 0;
-
-z-index: 3;
-
-opacity: 0;
-
-pointer-events: none;
-
-border-radius: 5px;
-
-background:
-    linear-gradient(
-        90deg,
-        rgba(40, 20, 25, 0.5),
-        transparent 55%
-    );
-
-}
-
-.book-leaf.flip-prev::after {
-
-background:
-    linear-gradient(
-        270deg,
-        rgba(40, 20, 25, 0.5),
-        transparent 55%
-    );
-
-}
-
-.book-leaf.flip-next {
-
-animation:
-    leafFlipNext 0.85s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
-
-filter: drop-shadow(0 10px 25px rgba(60, 30, 35, 0.35));
-
-}
-
-.book-leaf.flip-prev {
-
-animation:
-    leafFlipPrev 0.85s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
-
-filter: drop-shadow(0 10px 25px rgba(60, 30, 35, 0.35));
-
-}
-
-.book-leaf.flip-next::after,
-.book-leaf.flip-prev::after {
-
-animation:
-    leafShade 0.85s ease forwards;
-
-}
-
-@keyframes leafFlipNext {
-
-from {
-    transform: rotateY(0deg) translateZ(0);
-}
-
-to {
-    transform: rotateY(-180deg) translateZ(0);
-}
-
-}
-
-@keyframes leafFlipPrev {
-
-from {
-    transform: rotateY(0deg) translateZ(0);
-}
-
-to {
-    transform: rotateY(180deg) translateZ(0);
-}
-
-}
-
-@keyframes leafShade {
-
-0% {
-    opacity: 0;
-}
-
-45% {
-    opacity: 0.55;
-}
-
-55% {
-    opacity: 0.55;
-}
-
-100% {
-    opacity: 0;
-}
-
-}
-
-/* CENTER LINE */
-
-.book::before {
-content: "";
-
-position: absolute;
-
-top: 0;
-bottom: 0;
-
-left: 50%;
-
-width: 2px;
-
-background: rgba(120, 90, 80, 0.12);
-
-transform: translateX(-50%);
-
-z-index: 5;
-
-}
-
-/* PAGE */
-
-.book-page {
-min-height: 650px;
-
-display: grid;
-
-grid-template-columns: 1fr 1fr;
-
-position: relative;
-
-animation: pageAppear 0.5s ease;
-
-}
-
-@keyframes pageAppear {
-
-from {
-    opacity: 0;
-
-    transform: scale(0.98);
-}
-
-to {
-    opacity: 1;
-
-    transform: scale(1);
-}
-
-}
-
-/* LEFT */
-
-.page-left {
-padding: 55px;
-
-display: flex;
-
-flex-direction: column;
-
-justify-content: center;
-
-align-items: center;
-
-text-align: center;
-
-border-right:
-    1px solid rgba(120, 90, 80, 0.1);
-
-perspective: 900px;
-
-}
-
-/* RIGHT */
-
-.page-right {
-padding: 55px;
-
-display: flex;
-
-flex-direction: column;
-
-justify-content: center;
-
-align-items: center;
-
-text-align: center;
-
-}
-
-/* PAGE NUMBER */
-
-.page-count {
-font-family: Arial, sans-serif;
-
-font-size: 11px;
-
-letter-spacing: 3px;
-
-color: #b29698;
-
-margin-bottom: 18px;
-
-}
-
-/* PHOTO */
-
-.book-photo {
-width: 85%;
-
-max-width: 350px;
-
-padding: 10px 10px 35px;
-
-background: white;
-
-box-shadow:
-    0 10px 25px rgba(80, 50, 50, 0.15);
-
-transform: rotate(-2deg);
-
-margin-bottom: 20px;
-
-position: relative;
-
-transition: transform 0.15s ease-out, box-shadow 0.3s ease;
-
-transform-style: preserve-3d;
-
-will-change: transform;
-
-}
-
-.book-photo:hover,
-.book-video:hover {
-
-box-shadow:
-    0 18px 35px rgba(80, 50, 50, 0.25);
-
-}
-
-.book-photo img {
-width: 100%;
-
-display: block;
-
-aspect-ratio: 4 / 5;
-
-object-fit: cover;
-
-}
-
-/* VIDEO */
-
-.book-video {
-width: 90%;
-
-max-width: 370px;
-
-padding: 10px;
-
-background: white;
-
-box-shadow:
-    0 10px 25px rgba(80, 50, 50, 0.15);
-
-transform: rotate(1deg);
-
-margin-bottom: 20px;
-
-position: relative;
-
-transition: transform 0.15s ease-out, box-shadow 0.3s ease;
-
-transform-style: preserve-3d;
-
-will-change: transform;
-
-}
-
-.book-video video {
-width: 100%;
-
-display: block;
-
-max-height: 450px;
-
-object-fit: contain;
-
-background: #111;
-
-}
-
-/* TAPE */
-
-.tape {
-width: 80px;
-
-height: 22px;
-
-background:
-    rgba(218, 190, 166, 0.55);
-
-position: absolute;
-
-top: -10px;
-
-left: 50%;
-
-transform:
-    translateX(-50%)
-    rotate(-4deg);
-
-z-index: 3;
-
-}
-
-/* CAPTION */
-
-.memory-caption {
-font-size: 18px;
-
-line-height: 1.8;
-
-color: #704850;
-
-max-width: 360px;
-
-}
-
-/* BOOK CONTROLS */
-
-.book-controls {
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-gap: 30px;
-
-margin-top: 35px;
-
-}
-
-.book-controls span {
-font-family: Arial, sans-serif;
-
-font-size: 13px;
-
-color: #8d6d73;
-
-min-width: 55px;
-
-text-align: center;
-
-}
-
-/* ==================================================
-CLOSING
-================================================== */
-
-.closing-section {
-min-height: 100vh;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-text-align: center;
-
-padding: 100px 25px;
-
-position: relative;
-
-overflow: hidden;
-
-background:
-    radial-gradient(
-        circle at center,
-        #fff9fa 0%,
-        #f7e5e8 45%,
-        #ead1d6 100%
-    );
-
-}
-
-/* DECORATIVE HEARTS */
-
-.closing-section::before,
-.closing-section::after {
-content: "♡";
-
-position: absolute;
-
-font-size: 100px;
-
-color:
-    rgba(150, 85, 100, 0.08);
-
-pointer-events: none;
-
-animation: driftSlow 10s ease-in-out infinite;
-
-}
-
-.closing-section::before {
-left: 8%;
-
-top: 15%;
-
-transform: rotate(-20deg);
-
-}
-
-.closing-section::after {
-right: 8%;
-
-bottom: 15%;
-
-transform: rotate(20deg);
-
-animation-delay: 3s;
-
-}
-
-@keyframes driftSlow {
-
-0%, 100% {
-    transform: translateY(0) rotate(-20deg);
-}
-
-50% {
-    transform: translateY(-18px) rotate(-16deg);
-}
-
-}
-
-/* CONTENT */
-
-.closing-content {
-max-width: 750px;
-
-}
-
-/* LABEL */
-
-.closing-label {
-font-family: Arial, sans-serif;
-
-font-size: 10px;
-
-letter-spacing: 5px;
-
-color: #a27680;
-
-margin-bottom: 20px;
-
-}
-
-/* LINE */
-
-.closing-line {
-width: 60px;
-
-height: 1px;
-
-background: #b78b94;
-
-margin:
-    0 auto 30px;
-
-transform-origin: center;
-
-}
-
-/* TITLE */
-
-.closing-content h2 {
-font-size: 45px;
-
-font-weight: normal;
-
-letter-spacing: 2px;
-
-color: #704650;
-
-margin-bottom: 45px;
-
-}
-
-/* TEXT */
-
-.closing-text {
-font-size: 16px;
-
-line-height: 2;
-
-color: #806068;
-
-margin-bottom: 25px;
-
-}
-
-/* LIST */
-
-.closing-list {
-margin: 40px auto;
-
-display: flex;
-
-flex-direction: column;
-
-gap: 10px;
-
-}
-
-.closing-list span {
-font-family: Arial, sans-serif;
-
-font-size: 12px;
-
-letter-spacing: 0.5px;
-
-color: #96747b;
-
-display: inline-block;
-
-}
-
-/* FINAL */
-
-.closing-final {
-margin-top: 45px;
-
-margin-bottom: 10px;
-
-font-size: 17px;
-
-color: #806068;
-
-}
-
-.closing-message {
-font-size: 21px;
-
-font-style: italic;
-
-color: #704650;
-
-line-height: 1.7;
-
-margin-bottom: 25px;
-
-}
-
-/* HEART */
-
-.closing-heart {
-font-size: 45px;
-
-color: #9b5d6b;
-
-animation:
-    heartBeat 2s infinite ease-in-out;
-
-margin-bottom: 8px;
-
-cursor: pointer;
-
-display: inline-block;
-
-}
-
-@keyframes heartBeat {
-
-0%, 100% {
-    transform: scale(1);
-}
-
-50% {
-    transform: scale(1.12);
-}
-
-}
-
-/* FROM */
-
-.closing-from {
-font-size: 17px;
-
-font-style: italic;
-
-color: #806068;
-
-margin-bottom: 50px;
-
-}
-
-/* DATE */
-
-.closing-date {
-display: flex;
-
-justify-content: center;
-
-gap: 12px;
-
-font-family: Arial, sans-serif;
-
-font-size: 11px;
-
-letter-spacing: 3px;
-
-color: #a27680;
-
-margin-bottom: 15px;
-
-}
-
-/* BIRTHDAY */
-
-.closing-birthday {
-font-size: 15px;
-
-color: #704650;
-
-letter-spacing: 1px;
-
-}
-
-/* ==================================================
-LETTER
-================================================== */
-
-.letter {
-min-height: 100vh;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-padding: 80px 20px;
-
-background:
-    linear-gradient(
-        135deg,
-        #f2e0e2,
-        #f8eeee
-    );
-
-}
-
-.letter-paper {
-width: min(750px, 92vw);
-
-padding: 70px 75px;
-
-background:
-    repeating-linear-gradient(
-        to bottom,
-        #fffdf8 0px,
-        #fffdf8 31px,
-        #eee5da 32px
-    );
-
-box-shadow:
-    0 20px 50px rgba(70, 50, 40, 0.15);
-
-position: relative;
-
-transition: box-shadow 0.4s ease;
-
-}
-
-.letter-paper::before {
-content: "";
-
-position: absolute;
-
-top: 25px;
-bottom: 25px;
-
-left: 25px;
-right: 25px;
-
-border:
-    1px solid rgba(150, 110, 110, 0.15);
-
-pointer-events: none;
-
-}
-
-.letter-small {
-font-family: Arial, sans-serif;
-
-font-size: 10px;
-
-letter-spacing: 4px;
-
-text-align: center;
-
-color: #a27680;
-
-margin-bottom: 25px;
-
-}
-
-.letter-paper h2 {
-font-size: 38px;
-
-font-weight: normal;
-
-text-align: center;
-
-color: #704650;
-
-margin-bottom: 45px;
-
-}
-
-.letter-content {
-position: relative;
-
-z-index: 2;
-
-}
-
-.letter-content p {
-font-family: Georgia, "Times New Roman", serif;
-
-font-size: 16px;
-
-line-height: 2;
-
-color: #76565d;
-
-margin-bottom: 25px;
-
-text-align: left;
-
-}
-
-.letter-content .letter-final {
-text-align: center;
-
-font-size: 17px;
-
-color: #704650;
-
-margin-top: 30px;
-
-}
-
-.letter-signature {
-text-align: right;
-
-font-size: 16px;
-
-line-height: 1.8;
-
-font-style: italic;
-
-color: #806068;
-
-margin-top: 45px;
-
-padding-right: 20px;
-
-}
-
-.letter-signature strong {
-font-size: 21px;
-
-font-weight: normal;
-
-color: #704650;
-
-}
-
-/* ==================================================
-   RESTART BUTTON
-================================================== */
-
-.restart-area {
     text-align: center;
-
-    margin-top: 50px;
-
-    position: relative;
-
-    z-index: 5;
-}
-
-.restart-button {
-    display: inline-block;
-
-    padding: 12px 25px;
-
-    border: 1px solid #a27680;
-
-    border-radius: 30px;
-
-    color: #806068;
-
-    text-decoration: none;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 12px;
-
-    letter-spacing: 1px;
-
-    transition: 0.3s;
 
     position: relative;
 
     overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #fff7f8,
+            transparent 45%
+        ),
+        linear-gradient(
+            135deg,
+            #f5d5dc,
+            #fff1f3
+        );
+
+    background-size:
+        100% 100%,
+        220% 220%;
+
+    animation:
+        openingGradient
+        14s
+        ease-in-out
+        infinite;
 }
 
-.restart-button:hover {
-    background: #806068;
+@keyframes openingGradient {
 
-    color: white;
+    0%,
+    100% {
+        background-position:
+            center top,
+            0% 50%;
+    }
 
-    transform: translateY(-3px);
+    50% {
+        background-position:
+            center top,
+            100% 50%;
+    }
 }
 
-/* ==================================================
-   PAGE TURN ANIMATION
-================================================== */
+
+.opening-content {
+    position: relative;
+
+    z-index: 2;
+
+    padding: 30px;
+}
+
+
+.small-text {
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    color: #96727a;
+
+    margin-bottom: 20px;
+}
+
+
+.opening h1 {
+    font-size: 45px;
+
+    font-weight: normal;
+
+    color: #704650;
+
+    margin-bottom: 12px;
+}
+
+
+.subtitle {
+    font-family: Arial, sans-serif;
+
+    color: #98747c;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+.hearts {
+    position: absolute;
+
+    inset: 0;
+
+    transition:
+        transform 0.35s ease-out;
+
+    will-change: transform;
+}
+
+.hearts span {
+    position: absolute;
+
+    color:
+        rgba(150, 85, 100, 0.3);
+
+    font-size: 26px;
+
+    animation:
+        floating
+        5s
+        infinite
+        ease-in-out;
+}
+
+.hearts span:nth-child(1) {
+    left: 12%;
+    top: 20%;
+}
+
+.hearts span:nth-child(2) {
+    left: 82%;
+    top: 22%;
+
+    animation-delay: 1s;
+}
+
+.hearts span:nth-child(3) {
+    left: 20%;
+    top: 75%;
+
+    animation-delay: 2s;
+}
+
+.hearts span:nth-child(4) {
+    left: 75%;
+    top: 70%;
+
+    animation-delay: 3s;
+}
+
+.hearts span:nth-child(5) {
+    left: 50%;
+    top: 10%;
+
+    animation-delay: 1.5s;
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-20px);
+    }
+}
+
+
+/* =========================================================
+   BIRTHDAY
+========================================================= */
+
+.birthday {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 40px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff7f8,
+            #f4dce2
+        );
+
+    background-size: 220% 220%;
+
+    animation:
+        openingGradient
+        16s
+        ease-in-out
+        infinite;
+}
+
+
+.birthday-content {
+    max-width: 650px;
+
+    position: relative;
+}
+
+
+.date {
+    font-family: Arial, sans-serif;
+
+    letter-spacing: 5px;
+
+    font-size: 13px;
+
+    color: #a27780;
+
+    margin-bottom: 25px;
+}
+
+
+.birthday h2 {
+    font-size: 40px;
+
+    font-weight: normal;
+
+    margin-bottom: 8px;
+}
+
+
+.birthday h3 {
+    font-size: 32px;
+
+    font-weight: normal;
+
+    margin-bottom: 30px;
+}
+
+
+.birthday-text {
+    font-family: Arial, sans-serif;
+
+    line-height: 1.8;
+
+    color: #8c6870;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================================================
+   BURST HEART
+========================================================= */
+
+.burst-heart {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    color: #a65d6d;
+
+    pointer-events: none;
+
+    transform:
+        translate(-50%, -50%);
+
+    animation:
+        burstOut
+        1.2s
+        ease-out
+        forwards;
+
+    z-index: 3;
+}
+
+@keyframes burstOut {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.4)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(
+                calc(-50% + var(--dx)),
+                calc(-50% + var(--dy))
+            )
+            scale(1)
+            rotate(25deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   BOOK INTRO
+========================================================= */
+
+.book-intro {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 60px 20px;
+
+    background:
+        radial-gradient(
+            circle,
+            #fffafa,
+            #ead8dc
+        );
+}
+
+
+.book-cover {
+    width:
+        min(500px, 90vw);
+
+    min-height: 650px;
+
+    padding: 70px 50px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+
+    color: #f9eeee;
+
+    background:
+        linear-gradient(
+            135deg,
+            #704650,
+            #966370
+        );
+
+    box-shadow:
+        15px 20px 40px
+        rgba(80, 45, 55, 0.25);
+
+    border-radius: 4px;
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+
+    transform-style: preserve-3d;
+
+    backface-visibility: hidden;
+}
+
+.book-cover:hover {
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        18px 28px 50px
+        rgba(80, 45, 55, 0.3);
+}
+
+
+.book-cover::before {
+    content: "";
+
+    position: absolute;
+
+    top: 25px;
+    bottom: 25px;
+
+    left: 25px;
+    right: 25px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.4);
+
+    pointer-events: none;
+}
+
+
+.book-small {
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 35px;
+}
+
+
+.book-cover h2 {
+    font-size: 44px;
+
+    font-weight: normal;
+
+    margin-bottom: 15px;
+}
+
+
+.book-names {
+    font-size: 22px;
+
+    font-style: italic;
+
+    margin-bottom: 30px;
+}
+
+
+.book-heart {
+    font-size: 45px;
+
+    margin-bottom: 25px;
+
+    animation:
+        heartBeat
+        2.4s
+        infinite
+        ease-in-out;
+}
+
+
+.book-description {
+    max-width: 300px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    opacity: 0.85;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================================================
+   BOOK SECTION
+========================================================= */
+
+.book-section {
+    min-height: 100vh;
+
+    padding: 80px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #eee0df 0px,
+            #eee0df 1px,
+            #f7eeee 1px,
+            #f7eeee 5px
+        );
+}
+
+
+/* =========================================================
+   BOOK
+========================================================= */
+
+.book {
+    width:
+        min(1000px, 95vw);
+
+    min-height: 650px;
+
+    background: #fdf8f1;
+
+    box-shadow:
+        0 20px 50px
+        rgba(70, 45, 45, 0.2);
+
+    position: relative;
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    perspective: 1800px;
+
+    -webkit-perspective: 1800px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =========================================================
+   CENTER BOOK LINE
+========================================================= */
+
+.book::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    left: 50%;
+
+    width: 2px;
+
+    background:
+        rgba(120, 90, 80, 0.12);
+
+    transform:
+        translateX(-50%);
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   BOOK PAGE
+========================================================= */
 
 .book-page {
-    transform-origin: center center;
+    width: 100%;
+
+    min-height: 650px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    position: relative;
+
+    animation:
+        pageAppear
+        0.5s
+        ease;
+
+    transform-origin:
+        center center;
 
     backface-visibility: hidden;
 
@@ -1641,12 +1196,463 @@ color: #704650;
 }
 
 
-/* NEXT */
+@keyframes pageAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   BOOK LEFT
+========================================================= */
+
+.page-left {
+    min-width: 0;
+
+    padding: 55px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    border-right:
+        1px solid
+        rgba(120, 90, 80, 0.1);
+
+    perspective: 900px;
+}
+
+
+/* =========================================================
+   BOOK RIGHT
+========================================================= */
+
+.page-right {
+    min-width: 0;
+
+    padding: 55px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   PAGE NUMBER
+========================================================= */
+
+.page-count {
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color: #b29698;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   BOOK PHOTO
+========================================================= */
+
+.book-photo {
+    width: 85%;
+
+    max-width: 350px;
+
+    padding:
+        10px
+        10px
+        35px;
+
+    background: white;
+
+    box-shadow:
+        0 10px 25px
+        rgba(80, 50, 50, 0.15);
+
+    transform:
+        rotate(-2deg);
+
+    margin-bottom: 20px;
+
+    position: relative;
+
+    transition:
+        transform 0.15s ease-out,
+        box-shadow 0.3s ease;
+
+    transform-style: preserve-3d;
+
+    will-change: transform;
+}
+
+
+.book-photo:hover,
+.book-video:hover {
+    box-shadow:
+        0 18px 35px
+        rgba(80, 50, 50, 0.25);
+}
+
+
+.book-photo img {
+    width: 100%;
+
+    display: block;
+
+    aspect-ratio: 4 / 5;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   BOOK VIDEO
+========================================================= */
+
+.book-video {
+    width: 90%;
+
+    max-width: 370px;
+
+    padding: 10px;
+
+    background: white;
+
+    box-shadow:
+        0 10px 25px
+        rgba(80, 50, 50, 0.15);
+
+    transform:
+        rotate(1deg);
+
+    margin-bottom: 20px;
+
+    position: relative;
+
+    transition:
+        transform 0.15s ease-out,
+        box-shadow 0.3s ease;
+
+    transform-style: preserve-3d;
+
+    will-change: transform;
+}
+
+
+.book-video video {
+    width: 100%;
+
+    display: block;
+
+    max-height: 450px;
+
+    object-fit: contain;
+
+    background: #111;
+}
+
+
+/* =========================================================
+   TAPE
+========================================================= */
+
+.tape {
+    width: 80px;
+
+    height: 22px;
+
+    background:
+        rgba(218, 190, 166, 0.55);
+
+    position: absolute;
+
+    top: -10px;
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        rotate(-4deg);
+
+    z-index: 3;
+}
+
+
+/* =========================================================
+   MEMORY CAPTION
+========================================================= */
+
+.memory-caption {
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    color: #704850;
+
+    max-width: 360px;
+}
+
+
+/* =========================================================
+   BOOK CONTROLS
+========================================================= */
+
+.book-controls {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 30px;
+
+    margin-top: 35px;
+}
+
+
+.book-controls span {
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    color: #8d6d73;
+
+    min-width: 55px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   BOOK LEAF
+========================================================= */
+
+.book-leaf {
+    position: absolute;
+
+    inset: 0;
+
+    visibility: hidden;
+
+    transform-style: preserve-3d;
+
+    -webkit-transform-style: preserve-3d;
+
+    pointer-events: none;
+
+    z-index: 6;
+
+    transform:
+        translateZ(0);
+}
+
+
+.leaf-face {
+    position: absolute;
+
+    inset: 0;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    background: #fdf8f1;
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+}
+
+
+.leaf-front {
+    transform:
+        rotateY(0deg);
+}
+
+
+.leaf-back {
+    transform:
+        rotateY(180deg);
+}
+
+
+.book-leaf::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(40, 20, 25, 0.5),
+            transparent 55%
+        );
+}
+
+
+.book-leaf.flip-prev::after {
+    background:
+        linear-gradient(
+            270deg,
+            rgba(40, 20, 25, 0.5),
+            transparent 55%
+        );
+}
+
+
+.book-leaf.flip-next {
+    animation:
+        leafFlipNext
+        0.85s
+        cubic-bezier(
+            0.45,
+            0.05,
+            0.55,
+            0.95
+        )
+        forwards;
+
+    filter:
+        drop-shadow(
+            0 10px 25px
+            rgba(60, 30, 35, 0.35)
+        );
+}
+
+
+.book-leaf.flip-prev {
+    animation:
+        leafFlipPrev
+        0.85s
+        cubic-bezier(
+            0.45,
+            0.05,
+            0.55,
+            0.95
+        )
+        forwards;
+
+    filter:
+        drop-shadow(
+            0 10px 25px
+            rgba(60, 30, 35, 0.35)
+        );
+}
+
+
+.book-leaf.flip-next::after,
+.book-leaf.flip-prev::after {
+    animation:
+        leafShade
+        0.85s
+        ease
+        forwards;
+}
+
+
+@keyframes leafFlipNext {
+
+    from {
+        transform:
+            rotateY(0deg)
+            translateZ(0);
+    }
+
+    to {
+        transform:
+            rotateY(-180deg)
+            translateZ(0);
+    }
+}
+
+
+@keyframes leafFlipPrev {
+
+    from {
+        transform:
+            rotateY(0deg)
+            translateZ(0);
+    }
+
+    to {
+        transform:
+            rotateY(180deg)
+            translateZ(0);
+    }
+}
+
+
+@keyframes leafShade {
+
+    0% {
+        opacity: 0;
+    }
+
+    45% {
+        opacity: 0.55;
+    }
+
+    55% {
+        opacity: 0.55;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   PAGE TURN
+========================================================= */
 
 .book-page.page-next {
     animation:
-        pageTurnNext 0.65s ease;
+        pageTurnNext
+        0.65s
+        ease;
 }
+
 
 @keyframes pageTurnNext {
 
@@ -1667,16 +1673,16 @@ color: #704650;
             rotateY(0)
             translateX(0);
     }
-
 }
 
-
-/* PREVIOUS */
 
 .book-page.page-prev {
     animation:
-        pageTurnPrev 0.65s ease;
+        pageTurnPrev
+        0.65s
+        ease;
 }
+
 
 @keyframes pageTurnPrev {
 
@@ -1697,12 +1703,633 @@ color: #704650;
             rotateY(0)
             translateX(0);
     }
-
 }
 
-/* ==================================================
+
+/* =========================================================
+   CLOSING
+========================================================= */
+
+.closing-section {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 100px 25px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fff9fa 0%,
+            #f7e5e8 45%,
+            #ead1d6 100%
+        );
+}
+
+
+.closing-section::before,
+.closing-section::after {
+    content: "♡";
+
+    position: absolute;
+
+    font-size: 100px;
+
+    color:
+        rgba(150, 85, 100, 0.08);
+
+    pointer-events: none;
+
+    animation:
+        driftSlow
+        10s
+        ease-in-out
+        infinite;
+}
+
+
+.closing-section::before {
+    left: 8%;
+    top: 15%;
+
+    transform:
+        rotate(-20deg);
+}
+
+
+.closing-section::after {
+    right: 8%;
+    bottom: 15%;
+
+    transform:
+        rotate(20deg);
+
+    animation-delay: 3s;
+}
+
+
+@keyframes driftSlow {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-20deg);
+    }
+
+    50% {
+        transform:
+            translateY(-18px)
+            rotate(-16deg);
+    }
+}
+
+
+.closing-content {
+    width: 100%;
+
+    max-width: 850px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.closing-label {
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 5px;
+
+    color: #a27680;
+
+    margin-bottom: 20px;
+}
+
+
+.closing-line {
+    width: 60px;
+
+    height: 1px;
+
+    background: #b78b94;
+
+    margin:
+        0 auto 30px;
+
+    transform-origin:
+        center;
+}
+
+
+.closing-content h2 {
+    font-size: 45px;
+
+    font-weight: normal;
+
+    letter-spacing: 2px;
+
+    color: #704650;
+
+    margin-bottom: 45px;
+}
+
+
+.closing-text {
+    font-size: 16px;
+
+    line-height: 2;
+
+    color: #806068;
+
+    margin-bottom: 25px;
+}
+
+
+.closing-list {
+    margin: 40px auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.closing-list span {
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 0.5px;
+
+    color: #96747b;
+
+    display: inline-block;
+}
+
+
+.closing-final {
+    margin-top: 45px;
+
+    margin-bottom: 10px;
+
+    font-size: 17px;
+
+    color: #806068;
+}
+
+
+.closing-message {
+    font-size: 21px;
+
+    font-style: italic;
+
+    color: #704650;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+}
+
+
+.closing-heart {
+    font-size: 45px;
+
+    color: #9b5d6b;
+
+    animation:
+        heartBeat
+        2s
+        infinite
+        ease-in-out;
+
+    margin-bottom: 8px;
+
+    cursor: pointer;
+
+    display: inline-block;
+}
+
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform:
+            scale(1);
+    }
+
+    50% {
+        transform:
+            scale(1.12);
+    }
+}
+
+
+.closing-from {
+    font-size: 17px;
+
+    font-style: italic;
+
+    color: #806068;
+
+    margin-bottom: 50px;
+}
+
+
+.closing-date {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color: #a27680;
+
+    margin-bottom: 15px;
+}
+
+
+.closing-birthday {
+    font-size: 15px;
+
+    color: #704650;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   CLOSING GALLERY
+   FOTO 7 - FOTO 15
+   INI KHUSUS CLOSING
+   TIDAK MENGGUNAKAN .photo-1 GLOBAL
+========================================================= */
+
+.closing-section .closing-gallery {
+    width: min(900px, 94%);
+
+    margin:
+        45px auto
+        50px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap:
+        25px 20px;
+
+    align-items: center;
+
+    justify-items: center;
+
+    position: relative;
+
+    z-index: 3;
+}
+
+
+.closing-section .closing-photo {
+    width: 125px;
+
+    height: 145px;
+
+    padding: 7px;
+
+    background: #fff;
+
+    border-radius: 2px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 20px
+        rgba(90, 50, 60, 0.18);
+
+    position: relative;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.closing-section .closing-photo img {
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+.closing-section .closing-photo:nth-child(1) {
+    transform:
+        rotate(-5deg);
+}
+
+
+.closing-section .closing-photo:nth-child(2) {
+    transform:
+        rotate(3deg);
+}
+
+
+.closing-section .closing-photo:nth-child(3) {
+    transform:
+        rotate(-2deg);
+}
+
+
+.closing-section .closing-photo:nth-child(4) {
+    transform:
+        rotate(4deg);
+}
+
+
+.closing-section .closing-photo:nth-child(5) {
+    transform:
+        rotate(-4deg);
+}
+
+
+.closing-section .closing-photo:nth-child(6) {
+    transform:
+        rotate(3deg);
+}
+
+
+.closing-section .closing-photo:nth-child(7) {
+    transform:
+        rotate(-3deg);
+}
+
+
+.closing-section .closing-photo:nth-child(8) {
+    transform:
+        rotate(4deg);
+}
+
+
+.closing-section .closing-photo:nth-child(9) {
+    transform:
+        rotate(-4deg);
+}
+
+
+.closing-section .closing-photo:hover {
+    transform:
+        translateY(-8px)
+        rotate(0deg)
+        scale(1.04);
+
+    box-shadow:
+        0 14px 28px
+        rgba(90, 50, 60, 0.25);
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+.letter {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 80px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f2e0e2,
+            #f8eeee
+        );
+}
+
+
+.letter-paper {
+    width:
+        min(750px, 92vw);
+
+    padding:
+        70px 75px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #fffdf8 0px,
+            #fffdf8 31px,
+            #eee5da 32px
+        );
+
+    box-shadow:
+        0 20px 50px
+        rgba(70, 50, 40, 0.15);
+
+    position: relative;
+
+    transition:
+        box-shadow 0.4s ease;
+}
+
+
+.letter-paper::before {
+    content: "";
+
+    position: absolute;
+
+    top: 25px;
+    bottom: 25px;
+
+    left: 25px;
+    right: 25px;
+
+    border:
+        1px solid
+        rgba(150, 110, 110, 0.15);
+
+    pointer-events: none;
+}
+
+
+.letter-small {
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    text-align: center;
+
+    color: #a27680;
+
+    margin-bottom: 25px;
+}
+
+
+.letter-paper h2 {
+    font-size: 38px;
+
+    font-weight: normal;
+
+    text-align: center;
+
+    color: #704650;
+
+    margin-bottom: 45px;
+}
+
+
+.letter-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.letter-content p {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    line-height: 2;
+
+    color: #76565d;
+
+    margin-bottom: 25px;
+
+    text-align: left;
+}
+
+
+.letter-content .letter-final {
+    text-align: center;
+
+    font-size: 17px;
+
+    color: #704650;
+
+    margin-top: 30px;
+}
+
+
+.letter-signature {
+    text-align: right;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    font-style: italic;
+
+    color: #806068;
+
+    margin-top: 45px;
+
+    padding-right: 20px;
+}
+
+
+.letter-signature strong {
+    font-size: 21px;
+
+    font-weight: normal;
+
+    color: #704650;
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+.restart-area {
+    text-align: center;
+
+    margin-top: 50px;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.restart-button {
+    display: inline-block;
+
+    padding:
+        12px 25px;
+
+    border:
+        1px solid #a27680;
+
+    border-radius: 30px;
+
+    color: #806068;
+
+    text-decoration: none;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    transition:
+        0.3s;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.restart-button:hover {
+    background: #806068;
+
+    color: white;
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* =========================================================
    MUSIC BUTTON
-================================================== */
+========================================================= */
 
 .music-button {
     position: fixed;
@@ -1717,11 +2344,14 @@ color: #704650;
 
     border-radius: 50%;
 
-    background: rgba(112, 70, 80, 0.9);
+    background:
+        rgba(112, 70, 80, 0.9);
 
     color: white;
 
-    border: 1px solid rgba(255,255,255,0.5);
+    border:
+        1px solid
+        rgba(255,255,255,0.5);
 
     font-size: 21px;
 
@@ -1733,16 +2363,22 @@ color: #704650;
     z-index: 9999;
 
     box-shadow:
-        0 8px 25px rgba(70, 40, 50, 0.2);
+        0 8px 25px
+        rgba(70, 40, 50, 0.2);
 
-    transition: 0.3s;
+    transition:
+        0.3s;
 }
+
 
 .music-button:hover {
-    transform: scale(1.08);
+    transform:
+        scale(1.08);
 
-    background: #7d4e5b;
+    background:
+        #7d4e5b;
 }
+
 
 .music-button.playing {
     animation:
@@ -1750,52 +2386,41 @@ color: #704650;
         musicSpin 4s linear infinite;
 }
 
+
 @keyframes musicPulse {
 
-    0%, 100% {
+    0%,
+    100% {
         box-shadow:
-            0 0 0 0 rgba(149, 96, 109, 0.3);
+            0 0 0 0
+            rgba(149, 96, 109, 0.3);
     }
 
     50% {
         box-shadow:
-            0 0 0 10px rgba(149, 96, 109, 0);
+            0 0 0 10px
+            rgba(149, 96, 109, 0);
     }
-
 }
+
 
 @keyframes musicSpin {
 
     from {
-        transform: rotate(0deg);
+        transform:
+            rotate(0deg);
     }
 
     to {
-        transform: rotate(360deg);
+        transform:
+            rotate(360deg);
     }
-
 }
 
 
-/* MOBILE */
-
-@media (max-width: 768px) {
-
-    .music-button {
-        width: 43px;
-        height: 43px;
-
-        right: 15px;
-        bottom: 15px;
-
-        font-size: 18px;
-    }
-
-}
-
-/* ==================================================
-   CLICK HEART EFFECT
-================================================== */
+/* =========================================================
+   CLICK HEART
+========================================================= */
 
 .click-heart {
     position: fixed;
@@ -1808,8 +2433,13 @@ color: #704650;
 
     color: #a65d6d;
 
-    animation: heartFloat 1s ease-out forwards;
+    animation:
+        heartFloat
+        1s
+        ease-out
+        forwards;
 }
+
 
 @keyframes heartFloat {
 
@@ -1836,21 +2466,33 @@ color: #704650;
             translate(-50%, -130px)
             scale(0.7);
     }
-
 }
 
-/* ==================================================
-   BOOK OPENING ANIMATION
-================================================== */
+
+/* =========================================================
+   BOOK OPENING
+========================================================= */
 
 .book-intro.opening-book {
-    animation: bookIntroFade 1.2s ease forwards;
+    animation:
+        bookIntroFade
+        1.2s
+        ease
+        forwards;
 }
 
+
 .book-intro.opening-book .book-cover {
-    animation: openBookCover 1.1s ease forwards;
-    transform-origin: left center;
+    animation:
+        openBookCover
+        1.1s
+        ease
+        forwards;
+
+    transform-origin:
+        left center;
 }
+
 
 @keyframes openBookCover {
 
@@ -1858,6 +2500,7 @@ color: #704650;
         transform:
             perspective(1400px)
             rotateY(0deg);
+
         opacity: 1;
     }
 
@@ -1865,6 +2508,7 @@ color: #704650;
         transform:
             perspective(1400px)
             rotateY(-105deg);
+
         opacity: 0.8;
     }
 
@@ -1872,10 +2516,11 @@ color: #704650;
         transform:
             perspective(1400px)
             rotateY(-140deg);
+
         opacity: 0;
     }
-
 }
+
 
 @keyframes bookIntroFade {
 
@@ -1886,669 +2531,327 @@ color: #704650;
     100% {
         opacity: 0;
     }
-
 }
 
-
-/* Pastikan cover berada di depan */
-
-.book-cover {
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-}
-
-
-/* Saat animasi selesai */
 
 .book-intro.book-hidden {
     display: none;
 }
 
-/* ==================================================
-   SCROLL REVEAL (added by JS: .reveal / .reveal.active)
-================================================== */
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
 
 .reveal {
     opacity: 0;
 
-    transform: translateY(34px);
+    transform:
+        translateY(34px);
 
     transition:
         opacity 0.8s ease,
         transform 0.8s ease;
 
-    will-change: opacity, transform;
+    will-change:
+        opacity,
+        transform;
 }
+
 
 .reveal.active {
     opacity: 1;
 
-    transform: translateY(0);
+    transform:
+        translateY(0);
 }
 
-/* line under "TO BE CONTINUED" grows in once revealed */
 
 .closing-line.reveal {
-    transform: scaleX(0);
+    transform:
+        scaleX(0);
 
     opacity: 1;
 
-    transition: transform 0.7s ease;
+    transition:
+        transform 0.7s ease;
 }
+
 
 .closing-line.reveal.active {
-    transform: scaleX(1);
-}
-
-/* ==================================================
-   MOBILE
-================================================== */
-
-@media (max-width: 768px) {
-
-.opening h1 {
-    font-size: 34px;
-}
-
-.birthday h2 {
-    font-size: 31px;
-}
-
-.birthday h3 {
-    font-size: 27px;
-}
-
-.book-cover {
-    min-height: 570px;
-
-    padding: 50px 30px;
-}
-
-.book-cover h2 {
-    font-size: 35px;
-}
-
-.book {
-    width: 94vw;
-
-    perspective: 1100px;
-
-    -webkit-perspective: 1100px;
-}
-
-.book::before {
-    display: none;
-}
-
-.book-page {
-    display: block;
-
-    min-height: auto;
-}
-
-.page-left,
-.page-right {
-    min-height: 500px;
-
-    padding: 45px 25px;
-
-    border: none;
-}
-
-.page-left {
-    border-bottom:
-        1px dashed rgba(120, 90, 80, 0.2);
-}
-
-.book-photo {
-    width: 90%;
-}
-
-.book-video {
-    width: 95%;
-}
-
-.memory-caption {
-    font-size: 16px;
-}
-
-.book-controls {
-    gap: 12px;
-}
-
-.book-controls button {
-    padding: 11px 17px;
-
-    font-size: 12px;
-}
-
-.closing-section {
-    padding: 80px 25px;
-}
-
-.closing-content h2 {
-    font-size: 34px;
-
-    margin-bottom: 35px;
-}
-
-.closing-text {
-    font-size: 14px;
-
-    line-height: 1.9;
-}
-
-.closing-list {
-    gap: 12px;
-
-    margin: 35px auto;
-}
-
-.closing-list span {
-    font-size: 11px;
-
-    line-height: 1.5;
-}
-
-.closing-message {
-    font-size: 18px;
-}
-
-.closing-heart {
-    font-size: 40px;
-}
-
-.closing-section::before {
-    left: -20px;
-}
-
-.closing-section::after {
-    right: -20px;
-}
-
-.letter-paper {
-    padding: 50px 25px;
-}
-
-.letter {
-    padding: 50px 15px;
-}
-
-.letter-paper::before {
-    top: 15px;
-    bottom: 15px;
-
-    left: 15px;
-    right: 15px;
-}
-
-.letter-paper h2 {
-    font-size: 30px;
-
-    margin-bottom: 35px;
-}
-
-.letter-content p {
-    font-size: 14px;
-
-    line-height: 1.9;
-
-    margin-bottom: 22px;
-}
-
-.letter-content .letter-final {
-    font-size: 15px;
-}
-
-.letter-signature {
-    font-size: 14px;
-
-    padding-right: 5px;
-}
-
-    /* ==============================
-       AREA BUKU
-    ============================== */
-
-    #bookPages {
-        width: 100%;
-        min-height: auto;
-        padding: 35px 10px 30px;
-    }
-
-    /* Buku diperkecil */
-    .book {
-        width: 88%;
-        max-width: 600px;
-        min-height: auto;
-        margin: 0 auto;
-    }
-
-    /* ==============================
-       ISI BUKU
-       FOTO + TULISAN BERDAMPINGAN
-    ============================== */
-
-    #bookPage {
-        width: 100%;
-        min-height: 0;
-
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-
-        gap: 0;
-
-        box-sizing: border-box;
-    }
-
-    /* Hilangkan garis tengah bawaan */
-    .book::before {
-        display: block;
-    }
-
-    /* ==============================
-       BAGIAN KIRI
-    ============================== */
-
-    .page-left {
-        width: 100%;
-        min-height: 330px;
-
-        padding: 25px 12px;
-
-        display: flex;
-        flex-direction: column;
-
-        justify-content: center;
-        align-items: center;
-
-        text-align: center;
-
-        border-right:
-            1px solid rgba(120, 90, 80, 0.12);
-
-        border-bottom: none;
-    }
-
-    /* ==============================
-       BAGIAN KANAN
-    ============================== */
-
-    .page-right {
-        width: 100%;
-        min-height: 330px;
-
-        padding: 25px 15px;
-
-        display: flex;
-        flex-direction: column;
-
-        justify-content: center;
-        align-items: center;
-
-        text-align: center;
-
-        border: none;
-    }
-
-    /* ==============================
-       NOMOR MEMORY
-    ============================== */
-
-    .page-count {
-        font-size: 8px;
-        letter-spacing: 2px;
-        margin-bottom: 10px;
-    }
-
-    /* ==============================
-       FOTO
-    ============================== */
-
-    .book-photo {
-        width: 95%;
-        max-width: 220px;
-
-        padding: 6px 6px 20px;
-
-        margin: 0 auto 10px;
-
-        box-shadow:
-            0 6px 15px rgba(80, 50, 50, 0.15);
-    }
-
-    .book-photo img {
-        width: 100%;
-        height: auto;
-
-        aspect-ratio: 4 / 5;
-
-        object-fit: cover;
-    }
-
-    /* ==============================
-       VIDEO
-    ============================== */
-
-    .book-video {
-        width: 95%;
-        max-width: 220px;
-
-        padding: 6px;
-
-        margin: 0 auto 10px;
-    }
-
-    .book-video video {
-        width: 100%;
-        max-height: 250px;
-    }
-
-    /* ==============================
-       TAPE
-    ============================== */
-
-    .tape {
-        width: 55px;
-        height: 16px;
-        top: -7px;
-    }
-
-    /* ==============================
-       TULISAN
-    ============================== */
-
-    .memory-caption {
-        max-width: 100%;
-
-        font-size: 13px;
-
-        line-height: 1.5;
-
-        color: #704850;
-    }
-
-    /* ==============================
-       TOMBOL PREVIOUS / NEXT
-       TEPAT DI BAWAH BUKU
-    ============================== */
-
-    .book-controls {
-        width: 88%;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        gap: 12px;
-
-        margin: 15px auto 35px;
-    }
-
-    .book-controls button {
-        padding: 10px 15px;
-
-        font-size: 11px;
-
-        letter-spacing: 0.5px;
-
-        white-space: nowrap;
-
-        border-radius: 25px;
-    }
-
-    .book-controls span {
-        min-width: 35px;
-
-        font-size: 12px;
-
-        white-space: nowrap;
-    }
-
-}
-
-/* ==================================================
-   REDUCED MOTION — respect user preference
-================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-        scroll-behavior: auto !important;
-    }
-
-    .reveal {
-        opacity: 1;
-        transform: none;
-    }
-
-}
-
-/* ==================================================
-   FINAL RESPONSIVE FIX
-   HP + TABLET + LAPTOP
-================================================== */
-
-/* ---------- INTRO ---------- */
-
-.intro-screen {
-    width: 100%;
-    min-height: 100dvh;
-    min-height: 100vh;
-
-    padding:
-        20px
-        max(20px, env(safe-area-inset-left))
-        20px
-        max(20px, env(safe-area-inset-right));
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-    overflow: hidden;
-}
-
-.intro-text {
-    width: 100%;
-    max-width: 1000px;
-
-    display: flex;
-    flex-wrap: wrap;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 0.02em;
-}
-
-.intro-text .letter {
-    display: inline-block;
-
-    /*
-       Ukuran mengikuti lebar layar,
-       tapi tidak akan terlalu besar.
-    */
-    font-size: clamp(32px, 6vw, 70px);
-
-    line-height: 1;
-
-    flex: 0 0 auto;
-}
-
-.intro-tap {
-    margin-top: 18px;
-
-    font-size: clamp(10px, 2vw, 12px);
-
-    letter-spacing: clamp(2px, 0.8vw, 4px);
-
-    white-space: nowrap;
+    transform:
+        scaleX(1);
 }
 
 
-/* ==================================================
-   BOOK RESPONSIVE
-================================================== */
-
-#bookPages {
-    width: 100%;
-    overflow-x: hidden;
-}
-
-.book {
-    width: min(1000px, calc(100vw - 40px));
-
-    margin-left: auto;
-    margin-right: auto;
-
-    min-height: 650px;
-
-    overflow: hidden;
-}
-
-
-/* DESKTOP */
-
-.book-page {
-    display: grid !important;
-
-    grid-template-columns: 1fr 1fr !important;
-
-    min-height: 650px;
-
-    width: 100%;
-}
-
-.page-left,
-.page-right {
-    min-width: 0;
-    box-sizing: border-box;
-}
-
-
-/* ==================================================
+/* =========================================================
    TABLET
-================================================== */
+========================================================= */
 
 @media (max-width: 900px) {
 
     .book {
-        width: calc(100vw - 30px);
+        width:
+            calc(100vw - 30px);
     }
 
     .page-left,
     .page-right {
-        padding: 35px 25px;
+        padding:
+            35px 25px;
     }
 
     .memory-caption {
         font-size: 16px;
+
         line-height: 1.7;
     }
 
+    .closing-section .closing-gallery {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap:
+            20px 15px;
+
+        width: 90%;
+    }
+
+    .closing-section .closing-photo {
+        width: 115px;
+        height: 135px;
+    }
 }
 
 
-/* ==================================================
-   HP
-================================================== */
+/* =========================================================
+   MOBILE
+========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
 
-    /* ---------- INTRO ---------- */
+    /* INTRO */
 
     .intro-screen {
-        padding: 20px 15px;
+        padding:
+            20px 15px;
+    }
+
+    .intro-screen::before {
+        width: 92%;
+        height: 95%;
+    }
+
+    .intro-center {
+        width: 88%;
+        padding: 10px;
     }
 
     .intro-text {
-        max-width: 100%;
+        gap: 1px;
 
-        /*
-           Jangan biarkan teks menjadi
-           satu baris yang keluar layar.
-        */
-        padding: 0 5px;
-
-        gap: 0;
+        max-width: 95%;
     }
 
     .intro-text .letter {
-        font-size: clamp(30px, 8.5vw, 48px);
+        font-size:
+            clamp(
+                27px,
+                8.5vw,
+                48px
+            );
+    }
 
-        line-height: 1;
-
-        text-shadow:
-            0 4px 12px rgba(112, 70, 80, 0.16);
+    .intro-text .letter.space {
+        width: 8px;
     }
 
     .intro-tap {
-        margin-top: 20px;
+        margin-top: 25px;
 
-        font-size: 10px;
+        font-size: 11px;
 
-        letter-spacing: 2.5px;
+        letter-spacing: 2px;
     }
 
 
-    /* ---------- BOOK SECTION ---------- */
+    /* INTRO PHOTOS */
+
+    .intro-photos .intro-photo {
+        width: 72px;
+
+        padding:
+            5px 5px 18px;
+    }
+
+    .intro-photos .photo-1 {
+        top: 6%;
+        left: 3%;
+
+        transform:
+            rotate(-9deg);
+    }
+
+    .intro-photos .photo-2 {
+        top: 6%;
+        right: 3%;
+
+        transform:
+            rotate(8deg);
+    }
+
+    .intro-photos .photo-3 {
+        top: 29%;
+        left: 1%;
+
+        transform:
+            rotate(7deg);
+    }
+
+    .intro-photos .photo-4 {
+        top: 29%;
+        right: 1%;
+
+        transform:
+            rotate(-8deg);
+    }
+
+    .intro-photos .photo-5 {
+        bottom: 7%;
+        left: 3%;
+
+        transform:
+            rotate(8deg);
+    }
+
+    .intro-photos .photo-6 {
+        bottom: 7%;
+        right: 3%;
+
+        transform:
+            rotate(-8deg);
+    }
+
+    .intro-photos .photo-7 {
+        top: 17%;
+        left: 14%;
+
+        transform:
+            rotate(-5deg);
+    }
+
+    .intro-photos .photo-8 {
+        top: 17%;
+        right: 14%;
+
+        transform:
+            rotate(5deg);
+    }
+
+    .intro-photos .photo-9 {
+        bottom: 22%;
+        left: 50%;
+
+        transform:
+            translateX(-50%)
+            rotate(-3deg);
+    }
+
+
+    /* OPENING */
+
+    .opening h1 {
+        font-size: 34px;
+    }
+
+
+    /* BIRTHDAY */
+
+    .birthday {
+        padding: 30px 20px;
+    }
+
+    .birthday h2 {
+        font-size: 31px;
+    }
+
+    .birthday h3 {
+        font-size: 27px;
+    }
+
+
+    /* BOOK COVER */
+
+    .book-cover {
+        min-height: 570px;
+
+        padding:
+            50px 30px;
+    }
+
+    .book-cover h2 {
+        font-size: 35px;
+    }
+
+
+    /* BOOK */
 
     #bookPages {
+        width: 100%;
+
         padding:
-            40px
-            10px
-            30px;
+            40px 10px 30px;
+
+        overflow-x: hidden;
     }
 
     .book {
         width: 100%;
+
         max-width: 100%;
 
         min-height: 0;
 
         border-radius: 4px;
+
+        perspective:
+            1100px;
+
+        -webkit-perspective:
+            1100px;
     }
 
 
-    /*
-       INI BAGIAN PALING PENTING.
+    /* MOBILE BOOK IS ONE COLUMN */
 
-       Di HP foto dan tulisan dibuat
-       VERTIKAL, bukan 2 kolom.
-    */
-
-    #bookPage {
+    .book-page {
         display: block !important;
 
         width: 100%;
 
         min-height: 0;
 
-        animation: pageAppear 0.5s ease;
+        animation:
+            pageAppear
+            0.5s ease;
+    }
+
+
+    .book::before {
+        display: none;
     }
 
 
     .page-left,
     .page-right {
-
         width: 100%;
 
         min-width: 0;
+
         min-height: auto;
 
         padding:
-            30px
-            20px;
+            30px 20px;
 
         box-sizing: border-box;
 
@@ -2565,21 +2868,20 @@ color: #704650;
 
 
     .page-left {
-
         border-right: none;
 
         border-bottom:
-            1px solid rgba(120, 90, 80, 0.12);
+            1px solid
+            rgba(120, 90, 80, 0.12);
     }
 
 
     .page-right {
-
         border: none;
     }
 
 
-    /* ---------- MEMORY NUMBER ---------- */
+    /* PAGE NUMBER */
 
     .page-count {
         font-size: 9px;
@@ -2590,11 +2892,11 @@ color: #704650;
     }
 
 
-    /* ---------- FOTO ---------- */
+    /* PHOTO */
 
     .book-photo {
-
-        width: min(88%, 300px);
+        width:
+            min(88%, 300px);
 
         max-width: 300px;
 
@@ -2604,17 +2906,17 @@ color: #704650;
             25px;
 
         margin:
-            0 auto
-            20px;
+            0 auto 20px;
     }
 
-    .book-photo img {
 
+    .book-photo img {
         width: 100%;
 
         height: auto;
 
-        aspect-ratio: 4 / 5;
+        aspect-ratio:
+            4 / 5;
 
         object-fit: cover;
 
@@ -2622,23 +2924,22 @@ color: #704650;
     }
 
 
-    /* ---------- VIDEO ---------- */
+    /* VIDEO */
 
     .book-video {
-
-        width: min(92%, 330px);
+        width:
+            min(92%, 330px);
 
         max-width: 330px;
 
         padding: 8px;
 
         margin:
-            0 auto
-            20px;
+            0 auto 20px;
     }
 
-    .book-video video {
 
+    .book-video video {
         width: 100%;
 
         max-height: 380px;
@@ -2647,10 +2948,20 @@ color: #704650;
     }
 
 
-    /* ---------- CAPTION ---------- */
+    /* TAPE */
+
+    .tape {
+        width: 55px;
+
+        height: 16px;
+
+        top: -7px;
+    }
+
+
+    /* CAPTION */
 
     .memory-caption {
-
         width: 100%;
 
         max-width: 330px;
@@ -2659,21 +2970,21 @@ color: #704650;
 
         line-height: 1.75;
 
-        overflow-wrap: break-word;
+        overflow-wrap:
+            break-word;
 
-        word-break: normal;
+        word-break:
+            normal;
     }
 
 
-    /* ---------- CONTROLS ---------- */
+    /* CONTROLS */
 
     .book-controls {
-
         width: 100%;
 
         margin:
-            18px auto
-            30px;
+            18px auto 30px;
 
         display: flex;
 
@@ -2684,11 +2995,10 @@ color: #704650;
         gap: 8px;
     }
 
-    .book-controls button {
 
+    .book-controls button {
         padding:
-            10px
-            13px;
+            10px 13px;
 
         font-size: 11px;
 
@@ -2697,8 +3007,8 @@ color: #704650;
         white-space: nowrap;
     }
 
-    .book-controls span {
 
+    .book-controls span {
         min-width: 45px;
 
         font-size: 11px;
@@ -2707,15 +3017,14 @@ color: #704650;
     }
 
 
-    /* ---------- BOOK FLIP ---------- */
+    /* LEAF */
 
     .book-leaf {
-
         overflow: hidden;
     }
 
-    .leaf-face {
 
+    .leaf-face {
         display: block;
 
         width: 100%;
@@ -2724,877 +3033,221 @@ color: #704650;
         overflow: hidden;
     }
 
+
     .leaf-face .page-left,
     .leaf-face .page-right {
-
         width: 100%;
+    }
+
+
+    /* CLOSING */
+
+    .closing-section {
+        padding:
+            80px 20px;
+    }
+
+    .closing-content h2 {
+        font-size: 34px;
+
+        margin-bottom: 35px;
+    }
+
+    .closing-text {
+        font-size: 14px;
+
+        line-height: 1.9;
+    }
+
+    .closing-list {
+        gap: 12px;
+
+        margin:
+            35px auto;
+    }
+
+    .closing-list span {
+        font-size: 11px;
+
+        line-height: 1.5;
+    }
+
+    .closing-message {
+        font-size: 18px;
+    }
+
+    .closing-heart {
+        font-size: 40px;
+    }
+
+
+    /* CLOSING GALLERY MOBILE */
+
+    .closing-section .closing-gallery {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        width: 94%;
+
+        gap:
+            15px 8px;
+
+        margin-top: 35px;
+
+        margin-bottom: 40px;
+    }
+
+
+    .closing-section .closing-photo {
+        width: 90px;
+
+        height: 110px;
+
+        padding: 5px;
+    }
+
+
+    /* LETTER */
+
+    .letter {
+        padding:
+            50px 15px;
+    }
+
+    .letter-paper {
+        padding:
+            50px 25px;
+    }
+
+    .letter-paper::before {
+        top: 15px;
+        bottom: 15px;
+
+        left: 15px;
+        right: 15px;
+    }
+
+    .letter-paper h2 {
+        font-size: 30px;
+
+        margin-bottom: 35px;
+    }
+
+    .letter-content p {
+        font-size: 14px;
+
+        line-height: 1.9;
+
+        margin-bottom: 22px;
+    }
+
+    .letter-content .letter-final {
+        font-size: 15px;
+    }
+
+    .letter-signature {
+        font-size: 14px;
+
+        padding-right: 5px;
+    }
+
+
+    /* MUSIC */
+
+    .music-button {
+        width: 43px;
+        height: 43px;
+
+        right: 15px;
+        bottom: 15px;
+
+        font-size: 18px;
     }
 }
 
 
-/* ==================================================
-   HP KECIL
-   Contoh: 360px / 320px
-================================================== */
+/* =========================================================
+   HP SANGAT KECIL
+========================================================= */
 
-@media (max-width: 380px) {
+@media (max-width: 400px) {
+
+    .intro-photos .intro-photo {
+        width: 60px;
+
+        padding:
+            4px
+            4px
+            15px;
+    }
 
     .intro-text .letter {
-
-        font-size: 28px;
+        font-size: 25px;
     }
 
     .intro-tap {
-
-        font-size: 9px;
-
-        letter-spacing: 2px;
+        font-size: 10px;
     }
 
-    .book-controls {
 
+    .book-controls {
         gap: 5px;
     }
 
     .book-controls button {
-
         padding:
-            9px
-            10px;
+            9px 10px;
 
         font-size: 10px;
     }
 
     .book-controls span {
-
         min-width: 38px;
 
         font-size: 10px;
     }
 
-}
 
-/* ==================================================
-   INTRO SCRAPBOOK
-   FOTO 7 - FOTO 15
-================================================== */
-
-
-/* ==================================================
-   LAYAR INTRO
-================================================== */
-
-.intro-screen {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-
-    overflow: hidden;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f3d5df 0%,
-            #f8e5e8 45%,
-            #f0ccd8 100%
-        );
-
-    z-index: 9999;
-}
-
-
-/* ==================================================
-   KERTAS BESAR DI TENGAH
-================================================== */
-
-.intro-screen::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 92%;
-    height: 94%;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.25),
-            rgba(255,248,249,0.75),
-            rgba(255,255,255,0.25)
-        );
-
-    box-shadow:
-        0 20px 60px rgba(95, 45, 60, 0.10);
-
-    transform: rotate(-1deg);
-
-    pointer-events: none;
-
-}
-
-
-/* ==================================================
-   CONTAINER FOTO
-================================================== */
-
-.intro-photos {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    pointer-events: none;
-
-    z-index: 2;
-
-}
-
-
-/* ==================================================
-   FOTO
-================================================== */
-
-.intro-photo {
-
-    position: absolute;
-
-    width: clamp(
-        100px,
-        12vw,
-        180px
-    );
-
-    padding: 8px 8px 28px;
-
-    background: #fffafa;
-
-    box-shadow:
-        0 10px 25px rgba(90, 45, 55, 0.18),
-        0 2px 5px rgba(90, 45, 55, 0.08);
-
-    border-radius: 2px;
-
-    opacity: 0;
-
-    animation:
-        introPhotoAppear 0.8s ease forwards,
-        introPhotoFloat 5s ease-in-out infinite;
-
-}
-
-
-/* ==================================================
-   GAMBAR
-================================================== */
-
-.intro-photo img {
-
-    display: block;
-
-    width: 100%;
-
-    aspect-ratio: 1 / 1;
-
-    object-fit: cover;
-
-    border-radius: 1px;
-
-}
-
-
-/* ==================================================
-   FOTO 1
-   foto7.jpg
-================================================== */
-
-.photo-1 {
-
-    top: 7%;
-    left: 7%;
-
-    transform: rotate(-8deg);
-
-    animation-delay:
-        0.2s,
-        1.8s;
-}
-
-
-/* ==================================================
-   FOTO 2
-   foto8.jpg
-================================================== */
-
-.photo-2 {
-
-    top: 6%;
-    right: 7%;
-
-    transform: rotate(7deg);
-
-    animation-delay:
-        0.35s,
-        2s;
-}
-
-
-/* ==================================================
-   FOTO 3
-   foto9.jpg
-================================================== */
-
-.photo-3 {
-
-    top: 37%;
-    left: 4%;
-
-    transform: rotate(6deg);
-
-    animation-delay:
-        0.5s,
-        2.2s;
-}
-
-
-/* ==================================================
-   FOTO 4
-   foto10.jpg
-================================================== */
-
-.photo-4 {
-
-    top: 37%;
-    right: 4%;
-
-    transform: rotate(-7deg);
-
-    animation-delay:
-        0.65s,
-        2.4s;
-}
-
-
-/* ==================================================
-   FOTO 5
-   foto11.jpg
-================================================== */
-
-.photo-5 {
-
-    bottom: 6%;
-    left: 7%;
-
-    transform: rotate(7deg);
-
-    animation-delay:
-        0.8s,
-        2.1s;
-}
-
-
-/* ==================================================
-   FOTO 6
-   foto12.jpg
-================================================== */
-
-.photo-6 {
-
-    bottom: 6%;
-    right: 7%;
-
-    transform: rotate(-7deg);
-
-    animation-delay:
-        0.95s,
-        2.5s;
-}
-
-
-/* ==================================================
-   FOTO 7
-   foto13.jpg
-================================================== */
-
-.photo-7 {
-
-    top: 20%;
-    left: 19%;
-
-    transform: rotate(-5deg);
-
-    animation-delay:
-        1.1s,
-        2.3s;
-}
-
-
-/* ==================================================
-   FOTO 8
-   foto14.jpg
-================================================== */
-
-.photo-8 {
-
-    top: 20%;
-    right: 19%;
-
-    transform: rotate(5deg);
-
-    animation-delay:
-        1.25s,
-        2.6s;
-}
-
-
-/* ==================================================
-   FOTO 9
-   foto15.jpg
-================================================== */
-
-.photo-9 {
-
-    bottom: 21%;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%)
-        rotate(-3deg);
-
-    animation-delay:
-        1.4s,
-        2.8s;
-}
-
-
-/* ==================================================
-   TULISAN DI TENGAH
-================================================== */
-
-.intro-center {
-
-    position: relative;
-
-    z-index: 10;
-
-    width: 85%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    pointer-events: none;
-
-}
-
-
-/* ==================================================
-   TULISAN UTAMA
-================================================== */
-
-.intro-text {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    max-width: 100%;
-
-    gap: clamp(
-        2px,
-        0.5vw,
-        10px
-    );
-
-}
-
-
-/* ==================================================
-   HURUF DARI JAVASCRIPT
-================================================== */
-
-.intro-text .letter {
-
-    display: inline-block;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            40px,
-            6vw,
-            90px
-        );
-
-    font-weight: 700;
-
-    color: var(--c);
-
-    text-shadow:
-        0 5px 12px
-        rgba(90, 40, 55, 0.15);
-
-    opacity: 0;
-
-    animation:
-        introLetterAppear
-        0.6s
-        ease
-        forwards;
-
-    animation-delay:
-        var(--d);
-
-}
-
-
-/* ==================================================
-   SPASI ANTAR KATA
-================================================== */
-
-.intro-text .letter.space {
-
-    width:
-        clamp(
-            12px,
-            2vw,
-            30px
-        );
-
-}
-
-
-/* ==================================================
-   TAP ANYWHERE
-================================================== */
-
-.intro-tap {
-
-    margin-top: 40px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            13px,
-            1.5vw,
-            20px
-        );
-
-    letter-spacing: 3px;
-
-    color: #8d5b68;
-
-    opacity: 0;
-
-    animation:
-        introTapAppear
-        1s
-        ease
-        1.7s
-        forwards;
-
-}
-
-
-/* ==================================================
-   ANIMASI FOTO MASUK
-================================================== */
-
-@keyframes introPhotoAppear {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(35px)
-            scale(0.78);
-
+    .closing-section .closing-gallery {
+        gap:
+            10px 5px;
     }
 
-    to {
+    .closing-section .closing-photo {
+        width: 78px;
 
+        height: 96px;
+
+        padding: 4px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.001ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.001ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+
+    .reveal {
         opacity: 1;
 
+        transform: none;
     }
-
-}
-
-
-/* ==================================================
-   FOTO BERGERAK HALUS
-================================================== */
-
-@keyframes introPhotoFloat {
-
-    0%,
-    100% {
-
-        margin-top: 0;
-
-    }
-
-    50% {
-
-        margin-top: -7px;
-
-    }
-
-}
-
-
-/* ==================================================
-   ANIMASI HURUF
-================================================== */
-
-@keyframes introLetterAppear {
-
-    0% {
-
-        opacity: 0;
-
-        transform:
-            translateY(25px)
-            scale(0.75);
-
-        filter: blur(5px);
-
-    }
-
-    100% {
-
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter: blur(0);
-
-    }
-
-}
-
-
-/* ==================================================
-   ANIMASI TAP
-================================================== */
-
-@keyframes introTapAppear {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(12px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-
-/* ==================================================
-   INTRO KELUAR
-================================================== */
-
-.intro-screen.intro-hidden {
-
-    animation:
-        introDisappear
-        0.65s
-        ease
-        forwards;
-
-}
-
-
-@keyframes introDisappear {
-
-    from {
-
-        opacity: 1;
-
-        transform:
-            scale(1);
-
-    }
-
-    to {
-
-        opacity: 0;
-
-        transform:
-            scale(1.03);
-
-    }
-
-}
-
-
-/* ==================================================
-   MOBILE
-================================================== */
-
-@media (max-width: 600px) {
-
-    .intro-screen::before {
-
-        width: 92%;
-
-        height: 95%;
-
-    }
-
-
-    .intro-center {
-
-        width: 88%;
-
-        padding: 10px;
-
-    }
-
-
-    /* FOTO LEBIH KECIL */
-
-    .intro-photo {
-
-        width: 72px;
-
-        padding:
-            5px 5px 18px;
-
-    }
-
-
-    /* FOTO 1 */
-
-    .photo-1 {
-
-        top: 6%;
-        left: 3%;
-
-        transform:
-            rotate(-9deg);
-
-    }
-
-
-    /* FOTO 2 */
-
-    .photo-2 {
-
-        top: 6%;
-        right: 3%;
-
-        transform:
-            rotate(8deg);
-
-    }
-
-
-    /* FOTO 3 */
-
-    .photo-3 {
-
-        top: 29%;
-        left: 1%;
-
-        transform:
-            rotate(7deg);
-
-    }
-
-
-    /* FOTO 4 */
-
-    .photo-4 {
-
-        top: 29%;
-        right: 1%;
-
-        transform:
-            rotate(-8deg);
-
-    }
-
-
-    /* FOTO 5 */
-
-    .photo-5 {
-
-        bottom: 7%;
-        left: 3%;
-
-        transform:
-            rotate(8deg);
-
-    }
-
-
-    /* FOTO 6 */
-
-    .photo-6 {
-
-        bottom: 7%;
-        right: 3%;
-
-        transform:
-            rotate(-8deg);
-
-    }
-
-
-    /* FOTO 7 */
-
-    .photo-7 {
-
-        top: 17%;
-        left: 14%;
-
-        transform:
-            rotate(-5deg);
-
-    }
-
-
-    /* FOTO 8 */
-
-    .photo-8 {
-
-        top: 17%;
-        right: 14%;
-
-        transform:
-            rotate(5deg);
-
-    }
-
-
-    /* FOTO 9 */
-
-    .photo-9 {
-
-        bottom: 22%;
-
-        left: 50%;
-
-        transform:
-            translateX(-50%)
-            rotate(-3deg);
-
-    }
-
-
-    /* TULISAN */
-
-    .intro-text {
-
-        gap: 1px;
-
-        max-width: 90%;
-
-    }
-
-
-    .intro-text .letter {
-
-        font-size:
-            clamp(
-                27px,
-                8.5vw,
-                48px
-            );
-
-    }
-
-
-    .intro-text .letter.space {
-
-        width: 8px;
-
-    }
-
-
-    .intro-tap {
-
-        margin-top: 25px;
-
-        font-size: 11px;
-
-        letter-spacing: 2px;
-
-    }
-
-}
-
-
-/* ==================================================
-   HP SANGAT KECIL
-================================================== */
-
-@media (max-width: 380px) {
-
-    .intro-photo {
-
-        width: 60px;
-
-        padding:
-            4px 4px 15px;
-
-    }
-
-
-    .intro-text .letter {
-
-        font-size: 25px;
-
-    }
-
-
-    .intro-tap {
-
-        font-size: 10px;
-
-    }
-
 }
