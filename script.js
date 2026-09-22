@@ -598,7 +598,7 @@ function burstHearts(container, count = 14) {
 
 /* ==================================================
 INTRO TEXT ANIMATION
-"pibedeee dimdimmm" muncul huruf demi huruf
+"pibesdeee dimdimmm" muncul huruf demi huruf
 di layar paling awal, sebelum situs dibuka
 ================================================== */
 
@@ -614,7 +614,7 @@ function initIntroScreen() {
         return;
     }
 
-    const message = "pibedeee dimdimmm";
+    const message = "pibesdeee dimdimmm";
 
     const colors = [
         "#95606d",
