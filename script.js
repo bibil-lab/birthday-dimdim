@@ -597,6 +597,99 @@ function burstHearts(container, count = 14) {
 
 
 /* ==================================================
+INTRO TEXT ANIMATION
+"pibedeee dimdimmm" muncul huruf demi huruf
+di layar paling awal, sebelum situs dibuka
+================================================== */
+
+function initIntroScreen() {
+
+    const introEl =
+        document.getElementById("introScreen");
+
+    const textEl =
+        document.getElementById("introText");
+
+    if (!introEl || !textEl) {
+        return;
+    }
+
+    const message = "pibedeee dimdimmm";
+
+    const colors = [
+        "#95606d",
+        "#7d4e5b",
+        "#a97885",
+        "#704650"
+    ];
+
+    message.split("").forEach(function(char, index) {
+
+        const letter =
+            document.createElement("span");
+
+        letter.className =
+            "letter" + (char === " " ? " space" : "");
+
+        letter.textContent =
+            char === " " ? "\u00A0" : char;
+
+        letter.style.setProperty(
+            "--d",
+            (index * 0.07) + "s"
+        );
+
+        letter.style.setProperty(
+            "--c",
+            colors[index % colors.length]
+        );
+
+        textEl.appendChild(letter);
+
+    });
+
+
+    /* Kunci scroll selama intro tampil */
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
+
+    function dismissIntro() {
+
+        burstHearts(introEl, 18);
+
+        introEl.classList.add("intro-hidden");
+
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+
+        setTimeout(function() {
+
+            introEl.remove();
+
+        }, 650);
+
+    }
+
+    introEl.addEventListener("click", dismissIntro);
+
+    introEl.addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter" || event.key === " ") {
+
+            event.preventDefault();
+
+            dismissIntro();
+
+        }
+
+    });
+
+}
+
+
+/* ==================================================
 SCROLL REVEAL
 Menambahkan animasi fade + slide-up bertahap
 saat elemen masuk ke layar
@@ -1016,6 +1109,7 @@ document.addEventListener(
             ANIMASI TAMBAHAN
         */
 
+        initIntroScreen();
         initScrollReveal();
         initParallaxHearts();
         initPhotoTilt();
