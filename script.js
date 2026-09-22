@@ -99,7 +99,15 @@ function openWebsite() {
 
         music.volume = 0.45;
 
-        music.play().catch(function() {
+        music.play().then(function() {
+
+            const button = document.getElementById("musicButton");
+
+            if (button) {
+                button.classList.add("playing");
+            }
+
+        }).catch(function() {
 
             console.log(
                 "Music belum bisa diputar."
@@ -537,6 +545,344 @@ function createHeart(x, y) {
 
 
 /* ==================================================
+BURST HEARTS
+(dipakai saat judul ulang tahun muncul di layar)
+================================================== */
+
+function burstHearts(container, count = 14) {
+
+    if (!container) {
+        return;
+    }
+
+    for (let i = 0; i < count; i++) {
+
+        const heart =
+            document.createElement("span");
+
+        heart.className = "burst-heart";
+
+        heart.innerHTML =
+            Math.random() > 0.5 ? "♡" : "♥";
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+        const distance =
+            60 + Math.random() * 100;
+
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        heart.style.setProperty("--dx", dx + "px");
+        heart.style.setProperty("--dy", dy + "px");
+
+        heart.style.fontSize =
+            (14 + Math.random() * 16) + "px";
+
+        heart.style.animationDelay =
+            (Math.random() * 0.2) + "s";
+
+        container.appendChild(heart);
+
+        setTimeout(function() {
+
+            heart.remove();
+
+        }, 1500);
+
+    }
+
+}
+
+
+/* ==================================================
+SCROLL REVEAL
+Menambahkan animasi fade + slide-up bertahap
+saat elemen masuk ke layar
+================================================== */
+
+function initScrollReveal() {
+
+    const groups = [
+        ".opening-content > *",
+        ".birthday-content > *",
+        ".book-cover > *",
+        ".closing-content > *",
+        ".letter-content > p",
+        ".letter-signature",
+        ".restart-area"
+    ];
+
+    const elements =
+        document.querySelectorAll(groups.join(", "));
+
+    if (!("IntersectionObserver" in window) || elements.length === 0) {
+
+        elements.forEach(function(el) {
+            el.classList.add("reveal", "active");
+        });
+
+        return;
+    }
+
+    elements.forEach(function(el) {
+        el.classList.add("reveal");
+    });
+
+    let birthdayBurstDone = false;
+
+    const observer = new IntersectionObserver(function(entries) {
+
+        entries.forEach(function(entry) {
+
+            if (!entry.isIntersecting) {
+                return;
+            }
+
+            const target = entry.target;
+
+            const siblings =
+                Array.from(target.parentElement.children)
+                    .filter(function(el) {
+                        return el.classList.contains("reveal");
+                    });
+
+            const index =
+                siblings.indexOf(target);
+
+            target.style.transitionDelay =
+                (index * 0.09) + "s";
+
+            target.classList.add("active");
+
+            /* Ledakan hati saat judul ulang tahun kelihatan */
+
+            if (
+                !birthdayBurstDone &&
+                target.parentElement &&
+                target.parentElement.classList.contains("birthday-content") &&
+                target.tagName === "H2"
+            ) {
+
+                birthdayBurstDone = true;
+
+                setTimeout(function() {
+
+                    burstHearts(target.parentElement, 16);
+
+                }, 250);
+
+            }
+
+            observer.unobserve(target);
+
+        });
+
+    }, {
+        threshold: 0.2,
+        rootMargin: "0px 0px -8% 0px"
+    });
+
+    elements.forEach(function(el) {
+        observer.observe(el);
+    });
+
+    /* Garis "TO BE CONTINUED" juga ikut reveal */
+
+    const closingLine =
+        document.querySelector(".closing-line");
+
+    if (closingLine) {
+
+        closingLine.classList.add("reveal");
+
+        const lineObserver = new IntersectionObserver(function(entries) {
+
+            entries.forEach(function(entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("active");
+
+                    lineObserver.unobserve(entry.target);
+
+                }
+
+            });
+
+        }, { threshold: 0.4 });
+
+        lineObserver.observe(closingLine);
+
+    }
+
+}
+
+
+/* ==================================================
+PARALLAX HEARTS
+Hati di halaman pembuka bergerak halus mengikuti
+posisi kursor / sentuhan
+================================================== */
+
+function initParallaxHearts() {
+
+    const hearts =
+        document.querySelector(".hearts");
+
+    if (!hearts) {
+        return;
+    }
+
+    document.addEventListener("mousemove", function(event) {
+
+        const x =
+            (event.clientX / window.innerWidth - 0.5) * 34;
+
+        const y =
+            (event.clientY / window.innerHeight - 0.5) * 34;
+
+        hearts.style.transform =
+            `translate(${x}px, ${y}px)`;
+
+    });
+
+}
+
+
+/* ==================================================
+TILT FOTO & VIDEO DI BUKU KENANGAN
+================================================== */
+
+function initPhotoTilt() {
+
+    const bookPageEl =
+        document.getElementById("bookPage");
+
+    if (!bookPageEl) {
+        return;
+    }
+
+    bookPageEl.addEventListener("mousemove", function(event) {
+
+        const card =
+            event.target.closest(".book-photo, .book-video");
+
+        if (!card) {
+            return;
+        }
+
+        const rect =
+            card.getBoundingClientRect();
+
+        const x =
+            (event.clientX - rect.left) / rect.width - 0.5;
+
+        const y =
+            (event.clientY - rect.top) / rect.height - 0.5;
+
+        const base =
+            card.classList.contains("book-photo") ? -2 : 1;
+
+        card.style.transform =
+            `rotate(${base}deg) rotateX(${(-y * 10).toFixed(2)}deg) rotateY(${(x * 10).toFixed(2)}deg)`;
+
+    });
+
+    bookPageEl.addEventListener("mouseleave", function() {
+
+        document.querySelectorAll(".book-photo, .book-video")
+            .forEach(function(card) {
+
+                card.style.transform =
+                    card.classList.contains("book-photo")
+                        ? "rotate(-2deg)"
+                        : "rotate(1deg)";
+
+            });
+
+    }, true);
+
+}
+
+
+/* ==================================================
+RIPPLE EFFECT PADA TOMBOL
+================================================== */
+
+function initButtonRipple() {
+
+    document.addEventListener("click", function(event) {
+
+        const button =
+            event.target.closest(
+                "button, .main-button, .open-story-button, .restart-button"
+            );
+
+        if (!button) {
+            return;
+        }
+
+        const ripple =
+            document.createElement("span");
+
+        ripple.className = "ripple";
+
+        const rect =
+            button.getBoundingClientRect();
+
+        const size =
+            Math.max(rect.width, rect.height);
+
+        ripple.style.width =
+            ripple.style.height = size + "px";
+
+        ripple.style.left =
+            (event.clientX - rect.left - size / 2) + "px";
+
+        ripple.style.top =
+            (event.clientY - rect.top - size / 2) + "px";
+
+        button.appendChild(ripple);
+
+        setTimeout(function() {
+
+            ripple.remove();
+
+        }, 650);
+
+    });
+
+}
+
+
+/* ==================================================
+KLIK HATI PENUTUP
+Sentuh hati di halaman closing untuk ledakan kecil
+================================================== */
+
+function initClosingHeart() {
+
+    const heart =
+        document.querySelector(".closing-heart");
+
+    if (!heart) {
+        return;
+    }
+
+    heart.addEventListener("click", function(event) {
+
+        event.stopPropagation();
+
+        burstHearts(heart.parentElement, 10);
+
+    });
+
+}
+
+
+/* ==================================================
 PAGE LOADED
 ================================================== */
 
@@ -664,6 +1010,17 @@ document.addEventListener(
 
             }
         );
+
+
+        /*
+            ANIMASI TAMBAHAN
+        */
+
+        initScrollReveal();
+        initParallaxHearts();
+        initPhotoTilt();
+        initButtonRipple();
+        initClosingHeart();
 
     }
 
