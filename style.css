@@ -1,4 +1,4 @@
-{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -727,6 +727,170 @@ position: relative;
 border-radius: 5px;
 
 overflow: hidden;
+
+perspective: 1800px;
+
+-webkit-perspective: 1800px;
+
+}
+
+/* ==================================================
+PAGE-TURN LEAF (halaman yang benar-benar membalik
+dari sisi spine, seperti buku asli)
+================================================== */
+
+.book-leaf {
+position: absolute;
+
+inset: 0;
+
+visibility: hidden;
+
+transform-style: preserve-3d;
+
+-webkit-transform-style: preserve-3d;
+
+pointer-events: none;
+
+z-index: 6;
+
+transform: translateZ(0);
+
+}
+
+.leaf-face {
+position: absolute;
+
+inset: 0;
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+background: #fdf8f1;
+
+border-radius: 5px;
+
+overflow: hidden;
+
+backface-visibility: hidden;
+
+-webkit-backface-visibility: hidden;
+
+}
+
+.leaf-front {
+transform: rotateY(0deg);
+}
+
+.leaf-back {
+transform: rotateY(180deg);
+}
+
+/* SHADING — halaman gelap saat menekuk, terang lagi saat rata */
+
+.book-leaf::after {
+content: "";
+
+position: absolute;
+
+inset: 0;
+
+z-index: 3;
+
+opacity: 0;
+
+pointer-events: none;
+
+border-radius: 5px;
+
+background:
+    linear-gradient(
+        90deg,
+        rgba(40, 20, 25, 0.5),
+        transparent 55%
+    );
+
+}
+
+.book-leaf.flip-prev::after {
+
+background:
+    linear-gradient(
+        270deg,
+        rgba(40, 20, 25, 0.5),
+        transparent 55%
+    );
+
+}
+
+.book-leaf.flip-next {
+
+animation:
+    leafFlipNext 0.85s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
+
+filter: drop-shadow(0 10px 25px rgba(60, 30, 35, 0.35));
+
+}
+
+.book-leaf.flip-prev {
+
+animation:
+    leafFlipPrev 0.85s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
+
+filter: drop-shadow(0 10px 25px rgba(60, 30, 35, 0.35));
+
+}
+
+.book-leaf.flip-next::after,
+.book-leaf.flip-prev::after {
+
+animation:
+    leafShade 0.85s ease forwards;
+
+}
+
+@keyframes leafFlipNext {
+
+from {
+    transform: rotateY(0deg) translateZ(0);
+}
+
+to {
+    transform: rotateY(-180deg) translateZ(0);
+}
+
+}
+
+@keyframes leafFlipPrev {
+
+from {
+    transform: rotateY(0deg) translateZ(0);
+}
+
+to {
+    transform: rotateY(180deg) translateZ(0);
+}
+
+}
+
+@keyframes leafShade {
+
+0% {
+    opacity: 0;
+}
+
+45% {
+    opacity: 0.55;
+}
+
+55% {
+    opacity: 0.55;
+}
+
+100% {
+    opacity: 0;
+}
 
 }
 
@@ -1806,6 +1970,10 @@ color: #704650;
 
 .book {
     width: 94vw;
+
+    perspective: 1100px;
+
+    -webkit-perspective: 1100px;
 }
 
 .book::before {
