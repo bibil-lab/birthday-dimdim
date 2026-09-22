@@ -98,6 +98,166 @@ to {
 }
 
 /* ==================================================
+   INTRO TEXT ANIMATION
+================================================== */
+
+.intro-screen {
+position: fixed;
+
+inset: 0;
+
+z-index: 10001;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+justify-content: center;
+
+text-align: center;
+
+gap: 22px;
+
+padding: 20px;
+
+overflow: hidden;
+
+cursor: pointer;
+
+background:
+    radial-gradient(
+        circle at center,
+        #fff3f5,
+        #f3d3da 65%,
+        #e6bfc8
+    );
+
+transition: opacity 0.6s ease, visibility 0.6s ease;
+
+}
+
+.intro-screen.intro-hidden {
+
+opacity: 0;
+
+visibility: hidden;
+
+pointer-events: none;
+
+}
+
+.intro-text {
+display: flex;
+
+flex-wrap: wrap;
+
+justify-content: center;
+
+max-width: 92vw;
+
+}
+
+.intro-text .letter {
+display: inline-block;
+
+font-family: Georgia, "Times New Roman", serif;
+
+font-weight: bold;
+
+font-size: clamp(30px, 9vw, 70px);
+
+color: var(--c, #95606d);
+
+opacity: 0;
+
+transform: translateY(45px) scale(0.4) rotate(-8deg);
+
+animation:
+    introLetterPop 0.7s cubic-bezier(.34, 1.56, .64, 1) forwards,
+    introLetterWiggle 2.6s ease-in-out infinite;
+
+animation-delay: var(--d, 0s), calc(var(--d, 0s) + 0.9s);
+
+text-shadow: 0 6px 18px rgba(112, 70, 80, 0.18);
+
+}
+
+.intro-text .letter.space {
+
+width: 0.38em;
+
+}
+
+@keyframes introLetterPop {
+
+to {
+    opacity: 1;
+
+    transform: translateY(0) scale(1) rotate(0deg);
+}
+
+}
+
+@keyframes introLetterWiggle {
+
+0%, 100% {
+    transform: rotate(0deg) translateY(0);
+}
+
+25% {
+    transform: rotate(-4deg) translateY(-4px);
+}
+
+75% {
+    transform: rotate(4deg) translateY(4px);
+}
+
+}
+
+.intro-tap {
+font-family: Arial, sans-serif;
+
+font-size: 12px;
+
+letter-spacing: 4px;
+
+text-transform: uppercase;
+
+color: #96727a;
+
+opacity: 0;
+
+animation:
+    introTapFade 0.8s ease forwards,
+    introTapPulse 1.6s ease-in-out 2.4s infinite;
+
+animation-delay: 2s, 2.6s;
+
+}
+
+@keyframes introTapFade {
+
+to {
+    opacity: 0.8;
+}
+
+}
+
+@keyframes introTapPulse {
+
+0%, 100% {
+    opacity: 0.5;
+}
+
+50% {
+    opacity: 1;
+}
+
+}
+
+/* ==================================================
 OPENING
 ================================================== */
 
