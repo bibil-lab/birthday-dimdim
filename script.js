@@ -182,28 +182,13 @@ function toggleMusic() {
 
 
 /* ==================================================
-SHOW MEMORY PAGE
+RENDER PAGE HTML
+Menghasilkan markup satu halaman (foto/video + caption),
+dipakai untuk halaman statis maupun kedua sisi lembar
+yang membalik
 ================================================== */
 
-function showPage(animation = "next") {
-
-    const container =
-        document.getElementById("bookPage");
-
-
-    if (!container) {
-        return;
-    }
-
-
-    const page =
-        pages[currentPage];
-
-
-    if (!page) {
-        return;
-    }
-
+function renderPageHTML(page) {
 
     let mediaHTML = "";
 
@@ -269,11 +254,7 @@ function showPage(animation = "next") {
     }
 
 
-    /* ==================================================
-       CONTENT
-    ================================================== */
-
-    container.innerHTML = `
+    return `
 
         <div class="page-left">
 
@@ -300,46 +281,17 @@ function showPage(animation = "next") {
 
     `;
 
-
-    /* ==================================================
-       ANIMATION
-    ================================================== */
-
-    container.classList.remove(
-        "page-next",
-        "page-prev"
-    );
+}
 
 
-    void container.offsetWidth;
+/* ==================================================
+UPDATE PAGE NUMBER
+================================================== */
 
-
-    if (animation === "prev") {
-
-        container.classList.add(
-            "page-prev"
-        );
-
-    }
-
-    else {
-
-        container.classList.add(
-            "page-next"
-        );
-
-    }
-
-
-    /* ==================================================
-       PAGE NUMBER
-    ================================================== */
+function updatePageNumber() {
 
     const pageNumber =
-        document.getElementById(
-            "pageNumber"
-        );
-
+        document.getElementById("pageNumber");
 
     if (pageNumber) {
 
@@ -352,19 +304,164 @@ function showPage(animation = "next") {
 
 
 /* ==================================================
+RENDER STATIC PAGE (tanpa animasi flip)
+Dipakai saat halaman pertama kali dimuat / buku dibuka
+================================================== */
+
+function renderStaticPage(index) {
+
+    const container =
+        document.getElementById("bookPage");
+
+    const page =
+        pages[index];
+
+    if (!container || !page) {
+        return;
+    }
+
+    currentPage = index;
+
+    container.innerHTML =
+        renderPageHTML(page);
+
+    updatePageNumber();
+
+}
+
+
+/* ==================================================
+FLIP TO PAGE
+Membalik satu lembar penuh dari sisi spine (kiri untuk
+maju, kanan untuk mundur), seperti buku sungguhan
+================================================== */
+
+let isFlipping = false;
+
+function flipToPage(targetIndex, direction) {
+
+    if (
+        isFlipping ||
+        targetIndex < 0 ||
+        targetIndex >= pages.length
+    ) {
+
+        return false;
+
+    }
+
+    const leaf =
+        document.getElementById("bookLeaf");
+
+    const leafFront =
+        document.getElementById("leafFront");
+
+    const leafBack =
+        document.getElementById("leafBack");
+
+    const staticContainer =
+        document.getElementById("bookPage");
+
+    if (!leaf || !leafFront || !leafBack || !staticContainer) {
+
+        return false;
+
+    }
+
+    isFlipping = true;
+
+
+    /* Sisi depan lembar = halaman yang sedang terlihat sekarang */
+
+    leafFront.innerHTML =
+        renderPageHTML(pages[currentPage]);
+
+
+    /* Sisi belakang lembar = halaman tujuan */
+
+    leafBack.innerHTML =
+        renderPageHTML(pages[targetIndex]);
+
+
+    leaf.style.transformOrigin =
+        direction === "next" ? "left center" : "right center";
+
+    leaf.classList.remove("flip-next", "flip-prev");
+
+    leaf.style.visibility = "visible";
+
+
+    /* Paksa reflow supaya reset animasi berlaku bersih */
+
+    void leaf.offsetWidth;
+
+
+    /* Halaman statis di bawah lembar langsung diperbarui —
+       tertutup rapat oleh sisi depan lembar selama animasi
+       berjalan, jadi tidak kelihatan berganti tiba-tiba */
+
+    currentPage = targetIndex;
+
+    staticContainer.innerHTML =
+        renderPageHTML(pages[currentPage]);
+
+    updatePageNumber();
+
+
+    leaf.classList.add(
+        direction === "next" ? "flip-next" : "flip-prev"
+    );
+
+
+    function handleFlipEnd() {
+
+        leaf.style.visibility = "hidden";
+
+        leaf.classList.remove("flip-next", "flip-prev");
+
+        leafFront.innerHTML = "";
+        leafBack.innerHTML = "";
+
+        isFlipping = false;
+
+        leaf.removeEventListener("animationend", handleFlipEnd);
+
+    }
+
+    leaf.addEventListener("animationend", handleFlipEnd);
+
+
+    /* Jaring pengaman kalau animationend tidak terpicu
+       (misal tab tidak aktif) */
+
+    setTimeout(function() {
+
+        if (isFlipping) {
+
+            handleFlipEnd();
+
+        }
+
+    }, 1100);
+
+    return true;
+
+}
+
+
+/* ==================================================
 NEXT
 ================================================== */
 
 function nextPage() {
 
-    if (
-        currentPage <
-        pages.length - 1
-    ) {
+    if (isFlipping) {
+        return;
+    }
 
-        currentPage++;
+    if (currentPage < pages.length - 1) {
 
-        showPage("next");
+        flipToPage(currentPage + 1, "next");
 
         scrollToBook();
 
@@ -397,11 +494,13 @@ PREVIOUS
 
 function previousPage() {
 
+    if (isFlipping) {
+        return;
+    }
+
     if (currentPage > 0) {
 
-        currentPage--;
-
-        showPage("prev");
+        flipToPage(currentPage - 1, "prev");
 
         scrollToBook();
 
@@ -484,9 +583,7 @@ function openStoryBook(event) {
         );
 
 
-        currentPage = 0;
-
-        showPage("next");
+        renderStaticPage(0);
 
 
         book.scrollIntoView({
@@ -987,7 +1084,7 @@ document.addEventListener(
             Tampilkan memory pertama
         */
 
-        showPage("next");
+        renderStaticPage(0);
 
 
         /*
@@ -1026,12 +1123,9 @@ document.addEventListener(
                 "click",
                 function() {
 
-                    currentPage = 0;
-
-
                     setTimeout(function() {
 
-                        showPage("next");
+                        renderStaticPage(0);
 
                     }, 100);
 
