@@ -20,39 +20,39 @@
     <div class="intro-photos">
 
         <div class="intro-photo photo-1">
-            <img src="foto7.jpg" alt="Memory 1">
+            <img src="images/foto7.jpg" alt="Memory 1">
         </div>
 
         <div class="intro-photo photo-2">
-            <img src="foto8.jpg" alt="Memory 2">
+            <img src="images/foto8.jpg" alt="Memory 2">
         </div>
 
         <div class="intro-photo photo-3">
-            <img src="foto9.jpg" alt="Memory 3">
+            <img src="images/foto9.jpg" alt="Memory 3">
         </div>
 
         <div class="intro-photo photo-4">
-            <img src="foto10.jpg" alt="Memory 4">
+            <img src="images/foto10.jpg" alt="Memory 4">
         </div>
 
         <div class="intro-photo photo-5">
-            <img src="foto11.jpg" alt="Memory 5">
+            <img src="images/foto11.jpg" alt="Memory 5">
         </div>
 
         <div class="intro-photo photo-6">
-            <img src="foto12.jpg" alt="Memory 6">
+            <img src="images/foto12.jpg" alt="Memory 6">
         </div>
 
         <div class="intro-photo photo-7">
-            <img src="foto13.jpg" alt="Memory 7">
+            <img src="images/foto13.jpg" alt="Memory 7">
         </div>
 
         <div class="intro-photo photo-8">
-            <img src="foto14.jpg" alt="Memory 8">
+            <img src="images/foto14.jpg" alt="Memory 8">
         </div>
 
         <div class="intro-photo photo-9">
-            <img src="foto15.jpg" alt="Memory 9">
+            <img src="images/foto15.jpg" alt="Memory 9">
         </div>
 
     </div>
@@ -134,6 +134,8 @@
         Hari ini adalah hari spesial untuk seseorang 
         yang sangat spesial buat Bibil. 
     </p> 
+
+    <p class="love-counter" id="loveCounter"></p> 
  
     <a href="#book" class="main-button"> 
         Continue ♡ 
@@ -175,13 +177,22 @@
  
 </section><!-- ================================================== 
      BOOK PAGES 
-================================================== --><section class="book-section" id="bookPages"><div class="book"> 
+================================================== --><section class="book-section" id="bookPages"><div class="book" id="bookContainer"> 
  
     <div class="book-page" id="bookPage"> 
  
         <!-- ISI BUKU DIBUAT OLEH JAVASCRIPT --> 
  
     </div> 
+ 
+    <!-- LEMBAR YANG DIANIMASIKAN SAAT PINDAH HALAMAN -->
+    <div class="book-leaf" id="bookLeaf">
+
+        <div class="leaf-face leaf-front" id="leafFront"></div>
+
+        <div class="leaf-face leaf-back" id="leafBack"></div>
+
+    </div>
  
 </div> 
  
@@ -190,7 +201,7 @@
  
 <div class="book-controls"> 
  
-    <button onclick="previousPage()"> 
+    <button onclick="previousPage()" id="prevPageBtn"> 
         ← Previous 
     </button> 
  
@@ -198,7 +209,7 @@
         1 / 10 
     </span> 
  
-    <button onclick="nextPage()"> 
+    <button onclick="nextPage()" id="nextPageBtn"> 
         Next → 
     </button> 
  
