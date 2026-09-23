@@ -1,1296 +1,395 @@
-/* ==================================================
-OUR LITTLE STORY
-Bibil ♡ Dimdim
-================================================== */
-
-
-/* ==================================================
-DATA MEMORY
-================================================== */
-
-const pages = [
-
-    {
-        type: "photo",
-        number: 1,
-        image: "foto1.jpg",
-        text: "pertama kali bibil ngajak ngajak dimdim ngerjain tugas di Socrates Vegan"
-    },
-
-    {
-        type: "photo",
-        number: 2,
-        image: "foto2.jpg",
-        text: "pertama kali kita nontonnn pulang kuliahh terus pulang nonton kitaa mamm"
-    },
-
-    {
-        type: "photo",
-        number: 3,
-        image: "foto3.jpg",
-        text: "bibil ke rumahh dimdim krna mau ke pantee terus dari situu kita makinn dekett"
-    },
-
-    {
-        type: "photo",
-        number: 4,
-        image: "foto4.jpg",
-        text: "kitaa ke pet cafee dan disituu bibil ceritainn kehidupann bibil ke dimdim krna bibil uda percyaa sma dimdim padahl kita belumm pcrann"
-    },
-
-    {
-        type: "photo",
-        number: 5,
-        image: "foto5.jpg",
-        text: "kitaa uda pcarann dann ituu pertama kali kita pigii jauhhh"
-    },
-
-    {
-        type: "photo",
-        number: 6,
-        image: "foto6.jpg",
-        text: "pertama kalinyaa bibil taunn baruan sma cowoo"
-    },
-
-    {
-        type: "video",
-        number: 7,
-        video: "video1.mp4",
-        text: "kitaa mainn PlayStation, nntonn netflixx dann ituu masi maluu\" krna masi baruu\" pcalann, kalo sekarang sudahh tidaa ada maloe nyaaa"
-    },
-
-    {
-        type: "video",
-        number: 8,
-        video: "video2.mp4",
-        text: "bibil screen recording dimdim lagi main gitar pass kitaa pecee, sekarang kita uda jarang pece hampir ga pernh punn :((("
-    },
-
-    {
-        type: "video",
-        number: 9,
-        video: "video3.mp4",
-        text: "kitaa ke tamannn dann pulangnyaa kita nontonnn, ituu pass ulang tahun bibill, makacii yahh bibil sngtt senangg cekalii pada saat ituu"
-    },
-
-    {
-        type: "video",
-        number: 10,
-        video: "video4.mp4",
-        text: "bibil ajak dimdim mainn tiktokk dann dimdimm mauuu, tapi sekarang dimdim gamauu lagi bibil ajak tiktokann :(((("
-    }
-
-];
-
-
-let currentPage = 0;
-
-
-/* ==================================================
-OPEN WEBSITE
-================================================== */
-
-function openWebsite() {
-
-    const music =
-        document.getElementById("backgroundMusic");
-
-    if (music) {
-
-        music.volume = 0.45;
-
-        music.play().then(function() {
-
-            const button = document.getElementById("musicButton");
-
-            if (button) {
-                button.classList.add("playing");
-            }
-
-        }).catch(function() {
-
-            console.log(
-                "Music belum bisa diputar."
-            );
-
-        });
-
-    }
-
-
-    const birthday =
-        document.getElementById("birthday");
-
-    if (birthday) {
-
-        birthday.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-
-}
-
-
-/* ==================================================
-MUSIC CONTROL
-================================================== */
-
-function toggleMusic() {
-
-    const music =
-        document.getElementById("backgroundMusic");
-
-    const button =
-        document.getElementById("musicButton");
-
-
-    if (!music || !button) {
-        return;
-    }
-
-
-    if (music.paused) {
-
-        music.play().then(function() {
-
-            button.classList.add("playing");
-
-            button.innerHTML = "♫";
-
-        }).catch(function() {
-
-            console.log(
-                "Musik tidak dapat diputar."
-            );
-
-        });
-
-    }
-
-    else {
-
-        music.pause();
-
-        button.classList.remove("playing");
-
-        button.innerHTML = "🔇";
-
-    }
-
-}
-
-
-/* ==================================================
-RENDER PAGE HTML
-Menghasilkan markup satu halaman (foto/video + caption),
-dipakai untuk halaman statis maupun kedua sisi lembar
-yang membalik
-================================================== */
-
-function renderPageHTML(page) {
-
-    let mediaHTML = "";
-
-
-    /* ==================================================
-       PHOTO
-    ================================================== */
-
-    if (page.type === "photo") {
-
-        mediaHTML = `
-
-            <div class="book-photo">
-
-                <div class="tape"></div>
-
-                <img
-                    src="${page.image}"
-                    alt="Memory ${page.number}"
-                    loading="lazy"
-                >
-
-            </div>
-
-        `;
-
-    }
-
-
-    /* ==================================================
-       VIDEO
-    ================================================== */
-
-    else {
-
-        mediaHTML = `
-
-            <div class="book-video">
-
-                <div class="tape"></div>
-
-                <video
-                    controls
-                    playsinline
-                    webkit-playsinline
-                    preload="metadata"
-                    controlsList="nodownload"
-                >
-
-                    <source
-                        src="${page.video}"
-                        type="video/mp4"
-                    >
-
-                    Browser kamu tidak mendukung video.
-
-                </video>
-
-            </div>
-
-        `;
-
-    }
-
-
-    return `
-
-        <div class="page-left">
-
-            <p class="page-count">
-                MEMORY ${page.number}
-            </p>
-
-            ${mediaHTML}
-
+<!DOCTYPE html><html lang="id"><head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><title>For Dimdim ♡</title> 
+ 
+<link rel="stylesheet" href="style.css"> 
+ 
+</head><body> 
+    <!-- ================================================== 
+     INTRO TEXT ANIMATION 
+================================================== --><div
+    class="intro-screen"
+    id="introScreen"
+    role="button"
+    tabindex="0"
+    aria-label="Ketuk untuk membuka"
+>
+
+    <div class="intro-photos">
+
+        <div class="intro-photo photo-1">
+            <img src="foto7.jpg" alt="Memory 1">
         </div>
 
-
-        <div class="page-right">
-
-            <p class="page-count">
-                OUR LITTLE MOMENT
-            </p>
-
-            <p class="memory-caption">
-                ${page.text}
-            </p>
-
+        <div class="intro-photo photo-2">
+            <img src="foto8.jpg" alt="Memory 2">
         </div>
 
-    `;
-
-}
-
-
-/* ==================================================
-UPDATE PAGE NUMBER
-================================================== */
-
-function updatePageNumber() {
-
-    const pageNumber =
-        document.getElementById("pageNumber");
-
-    if (pageNumber) {
-
-        pageNumber.textContent =
-            `${currentPage + 1} / ${pages.length}`;
-
-    }
-
-}
-
-
-/* ==================================================
-RENDER STATIC PAGE (tanpa animasi flip)
-Dipakai saat halaman pertama kali dimuat / buku dibuka
-================================================== */
-
-function renderStaticPage(index) {
-
-    const container =
-        document.getElementById("bookPage");
-
-    const page =
-        pages[index];
-
-    if (!container || !page) {
-        return;
-    }
-
-    currentPage = index;
-
-    container.innerHTML =
-        renderPageHTML(page);
-
-    updatePageNumber();
-
-}
-
-
-/* ==================================================
-FLIP TO PAGE
-Membalik satu lembar penuh dari sisi spine (kiri untuk
-maju, kanan untuk mundur), seperti buku sungguhan
-================================================== */
-
-let isFlipping = false;
-
-function flipToPage(targetIndex, direction) {
-
-    if (
-        isFlipping ||
-        targetIndex < 0 ||
-        targetIndex >= pages.length
-    ) {
-
-        return false;
-
-    }
-
-    const leaf =
-        document.getElementById("bookLeaf");
-
-    const leafFront =
-        document.getElementById("leafFront");
-
-    const leafBack =
-        document.getElementById("leafBack");
-
-    const staticContainer =
-        document.getElementById("bookPage");
-
-    if (!leaf || !leafFront || !leafBack || !staticContainer) {
-
-        return false;
-
-    }
-
-    isFlipping = true;
-
-
-    /* Sisi depan lembar = halaman yang sedang terlihat sekarang */
-
-    leafFront.innerHTML =
-        renderPageHTML(pages[currentPage]);
-
-
-    /* Sisi belakang lembar = halaman tujuan */
-
-    leafBack.innerHTML =
-        renderPageHTML(pages[targetIndex]);
-
-
-    leaf.style.transformOrigin =
-        direction === "next" ? "left center" : "right center";
-
-    leaf.classList.remove("flip-next", "flip-prev");
-
-    leaf.style.visibility = "visible";
-
-
-    /* Paksa reflow supaya reset animasi berlaku bersih */
-
-    void leaf.offsetWidth;
-
-
-    /* Halaman statis di bawah lembar langsung diperbarui —
-       tertutup rapat oleh sisi depan lembar selama animasi
-       berjalan, jadi tidak kelihatan berganti tiba-tiba */
-
-    currentPage = targetIndex;
-
-    staticContainer.innerHTML =
-        renderPageHTML(pages[currentPage]);
-
-    updatePageNumber();
-
-
-    leaf.classList.add(
-        direction === "next" ? "flip-next" : "flip-prev"
-    );
-
-
-    function handleFlipEnd() {
-
-        leaf.style.visibility = "hidden";
-
-        leaf.classList.remove("flip-next", "flip-prev");
-
-        leafFront.innerHTML = "";
-        leafBack.innerHTML = "";
-
-        isFlipping = false;
-
-        leaf.removeEventListener("animationend", handleFlipEnd);
-
-    }
-
-    leaf.addEventListener("animationend", handleFlipEnd);
-
-
-    /* Jaring pengaman kalau animationend tidak terpicu
-       (misal tab tidak aktif) */
-
-    setTimeout(function() {
-
-        if (isFlipping) {
-
-            handleFlipEnd();
-
-        }
-
-    }, 1100);
-
-    return true;
-
-}
-
-
-/* ==================================================
-NEXT
-================================================== */
-
-function nextPage() {
-
-    if (isFlipping) {
-        return;
-    }
-
-    if (currentPage < pages.length - 1) {
-
-        flipToPage(currentPage + 1, "next");
-
-        scrollToBook();
-
-    }
-
-    else {
-
-        const closing =
-            document.querySelector(
-                ".closing-section"
-            );
-
-
-        if (closing) {
-
-            closing.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-
-    }
-
-}
-
-
-/* ==================================================
-PREVIOUS
-================================================== */
-
-function previousPage() {
-
-    if (isFlipping) {
-        return;
-    }
-
-    if (currentPage > 0) {
-
-        flipToPage(currentPage - 1, "prev");
-
-        scrollToBook();
-
-    }
-
-}
-
-
-/* ==================================================
-SCROLL TO BOOK
-================================================== */
-
-function scrollToBook() {
-
-    const book =
-        document.getElementById(
-            "bookPages"
-        );
-
-
-    if (book) {
-
-        book.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    }
-
-}
-
-
-/* ==================================================
-OPEN BOOK
-================================================== */
-
-function openStoryBook(event) {
-
-    if (event) {
-
-        event.preventDefault();
-
-    }
-
-
-    const cover =
-        document.querySelector(
-            ".book-intro"
-        );
-
-
-    const book =
-        document.getElementById(
-            "bookPages"
-        );
-
-
-    if (!cover || !book) {
-
-        scrollToBook();
-
-        return;
-
-    }
-
-
-    /* Animasi cover */
-
-    cover.classList.add(
-        "opening-book"
-    );
-
-
-    /* Tunggu animasi selesai */
-
-    setTimeout(function() {
-
-        cover.classList.add(
-            "book-hidden"
-        );
-
-
-        renderStaticPage(0);
-
-
-        book.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }, 1000);
-
-}
-
-
-/* ==================================================
-CLICK HEART
-================================================== */
-
-function createHeart(x, y) {
-
-    const heart =
-        document.createElement("span");
-
-
-    heart.className =
-        "click-heart";
-
-
-    heart.innerHTML =
-        Math.random() > 0.5
-            ? "♡"
-            : "♥";
-
-
-    heart.style.left =
-        x + "px";
-
-
-    heart.style.top =
-        y + "px";
-
-
-    heart.style.fontSize =
-        (18 + Math.random() * 12) + "px";
-
-
-    document.body.appendChild(
-        heart
-    );
-
-
-    setTimeout(function() {
-
-        heart.remove();
-
-    }, 1000);
-
-}
-
-
-/* ==================================================
-BURST HEARTS
-(dipakai saat judul ulang tahun muncul di layar)
-================================================== */
-
-function burstHearts(container, count = 14) {
-
-    if (!container) {
-        return;
-    }
-
-    for (let i = 0; i < count; i++) {
-
-        const heart =
-            document.createElement("span");
-
-        heart.className = "burst-heart";
-
-        heart.innerHTML =
-            Math.random() > 0.5 ? "♡" : "♥";
-
-        const angle =
-            Math.random() * Math.PI * 2;
-
-        const distance =
-            60 + Math.random() * 100;
-
-        const dx = Math.cos(angle) * distance;
-        const dy = Math.sin(angle) * distance;
-
-        heart.style.setProperty("--dx", dx + "px");
-        heart.style.setProperty("--dy", dy + "px");
-
-        heart.style.fontSize =
-            (14 + Math.random() * 16) + "px";
-
-        heart.style.animationDelay =
-            (Math.random() * 0.2) + "s";
-
-        container.appendChild(heart);
-
-        setTimeout(function() {
-
-            heart.remove();
-
-        }, 1500);
-
-    }
-
-}
-
-
-/* ==================================================
-INTRO TEXT ANIMATION
-"Happy Birthday Dimdim" muncul huruf demi huruf
-di layar paling awal, sebelum situs dibuka.
-
-Setiap KATA dibungkus dalam satu span ".word" (tidak
-boleh terpotong di tengah kata saat wrap ke baris baru),
-supaya teks tetap rapi, simetris, dan tetap di tengah
-tanpa menabrak / menutupi foto-foto di sekitarnya.
-================================================== */
-
-function initIntroScreen() {
-
-    const introEl =
-        document.getElementById("introScreen");
-
-    const textEl =
-        document.getElementById("introText");
-
-    if (!introEl || !textEl) {
-        return;
-    }
-
-    const message = "Happy Birthday Dimdim";
-
-    const colors = [
-        "#95606d",
-        "#7d4e5b",
-        "#a97885",
-        "#704650"
-    ];
-
-    const words = message.split(" ");
-
-    let globalIndex = 0;
-
-    words.forEach(function(word, wordIndex) {
-
-        const wordEl =
-            document.createElement("span");
-
-        wordEl.className = "word";
-
-        word.split("").forEach(function(char) {
-
-            const letter =
-                document.createElement("span");
-
-            letter.className = "letter";
-
-            letter.textContent = char;
-
-            letter.style.setProperty(
-                "--d",
-                (globalIndex * 0.07) + "s"
-            );
-
-            letter.style.setProperty(
-                "--c",
-                colors[globalIndex % colors.length]
-            );
-
-            wordEl.appendChild(letter);
-
-            globalIndex++;
-
-        });
-
-        textEl.appendChild(wordEl);
-
-
-        /* Spasi di ANTARA kata dibuat sebagai elemen
-           terpisah supaya baris boleh membungkus di sini,
-           tapi tidak di tengah kata itu sendiri */
-
-        if (wordIndex < words.length - 1) {
-
-            const space =
-                document.createElement("span");
-
-            space.className = "letter space";
-
-            space.textContent = "\u00A0";
-
-            space.style.setProperty(
-                "--d",
-                (globalIndex * 0.07) + "s"
-            );
-
-            textEl.appendChild(space);
-
-            globalIndex++;
-
-        }
-
-    });
-
-
-    /* Kunci scroll selama intro tampil */
-
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-
-
-    function dismissIntro() {
-
-        burstHearts(introEl, 18);
-
-        introEl.classList.add("intro-hidden");
-
-        document.documentElement.style.overflow = "";
-        document.body.style.overflow = "";
-
-        setTimeout(function() {
-
-            introEl.remove();
-
-        }, 650);
-
-    }
-
-    introEl.addEventListener("click", dismissIntro);
-
-    introEl.addEventListener("keydown", function(event) {
-
-        if (event.key === "Enter" || event.key === " ") {
-
-            event.preventDefault();
-
-            dismissIntro();
-
-        }
-
-    });
-
-}
-
-
-/* ==================================================
-SCROLL REVEAL
-Menambahkan animasi fade + slide-up bertahap
-saat elemen masuk ke layar
-================================================== */
-
-function initScrollReveal() {
-
-    const groups = [
-        ".opening-content > *",
-        ".birthday-content > *",
-        ".book-cover > *",
-        ".closing-content > *",
-        ".letter-content > p",
-        ".letter-signature",
-        ".restart-area"
-    ];
-
-    const elements =
-        document.querySelectorAll(groups.join(", "));
-
-    if (!("IntersectionObserver" in window) || elements.length === 0) {
-
-        elements.forEach(function(el) {
-            el.classList.add("reveal", "active");
-        });
-
-        return;
-    }
-
-    elements.forEach(function(el) {
-        el.classList.add("reveal");
-    });
-
-    let birthdayBurstDone = false;
-
-    const observer = new IntersectionObserver(function(entries) {
-
-        entries.forEach(function(entry) {
-
-            if (!entry.isIntersecting) {
-                return;
-            }
-
-            const target = entry.target;
-
-            const siblings =
-                Array.from(target.parentElement.children)
-                    .filter(function(el) {
-                        return el.classList.contains("reveal");
-                    });
-
-            const index =
-                siblings.indexOf(target);
-
-            target.style.transitionDelay =
-                (index * 0.09) + "s";
-
-            target.classList.add("active");
-
-            /* Ledakan hati saat judul ulang tahun kelihatan */
-
-            if (
-                !birthdayBurstDone &&
-                target.parentElement &&
-                target.parentElement.classList.contains("birthday-content") &&
-                target.tagName === "H2"
-            ) {
-
-                birthdayBurstDone = true;
-
-                setTimeout(function() {
-
-                    burstHearts(target.parentElement, 16);
-
-                }, 250);
-
-            }
-
-            observer.unobserve(target);
-
-        });
-
-    }, {
-        threshold: 0.2,
-        rootMargin: "0px 0px -8% 0px"
-    });
-
-    elements.forEach(function(el) {
-        observer.observe(el);
-    });
-
-    /* Garis "TO BE CONTINUED" juga ikut reveal */
-
-    const closingLine =
-        document.querySelector(".closing-line");
-
-    if (closingLine) {
-
-        closingLine.classList.add("reveal");
-
-        const lineObserver = new IntersectionObserver(function(entries) {
-
-            entries.forEach(function(entry) {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("active");
-
-                    lineObserver.unobserve(entry.target);
-
-                }
-
-            });
-
-        }, { threshold: 0.4 });
-
-        lineObserver.observe(closingLine);
-
-    }
-
-}
-
-
-/* ==================================================
-PARALLAX HEARTS
-Hati di halaman pembuka bergerak halus mengikuti
-posisi kursor / sentuhan
-================================================== */
-
-function initParallaxHearts() {
-
-    const hearts =
-        document.querySelector(".hearts");
-
-    if (!hearts) {
-        return;
-    }
-
-    document.addEventListener("mousemove", function(event) {
-
-        const x =
-            (event.clientX / window.innerWidth - 0.5) * 34;
-
-        const y =
-            (event.clientY / window.innerHeight - 0.5) * 34;
-
-        hearts.style.transform =
-            `translate(${x}px, ${y}px)`;
-
-    });
-
-}
-
-
-/* ==================================================
-TILT FOTO & VIDEO DI BUKU KENANGAN
-================================================== */
-
-function initPhotoTilt() {
-
-    const bookPageEl =
-        document.getElementById("bookPage");
-
-    if (!bookPageEl) {
-        return;
-    }
-
-    bookPageEl.addEventListener("mousemove", function(event) {
-
-        const card =
-            event.target.closest(".book-photo, .book-video");
-
-        if (!card) {
-            return;
-        }
-
-        const rect =
-            card.getBoundingClientRect();
-
-        const x =
-            (event.clientX - rect.left) / rect.width - 0.5;
-
-        const y =
-            (event.clientY - rect.top) / rect.height - 0.5;
-
-        const base =
-            card.classList.contains("book-photo") ? -2 : 1;
-
-        card.style.transform =
-            `rotate(${base}deg) rotateX(${(-y * 10).toFixed(2)}deg) rotateY(${(x * 10).toFixed(2)}deg)`;
-
-    });
-
-    bookPageEl.addEventListener("mouseleave", function() {
-
-        document.querySelectorAll(".book-photo, .book-video")
-            .forEach(function(card) {
-
-                card.style.transform =
-                    card.classList.contains("book-photo")
-                        ? "rotate(-2deg)"
-                        : "rotate(1deg)";
-
-            });
-
-    }, true);
-
-}
-
-
-/* ==================================================
-RIPPLE EFFECT PADA TOMBOL
-================================================== */
-
-function initButtonRipple() {
-
-    document.addEventListener("click", function(event) {
-
-        const button =
-            event.target.closest(
-                "button, .main-button, .open-story-button, .restart-button"
-            );
-
-        if (!button) {
-            return;
-        }
-
-        const ripple =
-            document.createElement("span");
-
-        ripple.className = "ripple";
-
-        const rect =
-            button.getBoundingClientRect();
-
-        const size =
-            Math.max(rect.width, rect.height);
-
-        ripple.style.width =
-            ripple.style.height = size + "px";
-
-        ripple.style.left =
-            (event.clientX - rect.left - size / 2) + "px";
-
-        ripple.style.top =
-            (event.clientY - rect.top - size / 2) + "px";
-
-        button.appendChild(ripple);
-
-        setTimeout(function() {
-
-            ripple.remove();
-
-        }, 650);
-
-    });
-
-}
-
-
-/* ==================================================
-KLIK HATI PENUTUP
-Sentuh hati di halaman closing untuk ledakan kecil
-================================================== */
-
-function initClosingHeart() {
-
-    const heart =
-        document.querySelector(".closing-heart");
-
-    if (!heart) {
-        return;
-    }
-
-    heart.addEventListener("click", function(event) {
-
-        event.stopPropagation();
-
-        burstHearts(heart.parentElement, 10);
-
-    });
-
-}
-
-
-/* ==================================================
-PAGE LOADED
-================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        /*
-            Tampilkan memory pertama
-        */
-
-        renderStaticPage(0);
-
-
-        /*
-            OPEN OUR STORY
-        */
-
-        const openButton =
-            document.querySelector(
-                ".open-story-button"
-            );
-
-
-        if (openButton) {
-
-            openButton.addEventListener(
-                "click",
-                openStoryBook
-            );
-
-        }
-
-
-        /*
-            RESTART
-        */
-
-        const restartButton =
-            document.querySelector(
-                ".restart-button"
-            );
-
-
-        if (restartButton) {
-
-            restartButton.addEventListener(
-                "click",
-                function() {
-
-                    setTimeout(function() {
-
-                        renderStaticPage(0);
-
-                    }, 100);
-
-                }
-            );
-
-        }
-
-
-        /*
-            CLICK HEART
-        */
-
-        document.addEventListener(
-            "click",
-            function(event) {
-
-                /*
-                    Jangan muncul hati saat
-                    menekan tombol musik
-                */
-
-                if (
-                    event.target.closest(
-                        ".music-button"
-                    )
-                ) {
-
-                    return;
-
-                }
-
-
-                createHeart(
-                    event.clientX,
-                    event.clientY
-                );
-
-            }
-        );
-
-
-        /*
-            KEYBOARD
-        */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key ===
-                    "ArrowRight"
-                ) {
-
-                    nextPage();
-
-                }
-
-
-                if (
-                    event.key ===
-                    "ArrowLeft"
-                ) {
-
-                    previousPage();
-
-                }
-
-            }
-        );
-
-
-        /*
-            ANIMASI TAMBAHAN
-        */
-
-        initIntroScreen();
-        initScrollReveal();
-        initParallaxHearts();
-        initPhotoTilt();
-        initButtonRipple();
-        initClosingHeart();
-
-    }
-
-);
-
-
-/* ==================================================
-STOP OTHER VIDEOS
-================================================== */
-
-document.addEventListener(
-    "play",
-    function(event) {
-
-        if (
-            event.target &&
-            event.target.tagName ===
-            "VIDEO"
-        ) {
-
-            document
-                .querySelectorAll("video")
-                .forEach(function(video) {
-
-                    if (
-                        video !==
-                        event.target
-                    ) {
-
-                        video.pause();
-
-                    }
-
-                });
-
-        }
-
-    },
-    true
-);
+        <div class="intro-photo photo-3">
+            <img src="foto9.jpg" alt="Memory 3">
+        </div>
+
+        <div class="intro-photo photo-4">
+            <img src="foto10.jpg" alt="Memory 4">
+        </div>
+
+        <div class="intro-photo photo-5">
+            <img src="foto11.jpg" alt="Memory 5">
+        </div>
+
+        <div class="intro-photo photo-6">
+            <img src="foto12.jpg" alt="Memory 6">
+        </div>
+
+        <div class="intro-photo photo-7">
+            <img src="foto13.jpg" alt="Memory 7">
+        </div>
+
+        <div class="intro-photo photo-8">
+            <img src="foto14.jpg" alt="Memory 8">
+        </div>
+
+        <div class="intro-photo photo-9">
+            <img src="foto15.jpg" alt="Memory 9">
+        </div>
+
+    </div>
+
+    <div class="intro-center">
+
+        <h1 class="intro-text" id="introText">
+            Happy Birthday Dimdim
+        </h1>
+
+        <p class="intro-tap">
+            tap anywhere ♡
+        </p>
+
+    </div>
+
+</div> 
+    <!-- MUSIC BUTTON --> 
+ 
+<button 
+    id="musicButton" 
+    class="music-button" 
+    onclick="toggleMusic()" 
+    aria-label="Music" 
+> 
+    ♫ 
+</button> 
+    <!-- ================================================== 
+     MUSIC 
+================================================== --><audio id="backgroundMusic" loop> 
+    <source src="lagu.mp3" type="audio/mpeg"> 
+</audio><!-- ================================================== 
+     OPENING 
+================================================== --><section class="opening" id="opening"><div class="hearts"> 
+    <span>♡</span> 
+    <span>♡</span> 
+    <span>♡</span> 
+    <span>♡</span> 
+    <span>♡</span> 
+</div> 
+ 
+<div class="opening-content"> 
+ 
+    <p class="small-text"> 
+        A little something for you... 
+    </p> 
+ 
+    <h1> 
+        For My Dimdim ♡ 
+    </h1> 
+ 
+    <p class="subtitle"> 
+        From your Bibil 
+    </p> 
+ 
+    <button onclick="openWebsite()"> 
+        Open ♡ 
+    </button> 
+ 
+</div> 
+ 
+</section><!-- ================================================== 
+     BIRTHDAY 
+================================================== --><section class="birthday" id="birthday"><div class="birthday-content"> 
+ 
+    <p class="date"> 
+        24 · 09 · 2026 
+    </p> 
+ 
+    <h2> 
+        Happy 25th Birthday 
+    </h2> 
+ 
+    <h3> 
+        Dimdim ♡ 
+    </h3> 
+ 
+    <p class="birthday-text"> 
+        Hari ini adalah hari spesial untuk seseorang 
+        yang sangat spesial buat Bibil. 
+    </p> 
+ 
+    <a href="#book" class="main-button"> 
+        Continue ♡ 
+    </a> 
+ 
+</div> 
+ 
+</section><!-- ================================================== 
+     BOOK COVER 
+================================================== --><section class="book-intro" id="book"><div class="book-cover"> 
+ 
+    <p class="book-small"> 
+        A LITTLE BOOK ABOUT US 
+    </p> 
+ 
+    <h2> 
+        Our Little Story 
+    </h2> 
+ 
+    <p class="book-names"> 
+        Bibil & Dimdim 
+    </p> 
+ 
+    <div class="book-heart"> 
+        ♡ 
+    </div> 
+ 
+    <p class="book-description"> 
+        little moments, little memories, 
+        and a story that means everything to me. 
+    </p> 
+ 
+    <!-- TIDAK PAKAI JAVASCRIPT --> 
+    <a href="#bookPages" class="open-story-button"> 
+        Open Our Story ♡ 
+    </a> 
+ 
+</div> 
+ 
+</section><!-- ================================================== 
+     BOOK PAGES 
+================================================== --><section class="book-section" id="bookPages"><div class="book"> 
+ 
+    <div class="book-page" id="bookPage"> 
+ 
+        <!-- ISI BUKU DIBUAT OLEH JAVASCRIPT --> 
+ 
+    </div> 
+ 
+</div> 
+ 
+ 
+<!-- BOOK NAVIGATION --> 
+ 
+<div class="book-controls"> 
+ 
+    <button onclick="previousPage()"> 
+        ← Previous 
+    </button> 
+ 
+    <span id="pageNumber"> 
+        1 / 10 
+    </span> 
+ 
+    <button onclick="nextPage()"> 
+        Next → 
+    </button> 
+ 
+</div> 
+ 
+</section><!-- ================================================== 
+     CLOSING 
+================================================== --><section class="closing-section"><div class="closing-content"> 
+ 
+    <p class="closing-label"> 
+        THE END... FOR NOW 
+    </p> 
+ 
+    <div class="closing-line"></div> 
+ 
+    <h2> 
+        TO BE CONTINUED ♡ 
+    </h2> 
+ 
+    <p class="closing-text"> 
+        Ini mungkin cuma sebuah website kecil,<br> 
+        tapi di dalamnya ada banyak cerita yang berarti buat Bibil. 
+    </p> 
+ 
+    <p class="closing-text"> 
+        Dari awal kita kenal,<br> 
+        sampai semua hal kecil yang sekarang jadi kenangan. 
+    </p> 
+ 
+    <p class="closing-text"> 
+        Dan kalau semua yang ada di sini adalah bagian dari cerita kita,<br> 
+        Bibil masih mau menulis banyak halaman lagi sama Dimdim. 
+    </p> 
+ 
+    <div class="closing-list"> 
+ 
+        <span> 
+            lebih banyak tempat untuk didatangi 
+        </span> 
+ 
+        <span> 
+            lebih banyak makanan untuk dimakan 
+        </span> 
+ 
+        <span> 
+            lebih banyak foto untuk disimpan 
+        </span> 
+ 
+        <span> 
+            lebih banyak video untuk ditertawakan 
+        </span> 
+ 
+        <span> 
+            dan lebih banyak cerita yang belum kita punya 
+        </span> 
+ 
+    </div> 
+ 
+    <p class="closing-final"> 
+        Jadi... 
+    </p> 
+ 
+    <p class="closing-message"> 
+        sampai jumpa di halaman berikutnya, Dimdim. ♡ 
+    </p> 
+ 
+    <div class="closing-heart"> 
+        ♡ 
+    </div> 
+ 
+    <p class="closing-from"> 
+        — Bibil 
+    </p> 
+ 
+    <div class="closing-date"> 
+ 
+        <span>24</span> 
+        <span>·</span> 
+        <span>09</span> 
+        <span>·</span> 
+        <span>2026</span> 
+ 
+    </div> 
+ 
+    <p class="closing-birthday"> 
+        Happy 25th Birthday, Dimdim ♡ 
+    </p> 
+ 
+</div> 
+ 
+</section><!-- ================================================== 
+     LETTER 
+================================================== --><section class="letter" id="letter"><div class="letter-paper"> 
+ 
+    <p class="letter-small"> 
+        FOR MY DIMDIM 
+    </p> 
+ 
+    <h2> 
+        Dear Dimdim ♡ 
+    </h2> 
+ 
+    <div class="letter-content"> 
+ 
+        <p> 
+            Happy birthday yaa dimdimmm. 
+            Selamat ulang tahun yang ke-25. 
+        </p> 
+ 
+        <p> 
+            Bibil sebenernya bingung mau nulis apa karena 
+            rasanya banyak banget yang mau bibil sampaikan, 
+            tapi susah buat dirangkai jadi kata-kata. 
+        </p> 
+ 
+        <p> 
+            Makasih yaa dimdim, udah hadir di hidup bibil. 
+            Makasih buat semua waktu, perhatian, cerita, 
+            candaan, dan hal-hal kecil yang mungkin menurut 
+            dimdim biasa aja, tapi buat bibil berarti. 
+        </p> 
+ 
+        <p> 
+            Kalau diingat-ingat, lucu juga yaa gimana 
+            awalnya kita bisa sampai di titik ini. 
+            Dari yang awalnya cuma ngerjain tugas bareng, 
+            nonton, jalan, cerita-cerita, sampai akhirnya 
+            sekarang kita punya banyak banget kenangan 
+            yang bisa kita lihat lagi. 
+        </p> 
+ 
+        <p> 
+            Bibil seneng banget bisa kenal dimdim sedekat ini. 
+            Seneng bisa punya seseorang yang bisa diajak cerita, 
+            diajak bercanda, diajak pergi, dan tentunya diajak 
+            melewati banyak hal. 
+        </p> 
+ 
+        <p> 
+            Di umur dimdim yang ke-25 ini, bibil berharap 
+            semoga semua hal baik datang ke dimdim. 
+            Semoga dimdim selalu sehat, selalu dikelilingi 
+            orang-orang yang sayang sama dimdim, dan semoga 
+            apa pun yang dimdim usahakan bisa pelan-pelan tercapai. 
+        </p> 
+ 
+        <p> 
+            Bibil juga berharap kita masih bisa bikin banyak 
+            cerita lagi. Masih bisa pergi ke banyak tempat, 
+            makan bareng, nonton bareng, main bareng, dan 
+            melakukan hal-hal kecil yang nantinya bisa kita 
+            ingat lagi sambil bilang, 
+            "ingat nggak waktu itu?" 
+        </p> 
+ 
+        <p> 
+            Mungkin hubungan kita juga nggak selalu sempurna, 
+            mungkin ada hari dimana kita sama-sama capek, 
+            kesel, atau nggak sependapat. Tapi bibil berharap 
+            kita tetap mau saling ngerti, saling sabar, 
+            dan tetap memilih satu sama lain. 
+        </p> 
+ 
+        <p> 
+            Makasih udah jadi bagian dari cerita hidup bibil 
+            sampai sekarang. 
+        </p> 
+ 
+        <p class="letter-final"> 
+            Sekali lagi, happy birthday dimdimmm ♡ 
+        </p> 
+ 
+        <p class="letter-final"> 
+            Semoga umur 25 ini jadi salah satu tahun 
+            yang paling baik buat dimdim. 
+        </p> 
+ 
+        <div class="letter-signature"> 
+            With love,<br> 
+            <strong>Bibil ♡</strong> 
+        </div> 
+ 
+    </div> 
+<div class="restart-area"> 
+ 
+    <a href="#opening" class="restart-button"> 
+        Start Our Story Again ♡ 
+    </a> 
+ 
+</div> 
+ 
+</div> 
+</section> 
+ 
+<script src="script.js"></script></body> 
+</html>
