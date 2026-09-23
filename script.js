@@ -77,7 +77,7 @@ const pages = [
         type: "video",
         number: 10,
         video: "video4.mp4",
-        text: "ini waktu awal-awal kita pacaran bibil ajak dimdim tiktokan dan dimdim mauuu, tapi serakang dimdim ga mau lagi bibil ajak tiktokann :(((("
+        text: "ini waktu awal-awal kita pacaran bibil ajak dimdim tiktokan dan dimdim mauuu, tapi sekarang dimdim ga mau lagi bibil ajak tiktokann :(((("
     }
 
 ];
