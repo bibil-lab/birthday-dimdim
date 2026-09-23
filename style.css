@@ -2,7 +2,7 @@
    RESET
 ========================================================= */
 
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -408,47 +408,22 @@ button:active,
 
 /* =========================================================
    INTRO TEXT
+   Teks statis di HTML (tidak dibuat oleh JavaScript),
+   jadi dijamin selalu muncul meskipun script.js gagal
+   dimuat / error di browser tertentu.
 ========================================================= */
 
 .intro-text {
     width: 100%;
 
-    display: flex;
-
-    flex-wrap: wrap;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 3px;
-    row-gap: 10px;
-
     max-width: 1000px;
-}
-
-
-/* Setiap kata dibungkus supaya tidak terpotong
-   di tengah kata saat teks membungkus baris baru */
-
-.intro-text .word {
-    display: inline-flex;
-    flex-wrap: nowrap;
-
-    justify-content: center;
-}
-
-
-/* =========================================================
-   HURUF INTRO
-========================================================= */
-
-.intro-text .letter {
-    display: inline-block;
 
     font-family:
         Georgia,
         "Times New Roman",
         serif;
+
+    font-weight: 700;
 
     font-size:
         clamp(
@@ -457,11 +432,11 @@ button:active,
             75px
         );
 
-    line-height: 1;
+    line-height: 1.15;
 
-    font-weight: 700;
+    color: #95606d;
 
-    color: var(--c, #95606d);
+    text-align: center;
 
     text-shadow:
         0 5px 12px rgba(90, 40, 55, 0.15);
@@ -470,19 +445,17 @@ button:active,
 
     transform:
         translateY(25px)
-        scale(0.75);
+        scale(0.9);
+
+    filter: blur(5px);
 
     animation:
-        introLetterAppear
-        0.6s
+        introTextAppear
+        0.9s
         ease
         forwards;
 
-    animation-delay: var(--d, 0s);
-}
-
-.intro-text .letter.space {
-    width: 0.4em;
+    animation-delay: 0.2s;
 }
 
 
@@ -554,17 +527,17 @@ button:active,
 
 
 /* =========================================================
-   INTRO LETTER ANIMATION
+   INTRO TEXT ANIMATION
 ========================================================= */
 
-@keyframes introLetterAppear {
+@keyframes introTextAppear {
 
     0% {
         opacity: 0;
 
         transform:
             translateY(25px)
-            scale(0.75);
+            scale(0.9);
 
         filter: blur(5px);
     }
@@ -2665,23 +2638,16 @@ button:active,
     }
 
     .intro-text {
-        gap: 1px;
-        row-gap: 8px;
-
         max-width: 95%;
-    }
 
-    .intro-text .letter {
         font-size:
             clamp(
                 26px,
                 8vw,
                 46px
             );
-    }
 
-    .intro-text .letter.space {
-        width: 8px;
+        line-height: 1.2;
     }
 
     .intro-tap {
@@ -3170,7 +3136,7 @@ button:active,
             15px;
     }
 
-    .intro-text .letter {
+    .intro-text {
         font-size: 24px;
     }
 
