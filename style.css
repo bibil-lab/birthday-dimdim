@@ -3232,3 +3232,783 @@ button:disabled {
         transform: none;
     }
 }
+
+/* =========================================================
+   BLUE + PURPLE DREAM THEME
+========================================================= */
+
+:root {
+    --blue-dark: #172554;
+    --blue: #2563eb;
+    --blue-light: #60a5fa;
+
+    --purple-dark: #4c1d95;
+    --purple: #7c3aed;
+    --purple-light: #a78bfa;
+
+    --love-blue: #bfdbfe;
+    --love-purple: #ddd6fe;
+
+    --text-dark: #25204a;
+    --text-medium: #51477a;
+}
+
+
+/* =========================================================
+   GLOBAL BLUE PURPLE BACKGROUND
+========================================================= */
+
+body {
+    color: var(--text-dark);
+
+    background:
+        linear-gradient(
+            135deg,
+            #dbeafe 0%,
+            #e0e7ff 35%,
+            #ede9fe 70%,
+            #f5f3ff 100%
+        );
+}
+
+
+/* =========================================================
+   LOVE RAIN
+========================================================= */
+
+.love-rain {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 9990;
+}
+
+
+/* setiap love */
+
+.love-rain span {
+    position: absolute;
+
+    top: -60px;
+
+    display: block;
+
+    color: rgba(124, 58, 237, 0.45);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    line-height: 1;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(
+            0 4px 8px
+            rgba(37, 99, 235, 0.15)
+        );
+
+    animation:
+        loveRainFall
+        linear
+        infinite;
+
+    will-change:
+        transform,
+        opacity;
+}
+
+
+/* varias warna love */
+
+.love-rain span:nth-child(3n) {
+    color: rgba(37, 99, 235, 0.42);
+}
+
+.love-rain span:nth-child(4n) {
+    color: rgba(167, 139, 250, 0.5);
+}
+
+.love-rain span:nth-child(5n) {
+    color: rgba(96, 165, 250, 0.38);
+}
+
+.love-rain span:nth-child(7n) {
+    color: rgba(124, 58, 237, 0.55);
+}
+
+
+/* animasi jatuh */
+
+@keyframes loveRainFall {
+
+    0% {
+        transform:
+            translate3d(
+                0,
+                -80px,
+                0
+            )
+            rotate(0deg)
+            scale(0.7);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translate3d(
+                var(--sway),
+                50vh,
+                0
+            )
+            rotate(180deg)
+            scale(1);
+    }
+
+    100% {
+        transform:
+            translate3d(
+                calc(var(--sway) * -1),
+                115vh,
+                0
+            )
+            rotate(360deg)
+            scale(0.75);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro-screen {
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(255,255,255,0.95) 0%,
+            rgba(224,231,255,0.9) 35%,
+            rgba(196,181,253,0.9) 70%,
+            rgba(129,140,248,0.95) 100%
+        );
+}
+
+
+.intro-screen::before {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.15),
+            rgba(255,255,255,0.55),
+            rgba(255,255,255,0.15)
+        );
+
+    box-shadow:
+        0 20px 60px
+        rgba(49, 46, 129, 0.18);
+}
+
+
+.intro-text {
+    color: #312e81;
+
+    text-shadow:
+        0 5px 15px
+        rgba(49, 46, 129, 0.18);
+}
+
+
+.intro-tap {
+    color: #4c1d95;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+button,
+.main-button,
+.open-story-button {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 8px 20px
+        rgba(76, 29, 149, 0.18);
+}
+
+
+button:hover,
+.main-button:hover,
+.open-story-button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #6d28d9
+        );
+
+    box-shadow:
+        0 12px 28px
+        rgba(76, 29, 149, 0.28);
+}
+
+
+/* =========================================================
+   OPENING
+========================================================= */
+
+.opening {
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(255,255,255,0.9),
+            transparent 45%
+        ),
+        linear-gradient(
+            135deg,
+            #bfdbfe,
+            #c4b5fd,
+            #ddd6fe
+        );
+
+    background-size:
+        100% 100%,
+        300% 300%;
+
+    animation:
+        bluePurpleGradient
+        14s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes bluePurpleGradient {
+
+    0%,
+    100% {
+        background-position:
+            center top,
+            0% 50%;
+    }
+
+    50% {
+        background-position:
+            center top,
+            100% 50%;
+    }
+}
+
+
+.small-text {
+    color: #4c5685;
+}
+
+
+.opening h1 {
+    color: #312e81;
+
+    text-shadow:
+        0 5px 15px
+        rgba(49, 46, 129, 0.15);
+}
+
+
+.subtitle {
+    color: #5b5382;
+}
+
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+.hearts span {
+    color:
+        rgba(76, 29, 149, 0.28);
+
+    text-shadow:
+        0 0 15px
+        rgba(124, 58, 237, 0.25);
+}
+
+
+/* =========================================================
+   BIRTHDAY
+========================================================= */
+
+.birthday {
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,0.8),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #dbeafe,
+            #e0e7ff,
+            #ede9fe,
+            #ddd6fe
+        );
+
+    background-size:
+        100% 100%,
+        300% 300%;
+
+    animation:
+        bluePurpleGradient
+        16s
+        ease-in-out
+        infinite;
+}
+
+
+.date {
+    color: #6366a8;
+}
+
+
+.birthday h2,
+.birthday h3 {
+    color: #312e81;
+}
+
+
+.birthday-text {
+    color: #51477a;
+}
+
+
+.love-counter {
+    color: #6d5ca8;
+}
+
+
+/* =========================================================
+   BOOK INTRO
+========================================================= */
+
+.book-intro {
+    background:
+        radial-gradient(
+            circle at center,
+            #f5f3ff,
+            #ddd6fe 50%,
+            #bfdbfe 100%
+        );
+}
+
+
+.book-cover {
+    color: #f5f3ff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172554 0%,
+            #312e81 40%,
+            #4c1d95 75%,
+            #6d28d9 100%
+        );
+
+    box-shadow:
+        15px 20px 40px
+        rgba(30, 27, 75, 0.28);
+}
+
+
+.book-cover:hover {
+    box-shadow:
+        18px 28px 50px
+        rgba(30, 27, 75, 0.38);
+}
+
+
+.book-cover::before {
+    border-color:
+        rgba(224,231,255,0.45);
+}
+
+
+.book-heart {
+    color: #c4b5fd;
+}
+
+
+/* =========================================================
+   BOOK SECTION
+========================================================= */
+
+.book-section {
+    background:
+        linear-gradient(
+            135deg,
+            #dbeafe 0%,
+            #e0e7ff 45%,
+            #ede9fe 100%
+        );
+}
+
+
+/* =========================================================
+   BOOK
+========================================================= */
+
+.book {
+    background: #fafaff;
+
+    box-shadow:
+        0 20px 50px
+        rgba(49, 46, 129, 0.20);
+}
+
+
+.book::before {
+    background:
+        rgba(79, 70, 130, 0.12);
+}
+
+
+.leaf-face {
+    background: #fafaff;
+}
+
+
+.page-left {
+    border-right-color:
+        rgba(79, 70, 130, 0.10);
+}
+
+
+.page-count {
+    color: #7c74a8;
+}
+
+
+.book-photo,
+.book-video {
+    box-shadow:
+        0 10px 25px
+        rgba(49, 46, 129, 0.14);
+}
+
+
+.book-photo:hover,
+.book-video:hover {
+    box-shadow:
+        0 18px 35px
+        rgba(49, 46, 129, 0.24);
+}
+
+
+.memory-caption {
+    color: #413967;
+}
+
+
+.book-controls span {
+    color: #68608f;
+}
+
+
+/* =========================================================
+   TAPE
+========================================================= */
+
+.tape {
+    background:
+        rgba(165, 180, 252, 0.55);
+}
+
+
+/* =========================================================
+   CLOSING
+========================================================= */
+
+.closing-section {
+    background:
+        radial-gradient(
+            circle at center,
+            #f5f3ff 0%,
+            #e0e7ff 45%,
+            #c4b5fd 100%
+        );
+}
+
+
+.closing-section::before,
+.closing-section::after {
+    color:
+        rgba(76, 29, 149, 0.10);
+}
+
+
+.closing-label {
+    color: #6d5ca8;
+}
+
+
+.closing-line {
+    background: #8b7fc4;
+}
+
+
+.closing-content h2 {
+    color: #312e81;
+}
+
+
+.closing-text {
+    color: #51477a;
+}
+
+
+.closing-list span {
+    color: #68608f;
+}
+
+
+.closing-final {
+    color: #51477a;
+}
+
+
+.closing-message {
+    color: #403568;
+}
+
+
+.closing-heart {
+    color: #7c3aed;
+}
+
+
+.closing-from {
+    color: #51477a;
+}
+
+
+.closing-date {
+    color: #6d5ca8;
+}
+
+
+.closing-birthday {
+    color: #312e81;
+}
+
+
+/* =========================================================
+   CLOSING GALLERY
+========================================================= */
+
+.closing-section .closing-photo {
+    box-shadow:
+        0 8px 20px
+        rgba(49, 46, 129, 0.18);
+}
+
+
+.closing-section .closing-photo:hover {
+    box-shadow:
+        0 14px 28px
+        rgba(49, 46, 129, 0.28);
+}
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+.letter {
+    background:
+        linear-gradient(
+            135deg,
+            #c7d2fe,
+            #e0e7ff,
+            #ede9fe
+        );
+}
+
+
+.letter-paper {
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #fcfcff 0px,
+            #fcfcff 31px,
+            #ddd6fe 32px
+        );
+
+    box-shadow:
+        0 20px 50px
+        rgba(49, 46, 129, 0.18);
+}
+
+
+.letter-paper::before {
+    border-color:
+        rgba(99, 102, 241, 0.15);
+}
+
+
+.letter-small {
+    color: #6d5ca8;
+}
+
+
+.letter-paper h2 {
+    color: #312e81;
+}
+
+
+.letter-content p {
+    color: #514a70;
+}
+
+
+.letter-content .letter-final {
+    color: #312e81;
+}
+
+
+.letter-signature {
+    color: #514a70;
+}
+
+
+.letter-signature strong {
+    color: #312e81;
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+.restart-button {
+    border-color: #818cf8;
+
+    color: #51477a;
+}
+
+
+.restart-button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    color: white;
+}
+
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+.music-button {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37, 99, 235, 0.95),
+            rgba(124, 58, 237, 0.95)
+        );
+
+    box-shadow:
+        0 8px 25px
+        rgba(49, 46, 129, 0.25);
+}
+
+
+.music-button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #6d28d9
+        );
+}
+
+
+/* =========================================================
+   CLICK HEART
+========================================================= */
+
+.click-heart {
+    color: #7c3aed;
+
+    filter:
+        drop-shadow(
+            0 3px 7px
+            rgba(124, 58, 237, 0.25)
+        );
+}
+
+
+/* =========================================================
+   BURST HEART
+========================================================= */
+
+.burst-heart {
+    color: #7c3aed;
+
+    filter:
+        drop-shadow(
+            0 3px 8px
+            rgba(124, 58, 237, 0.3)
+        );
+}
+
+
+/* =========================================================
+   MOBILE LOVE RAIN
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .love-rain span {
+        animation-duration:
+            calc(var(--fall-speed) * 1s);
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .love-rain span {
+        animation: none;
+        opacity: 0.35;
+    }
+
+}
