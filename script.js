@@ -1331,6 +1331,191 @@ function initClosingHeart() {
 
 }
 
+/* ==================================================
+   BLUE PURPLE LOVE RAIN
+================================================== */
+
+function initLoveRain() {
+
+    const container =
+        document.getElementById("loveRain");
+
+    if (!container) {
+        return;
+    }
+
+
+    const heartCount =
+        window.innerWidth <= 768 ? 32 : 55;
+
+
+    const hearts = [
+        "♡",
+        "♥",
+        "♡",
+        "♥",
+        "♡"
+    ];
+
+
+    for (let i = 0; i < heartCount; i++) {
+
+        const heart =
+            document.createElement("span");
+
+
+        heart.innerHTML =
+            hearts[
+                Math.floor(
+                    Math.random() * hearts.length
+                )
+            ];
+
+
+        /* Posisi horizontal */
+
+        heart.style.left =
+            Math.random() * 100 + "%";
+
+
+        /* Ukuran */
+
+        const size =
+            12 + Math.random() * 25;
+
+        heart.style.fontSize =
+            size + "px";
+
+
+        /* Kecepatan */
+
+        const duration =
+            5 + Math.random() * 8;
+
+        heart.style.animationDuration =
+            duration + "s";
+
+
+        heart.style.setProperty(
+            "--fall-speed",
+            duration
+        );
+
+
+        /* Gerakan ke kiri/kanan */
+
+        const sway =
+            -80 + Math.random() * 160;
+
+        heart.style.setProperty(
+            "--sway",
+            sway + "px"
+        );
+
+
+        /* Delay supaya tidak jatuh bersamaan */
+
+        heart.style.animationDelay =
+            (-Math.random() * duration) + "s";
+
+
+        /* Sedikit transparansi random */
+
+        heart.style.opacity =
+            0.25 + Math.random() * 0.5;
+
+
+        container.appendChild(
+            heart
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   LOVE RAIN START
+================================================== */
+
+function startLoveRain() {
+
+    initLoveRain();
+
+
+    /* Tambahkan love baru secara berkala
+       supaya hujan terasa terus menerus */
+
+    setInterval(function() {
+
+        const container =
+            document.getElementById("loveRain");
+
+        if (!container) {
+            return;
+        }
+
+
+        const heart =
+            document.createElement("span");
+
+
+        heart.innerHTML =
+            Math.random() > 0.5
+                ? "♡"
+                : "♥";
+
+
+        heart.style.left =
+            Math.random() * 100 + "%";
+
+
+        heart.style.fontSize =
+            (12 + Math.random() * 22) + "px";
+
+
+        const duration =
+            5 + Math.random() * 7;
+
+
+        heart.style.animationDuration =
+            duration + "s";
+
+
+        heart.style.setProperty(
+            "--fall-speed",
+            duration
+        );
+
+
+        heart.style.setProperty(
+            "--sway",
+            (-80 + Math.random() * 160) + "px"
+        );
+
+
+        heart.style.animationDelay =
+            "0s";
+
+
+        container.appendChild(
+            heart
+        );
+
+
+        /* Hapus setelah selesai */
+
+        setTimeout(function() {
+
+            heart.remove();
+
+        }, (duration + 1) * 1000);
+
+
+    }, 700);
+
+}
+
 
 /* ==================================================
 PAGE LOADED
@@ -1471,6 +1656,7 @@ document.addEventListener(
         initClosingHeart();
         initBookSwipe();
         initLoveCounter();
+        startLoveRain();
 
     }
 
