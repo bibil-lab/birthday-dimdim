@@ -13,70 +13,70 @@ const pages = [
     {
         type: "photo",
         number: 1,
-        image: "foto1.jpg",
+        image: "images/foto1.jpg",
         text: "pertama kali bibil ngajak ngajak dimdim ngerjain tugas di Socrates Vegan"
     },
 
     {
         type: "photo",
         number: 2,
-        image: "foto2.jpg",
+        image: "images/foto2.jpg",
         text: "pertama kali kita nontonnn pulang kuliahh terus pulang nonton kitaa mamm"
     },
 
     {
         type: "photo",
         number: 3,
-        image: "foto3.jpg",
+        image: "images/foto3.jpg",
         text: "bibil ke rumahh dimdim krna mau ke pantee terus dari situu kita makinn dekett"
     },
 
     {
         type: "photo",
         number: 4,
-        image: "foto4.jpg",
+        image: "images/foto4.jpg",
         text: "kitaa ke pet cafee dan disituu bibil ceritainn kehidupann bibil ke dimdim krna bibil uda percyaa sma dimdim padahl kita belumm pcrann"
     },
 
     {
         type: "photo",
         number: 5,
-        image: "foto5.jpg",
+        image: "images/foto5.jpg",
         text: "kitaa uda pcarann dann ituu pertama kali kita pigii jauhhh"
     },
 
     {
         type: "photo",
         number: 6,
-        image: "foto6.jpg",
+        image: "images/foto6.jpg",
         text: "pertama kalinyaa bibil taunn baruan sma cowoo"
     },
 
     {
         type: "video",
         number: 7,
-        video: "video1.mp4",
+        video: "videos/video1.mp4",
         text: "kitaa mainn PlayStation, nntonn netflixx dann ituu masi maluu\" krna masi baruu\" pcalann, kalo sekarang sudahh tidaa ada maloe nyaaa"
     },
 
     {
         type: "video",
         number: 8,
-        video: "video2.mp4",
+        video: "videos/video2.mp4",
         text: "bibil screen recording dimdim lagi main gitar pass kitaa pecee, sekarang kita uda jarang pece hampir ga pernh punn :((("
     },
 
     {
         type: "video",
         number: 9,
-        video: "video3.mp4",
+        video: "videos/video3.mp4",
         text: "kitaa ke tamannn dann pulangnyaa kita nontonnn, ituu pass ulang tahun bibill, makacii yahh bibil sngtt senangg cekalii pada saat ituu"
     },
 
     {
         type: "video",
         number: 10,
-        video: "video4.mp4",
+        video: "videos/video4.mp4",
         text: "bibil ajak dimdim mainn tiktokk dann dimdimm mauuu, tapi sekarang dimdim gamauu lagi bibil ajak tiktokann :(((("
     }
 
@@ -84,6 +84,162 @@ const pages = [
 
 
 let currentPage = 0;
+
+
+/* ==================================================
+KONFIGURASI
+Ganti tanggal ini sesuai tanggal jadian kalian
+berdua, dipakai untuk hitungan "sudah berapa lama".
+Format: "YYYY-MM-DD"
+================================================== */
+
+const RELATIONSHIP_START_DATE = "2024-01-01";
+
+
+/* ==================================================
+SOUND EFFECTS
+Dibuat langsung lewat kode (Web Audio API), jadi
+tidak perlu file mp3 tambahan. Browser butuh interaksi
+user dulu sebelum bisa memutar suara, makanya context
+baru dibuat/di-resume saat user tap/klik.
+================================================== */
+
+let audioCtx = null;
+
+function getAudioCtx() {
+
+    const AudioCtxClass =
+        window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioCtxClass) {
+        return null;
+    }
+
+    if (!audioCtx) {
+
+        try {
+
+            audioCtx = new AudioCtxClass();
+
+        } catch (e) {
+
+            audioCtx = null;
+
+        }
+
+    }
+
+    if (audioCtx && audioCtx.state === "suspended") {
+
+        audioCtx.resume().catch(function() {});
+
+    }
+
+    return audioCtx;
+
+}
+
+
+/* Suara "pop" lembut, dipakai saat tap membuka intro */
+
+function playPopSound() {
+
+    const ctx = getAudioCtx();
+
+    if (!ctx) {
+        return;
+    }
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+
+    osc.frequency.setValueAtTime(620, ctx.currentTime);
+
+    osc.frequency.exponentialRampToValueAtTime(
+        1100,
+        ctx.currentTime + 0.09
+    );
+
+    gain.gain.setValueAtTime(0.16, ctx.currentTime);
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + 0.18
+    );
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.2);
+
+}
+
+
+/* Suara "swish" kertas, dipakai saat halaman buku dibalik */
+
+function playPageFlipSound() {
+
+    const ctx = getAudioCtx();
+
+    if (!ctx) {
+        return;
+    }
+
+    const duration = 0.3;
+
+    const bufferSize =
+        Math.floor(ctx.sampleRate * duration);
+
+    const buffer =
+        ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+
+    const data =
+        buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+
+        const decay =
+            Math.pow(1 - (i / bufferSize), 2);
+
+        data[i] = (Math.random() * 2 - 1) * decay;
+
+    }
+
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+
+    const filter = ctx.createBiquadFilter();
+
+    filter.type = "bandpass";
+
+    filter.frequency.setValueAtTime(2000, ctx.currentTime);
+
+    filter.frequency.exponentialRampToValueAtTime(
+        500,
+        ctx.currentTime + duration
+    );
+
+    filter.Q.value = 0.7;
+
+    const gain = ctx.createGain();
+
+    gain.gain.setValueAtTime(0.22, ctx.currentTime);
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + duration
+    );
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    noise.start();
+
+}
 
 
 /* ==================================================
@@ -300,6 +456,31 @@ function updatePageNumber() {
 
     }
 
+
+    const prevBtn =
+        document.getElementById("prevPageBtn");
+
+    if (prevBtn) {
+
+        prevBtn.disabled =
+            currentPage === 0;
+
+    }
+
+
+    const nextBtn =
+        document.getElementById("nextPageBtn");
+
+    if (nextBtn) {
+
+        const isLastPage =
+            currentPage === pages.length - 1;
+
+        nextBtn.textContent =
+            isLastPage ? "Lanjut ke Penutup →" : "Next →";
+
+    }
+
 }
 
 
@@ -411,6 +592,8 @@ function flipToPage(targetIndex, direction) {
     leaf.classList.add(
         direction === "next" ? "flip-next" : "flip-prev"
     );
+
+    playPageFlipSound();
 
 
     function handleFlipEnd() {
@@ -723,6 +906,8 @@ function initIntroScreen() {
 
     function dismissIntro() {
 
+        playPopSound();
+
         burstHearts(introEl, 18);
 
         introEl.classList.add("intro-hidden");
@@ -967,6 +1152,112 @@ function initPhotoTilt() {
 
 
 /* ==================================================
+SWIPE GESTURE (HP)
+Geser kiri = halaman berikutnya, geser kanan = sebelumnya
+================================================== */
+
+function initBookSwipe() {
+
+    const bookEl =
+        document.getElementById("bookContainer");
+
+    if (!bookEl) {
+        return;
+    }
+
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+
+    bookEl.addEventListener("touchstart", function(event) {
+
+        if (event.touches.length !== 1) {
+            return;
+        }
+
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+        tracking = true;
+
+    }, { passive: true });
+
+    bookEl.addEventListener("touchend", function(event) {
+
+        if (!tracking) {
+            return;
+        }
+
+        tracking = false;
+
+        const touch =
+            event.changedTouches[0];
+
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+
+        /* Harus lebih horizontal daripada vertikal,
+           dan cukup jauh, supaya tidak bentrok
+           dengan scroll biasa */
+
+        if (
+            Math.abs(dx) > 55 &&
+            Math.abs(dx) > Math.abs(dy) * 1.5
+        ) {
+
+            if (dx < 0) {
+
+                nextPage();
+
+            } else {
+
+                previousPage();
+
+            }
+
+        }
+
+    }, { passive: true });
+
+}
+
+
+/* ==================================================
+LOVE COUNTER
+"Sudah sekian hari sejak jadian", dihitung otomatis
+dari RELATIONSHIP_START_DATE di atas
+================================================== */
+
+function initLoveCounter() {
+
+    const el =
+        document.getElementById("loveCounter");
+
+    if (!el) {
+        return;
+    }
+
+    const start =
+        new Date(RELATIONSHIP_START_DATE + "T00:00:00");
+
+    if (isNaN(start.getTime())) {
+        return;
+    }
+
+    const now = new Date();
+
+    const diffMs =
+        now.setHours(0, 0, 0, 0) - start.setHours(0, 0, 0, 0);
+
+    const days =
+        Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+
+    el.textContent =
+        `sudah ${days.toLocaleString("id-ID")} hari kita saling menemani ♡`;
+
+}
+
+
+/* ==================================================
 RIPPLE EFFECT PADA TOMBOL
 ================================================== */
 
@@ -1178,6 +1469,8 @@ document.addEventListener(
         initPhotoTilt();
         initButtonRipple();
         initClosingHeart();
+        initBookSwipe();
+        initLoveCounter();
 
     }
 
