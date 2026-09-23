@@ -14,70 +14,70 @@ const pages = [
         type: "photo",
         number: 1,
         image: "foto1.jpg",
-        text: "pertama kali bibil ngajak ngajak dimdim ngerjain tugas di Socrates Vegan"
+        text: "pertama kali bibil ngajak dimdim ngerjain tugas barengg di Socrates Vegan. mungkin itu kelihatannya cuma sekedar ngerjain tugas bareng, tapi dari momen itu bibil mulai banyak bercerita sama dimdim."
     },
 
     {
         type: "photo",
         number: 2,
         image: "foto2.jpg",
-        text: "pertama kali kita nontonnn pulang kuliahh terus pulang nonton kitaa mamm"
+        text: "pertama kali kita nontonnn bareng setelah pulang kuliahh, terus pulangnya kita makan bareng di serba 15"
     },
 
     {
         type: "photo",
         number: 3,
         image: "foto3.jpg",
-        text: "bibil ke rumahh dimdim krna mau ke pantee terus dari situu kita makinn dekett"
+        text: "ini waktu bibil ke rumah dimdim karena kita mau pergi ke pantai dan dari sini kita mulai semakin dekettt"
     },
 
     {
         type: "photo",
         number: 4,
         image: "foto4.jpg",
-        text: "kitaa ke pet cafee dan disituu bibil ceritainn kehidupann bibil ke dimdim krna bibil uda percyaa sma dimdim padahl kita belumm pcrann"
+        text: "ini kitaa pergi ke pet cafee dan disana bibil mulai cerita tentang kehidupan bibil ke dimdim. padahal disitu kita belum pacaran tapi bibil uda seterbuka itu sma dimdim karena bibil uda percaya sma dimdim"
     },
 
     {
         type: "photo",
         number: 5,
         image: "foto5.jpg",
-        text: "kitaa uda pcarann dann ituu pertama kali kita pigii jauhhh"
+        text: "disini kitaa uda pcarann dan itu pertama kalinya kita pergi-pergi jauh"
     },
 
     {
         type: "photo",
         number: 6,
         image: "foto6.jpg",
-        text: "pertama kalinyaa bibil taunn baruan sma cowoo"
+        text: "ini kita tahun baruann dan ini pertama kalinya bibil tahun baruan sma cowok dan itu dimdim. semoga tahun-tahun berikutnya tetap sama dimdim seterusnya yaaa"
     },
 
     {
         type: "video",
         number: 7,
         video: "video1.mp4",
-        text: "kitaa mainn PlayStation, nntonn netflixx dann ituu masi maluu\" krna masi baruu\" pcalann, kalo sekarang sudahh tidaa ada maloe nyaaa"
+        text: "ini kitaa mainn PlayStation, nontonn netflixx dann ituu kita masih malu-malu karena masi baruu pcalann, tapi sekarang kita uda di titik sampee bales-balesan kentuttt"
     },
 
     {
         type: "video",
         number: 8,
         video: "video2.mp4",
-        text: "bibil screen recording dimdim lagi main gitar pass kitaa pecee, sekarang kita uda jarang pece hampir ga pernh punn :((("
+        text: "ini bibil screen recording dimdim lagi main gitar pass kitaa pecee, sekarang kita uda jarang pece hampir ga pernh punn :((("
     },
 
     {
         type: "video",
         number: 9,
         video: "video3.mp4",
-        text: "kitaa ke tamannn dann pulangnyaa kita nontonnn, ituu pass ulang tahun bibill, makacii yahh bibil sngtt senangg cekalii pada saat ituu"
+        text: "ini waktu kita ketaman terus pulangnya kita nonton. itu pas hari ulang tahun bibil, bibil cuma mau bilang makacii yaa bibil senang bisa seharian sama dimdim di hari ulang tahun bibil"
     },
 
     {
         type: "video",
         number: 10,
         video: "video4.mp4",
-        text: "bibil ajak dimdim mainn tiktokk dann dimdimm mauuu, tapi sekarang dimdim gamauu lagi bibil ajak tiktokann :(((("
+        text: "ini waktu awal-awal kita pacaran bibil ajak dimdim tiktokan dan dimdim mauuu, tapi serakang dimdim ga mau lagi bibil ajak tiktokann :(((("
     }
 
 ];
