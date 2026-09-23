@@ -13,70 +13,70 @@ const pages = [
     {
         type: "photo",
         number: 1,
-        image: "images/foto1.jpg",
+        image: "foto1.jpg",
         text: "pertama kali bibil ngajak ngajak dimdim ngerjain tugas di Socrates Vegan"
     },
 
     {
         type: "photo",
         number: 2,
-        image: "images/foto2.jpg",
+        image: "foto2.jpg",
         text: "pertama kali kita nontonnn pulang kuliahh terus pulang nonton kitaa mamm"
     },
 
     {
         type: "photo",
         number: 3,
-        image: "images/foto3.jpg",
+        image: "foto3.jpg",
         text: "bibil ke rumahh dimdim krna mau ke pantee terus dari situu kita makinn dekett"
     },
 
     {
         type: "photo",
         number: 4,
-        image: "images/foto4.jpg",
+        image: "foto4.jpg",
         text: "kitaa ke pet cafee dan disituu bibil ceritainn kehidupann bibil ke dimdim krna bibil uda percyaa sma dimdim padahl kita belumm pcrann"
     },
 
     {
         type: "photo",
         number: 5,
-        image: "images/foto5.jpg",
+        image: "foto5.jpg",
         text: "kitaa uda pcarann dann ituu pertama kali kita pigii jauhhh"
     },
 
     {
         type: "photo",
         number: 6,
-        image: "images/foto6.jpg",
+        image: "foto6.jpg",
         text: "pertama kalinyaa bibil taunn baruan sma cowoo"
     },
 
     {
         type: "video",
         number: 7,
-        video: "videos/video1.mp4",
+        video: "video1.mp4",
         text: "kitaa mainn PlayStation, nntonn netflixx dann ituu masi maluu\" krna masi baruu\" pcalann, kalo sekarang sudahh tidaa ada maloe nyaaa"
     },
 
     {
         type: "video",
         number: 8,
-        video: "videos/video2.mp4",
+        video: "video2.mp4",
         text: "bibil screen recording dimdim lagi main gitar pass kitaa pecee, sekarang kita uda jarang pece hampir ga pernh punn :((("
     },
 
     {
         type: "video",
         number: 9,
-        video: "videos/video3.mp4",
+        video: "video3.mp4",
         text: "kitaa ke tamannn dann pulangnyaa kita nontonnn, ituu pass ulang tahun bibill, makacii yahh bibil sngtt senangg cekalii pada saat ituu"
     },
 
     {
         type: "video",
         number: 10,
-        video: "videos/video4.mp4",
+        video: "video4.mp4",
         text: "bibil ajak dimdim mainn tiktokk dann dimdimm mauuu, tapi sekarang dimdim gamauu lagi bibil ajak tiktokann :(((("
     }
 
