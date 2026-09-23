@@ -75,6 +75,15 @@ button:active,
     transform: translateY(-1px) scale(0.97);
 }
 
+button:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+
+    transform: none;
+    box-shadow: none;
+}
+
 
 /* =========================================================
    RIPPLE
@@ -867,6 +876,23 @@ button:active,
     color: #8c6870;
 
     margin-bottom: 35px;
+}
+
+
+.love-counter {
+    font-family: Arial, sans-serif;
+
+    font-style: italic;
+
+    font-size: 14px;
+
+    letter-spacing: 0.5px;
+
+    color: #a2707c;
+
+    margin-bottom: 35px;
+
+    min-height: 1.4em;
 }
 
 
